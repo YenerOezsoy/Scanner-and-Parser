@@ -6,6 +6,7 @@
  */
 
 #include "../includes/Scanner.h"
+
 #include "../../Automat/includes/Automat.h"
 
 Scanner::Scanner() {

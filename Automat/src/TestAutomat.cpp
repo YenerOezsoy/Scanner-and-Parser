@@ -5,7 +5,7 @@
  *      Author: kaok1012
  */
 
-#include "../includes/Automat.h"
+#include "../../Automat/includes/Automat.h"
 
 int main (int argc, char* argv[]){
 

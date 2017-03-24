@@ -15,5 +15,3 @@ Symboltabelle::Symboltabelle() {
 Symboltabelle::~Symboltabelle() {
 	// TODO Auto-generated destructor stub
 }
-
-
