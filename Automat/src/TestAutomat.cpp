@@ -6,11 +6,11 @@
  */
 
 #include "../../Automat/includes/Automat.h"
+#include <iostream>
 
 int main (int argc, char* argv[]){
-
+	std::cout << "Automat" << std::endl;
 	Automat* automat;
 
 	automat = new Automat();
-
 }

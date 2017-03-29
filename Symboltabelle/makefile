@@ -79,6 +79,6 @@ cleanSymboltabelle:
 	
 ## objs fuer GesamtProjekt neu erzeugen
 SymboltabelleOBJTarget:
-	$(MAKE) SymboltabelleTarget
+	$(MAKE) makeTestSymboltabelle
 
 	

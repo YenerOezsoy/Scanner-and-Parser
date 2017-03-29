@@ -6,10 +6,7 @@
  */
 
 #include "../includes/Buffer.h"
-#include <iostream>
-#include <fstream>
 
-using namespace std;
 
 Buffer::Buffer() {
 	// TODO Auto-generated constructor stub
@@ -20,14 +17,32 @@ Buffer::~Buffer() {
 	// TODO Auto-generated destructor stub
 }
 
-void Buffer::read() {
-    fstream file;
+void Buffer::readFromFile() {
+	char buffer1[SIZE], buffer2[SIZE];
+	//char* next, current;
 
-    file.open(INPUT, ios::out);
+	inputFile.open(INPUT, ios::in);
 
-    file << "Test Text geht in die Datei" << endl;
-    file << "Welcome to Bufferland" << endl;
+	inputFile.read(buffer1, SIZE);
+	inputFile.read(buffer2, SIZE);
 
-    file.close();
-    cout << "close" << endl;
+	for (int i = 0; i < SIZE; ++i) {
+		cout << i+1 << ": " << buffer1[i] << endl;
+	}
+	for (int i = 0; i < SIZE; ++i) {
+			cout << i+1 << ": " << buffer2[i] << endl;
+	}
+//	cout << "Buffer1: " << buffer1 << endl;
+//	cout << "Buffer2: " << buffer2 << endl;
+	if (inputFile.eof() == 0) {
+		inputFile.close();
+	}
+}
+
+void Buffer::writeToFile(/* What to write */) {
+	outputFile.open(OUTPUT, ios::out);
+
+	outputFile << "Testing the output" << endl;
+
+	outputFile.close();
 }

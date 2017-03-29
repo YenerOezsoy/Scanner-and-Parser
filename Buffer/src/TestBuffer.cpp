@@ -6,16 +6,13 @@
  */
 
 #include "../includes/Buffer.h"
-#include <iostream>
-#include <fstream>
 
-using namespace std;
 
 int main(int argc, char **argv) {
 	cout << "Buffer" << endl;
-	Buffer*  buffer;
 
-	buffer = new Buffer();
+	Buffer*  buffer = new Buffer();
 
-	buffer->read();
+	buffer->readFromFile();
+	//buffer->readFromFile();
 }
