@@ -45,6 +45,7 @@ public:
     State31 state31;
     State32 state32;
     Error error;
+
 	Automat();
 	virtual ~Automat();
     void handle();

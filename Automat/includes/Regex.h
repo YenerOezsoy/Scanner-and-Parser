@@ -23,7 +23,6 @@ private:
     int regex;
     char exclude;
     bool checkExclude(char c);
-
 };
 
 #endif //COMPILER_REGEX_H

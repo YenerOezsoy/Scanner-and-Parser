@@ -1,8 +1,5 @@
 /*
- * Automat.cpp
- *
- *  Created on: Mar 22, 2017
- *      Author: kaok1012
+ * Created by Yener on 27.03.2017.
  */
 
 #include "../../Automat/includes/Automat.h"

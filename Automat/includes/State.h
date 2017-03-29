@@ -103,10 +103,6 @@ class State2 : public State {
 class State3 : public State {
     void Start::read(char c, AutomatOO *m) {
         r->setRegex(0);
-        /*
-        char carray[1] = {'f'};
-        char* cpointer;
-        r->setExclude(cpointer);*/
         r->setExclude('f');
         //Wechsel State4
         if (c == 'f'){
