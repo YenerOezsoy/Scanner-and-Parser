@@ -10,8 +10,8 @@
 class Regex{
 
 public:
-    void Regex();
-    void ~Regex();
+    Regex();
+    ~Regex();
     void setRegex(int regex);
     void setExclude(char c);
     bool getResult(char c);
@@ -19,6 +19,7 @@ public:
     bool checkLetter(char c);
     bool checkSign(char c);
     bool checkLD(char c);
+    bool checkAll(char c);
 private:
     int regex;
     char exclude;

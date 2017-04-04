@@ -5,14 +5,19 @@
  *      Author: kaok1012
  */
 
+
+
 #ifndef Automat_H_
 #define Automat_H_
 
+//#include "../includes/State.h"
+class State;
+
 class Automat {
 public:
-    State currentState;
-    Start start;
-    State1 state1;
+    State* currentState;
+    //Start start;
+    /*State1 state1;
     State2 state2;
     State3 state3;
     State4 state4;
@@ -44,12 +49,11 @@ public:
     State30 state30;
     State31 state31;
     State32 state32;
-    Error error;
-
+    Error error;*/
 	Automat();
 	virtual ~Automat();
     void handle();
-    void setCurrentState(State s);
+    void setCurrentState(State* s);
 };
 
 #endif /* Automat_H_ */

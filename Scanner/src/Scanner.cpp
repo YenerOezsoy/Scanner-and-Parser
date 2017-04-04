@@ -11,7 +11,7 @@
 
 Scanner::Scanner() {
 	// TODO Auto-generated constructor stub
-	Automat* automat = new Automat();
+	//Automat* automat = new Automat();
 
 }
 

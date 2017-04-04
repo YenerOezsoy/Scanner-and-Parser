@@ -5,17 +5,19 @@
 #include "../includes/Regex.h"
 
 
+
+
 Regex::Regex(void) {
 }
 
 Regex::~Regex(void) {
 }
 
-Regex::setRegex(int regex) {
+void Regex::setRegex(int regex) {
     this->regex=regex;
 }
 
-Regex::setExclude(char exclude) {
+void Regex::setExclude(char exclude) {
     this->exclude = exclude;
 }
 
@@ -146,3 +148,4 @@ bool Regex::checkAll(char c) {
     }
     return false;
 }
+
