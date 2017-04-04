@@ -8,6 +8,7 @@
 
 
 Regex::Regex(void) {
+	regex = 0;
 }
 
 Regex::~Regex(void) {

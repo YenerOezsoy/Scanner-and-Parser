@@ -6,62 +6,62 @@
  #include "../includes/Regex.h"
 
  class State {
- public: virtual void read(char c, AutomatOO* m=0);
+ public: virtual State read(char c, AutomatOO* m=0);
  bool accepted;
  enum Type {Sign, Letter, If, While, Digit, None};
  Regex* r = new Regex();
  };
 
  class Start : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  if (r->checkDigit(c)) {
- m->setState(State1);
+ // m->setState(State1);
  }
  else if (r->checkLetter(c)) {
  switch (c) {
- case 'i':   m->setState(State3);
+ case 'i':   // m->setState(State3);
  break;
- case 'I':   m->setSate(State5);
+ case 'I':   // m->setSate(State5);
  break;
- case 'w':   m->setSate(State7);
+ case 'w':   // m->setSate(State7);
  break;
- case 'W':   m->setState(State12);
+ case 'W':   // m->setState(State12);
  break;
  }
  }
  else if (r->checkSign(c)){
  switch(c) {
- case '+':   m->setState(State17);
+ case '+':   // m->setState(State17);
  break;
- case '-':   m->setSate(State18);
+ case '-':   // m->setSate(State18);
  break;
- case ':':   m->setSate(State19);
+ case ':':   // m->setSate(State19);
  break;
- case '*':   m->setState(State21);
+ case '*':   // m->setState(State21);
  break;
- case '<':   m->setState(State22);
+ case '<':   // m->setState(State22);
  break;
- case '>':   m->setSate(State23);
+ case '>':   // m->setSate(State23);
  break;
- case '=':   m->setSate(State24);
+ case '=':   // m->setSate(State24);
  break;
- case '!':   m->setState(State27);
+ case '!':   // m->setState(State27);
  break;
- case '&':   m->setState(State28);
+ case '&':   // m->setState(State28);
  break;
- case ';':   m->setSate(State30);
+ case ';':   // m->setSate(State30);
  break;
- case '(':   m->setSate(State31);
+ case '(':   // m->setSate(State31);
  break;
- case ')':   m->setState(State32);
+ case ')':   // m->setState(State32);
  break;
- case '{':   m->setState(State33);
+ case '{':   // m->setState(State33);
  break;
- case '}':   m->setSate(State34);
+ case '}':   // m->setSate(State34);
  break;
- case '[':   m->setSate(State35);
+ case '[':   // m->setSate(State35);
  break;
- case ']':   m->setState(State36);
+ case ']':   // m->setState(State36);
  break;
  }
  }
@@ -71,12 +71,12 @@
  };
 
  class State1 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  if (r->checkDigit(c)) {
- m->setState(State1);
+ // m->setState(State1);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  Type type = Type.Digit;
@@ -84,12 +84,12 @@
  };
 
  class State2 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  if(r->checkLD(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  Type type = Type.Letter;
@@ -97,21 +97,21 @@
  };
 
  class State3 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
 
  r->setExclude('f');
  //Wechsel State4
  if (c == 'f'){
- m->setState(State4);
+ // m->setState(State4);
  }
  //Wechsel zu State2
  else if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  //Wechsel Error
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  Type type = Type.Letter;
@@ -119,14 +119,14 @@
  };
 
  class State4 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  Type type = Type.If;
@@ -134,21 +134,21 @@
  };
 
  class State5 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
- /*
+
  char carray[1] = {'F'};
  char* cpointer;
  r->setExclude(cpointer);
  r->setExclude('F');
  if (c == 'F'){
- m->setState(State6);
+ // m->setState(State6);
  }
  else if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  Type type = Type.Identifier;
@@ -156,14 +156,14 @@
  };
 
  class State6 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -171,17 +171,17 @@
  };
 
  class State7 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
  r->setExclude('h');
  if (c == 'h'){
- m->setState(State8);
+ // m->setState(State8);
  }
  else if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -189,17 +189,17 @@
  };
 
  class State8 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
  r->setExclude('i');
  if (c == 'i'){
- m->setState(State9);
+ // m->setState(State9);
  }
  else if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -207,17 +207,17 @@
  };
 
  class State9 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
  r->setExclude('l');
  if (c == 'l'){
- m->setState(State10);
+ // m->setState(State10);
  }
  else if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -225,17 +225,17 @@
  };
 
  class State10 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(3);
  r->setExclude('e');
  if (c == 'e'){
- m->setState(State11);
+ // m->setState(State11);
  }
  else if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -243,16 +243,16 @@
  };
 
  class State11 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  //nach while weiteres Zeichen(Letter oder Digit) -> Letter!
  r->setExclude('');
  r->setRegex(0);
  if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  //Sign
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -260,17 +260,17 @@
  };
 
  class State12 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
  r->setExclude('H');
  if (c == 'H'){
- m->setState(State13);
+ // m->setState(State13);
  }
  else if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -278,17 +278,17 @@
  };
 
  class State13 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
  r->setExclude('I');
  if (c == 'I'){
- m->setState(State14);
+ // m->setState(State14);
  }
  else if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -296,17 +296,17 @@
  };
 
  class State14 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
  r->setExclude('L');
  if (c == 'L'){
- m->setState(State15);
+ // m->setState(State15);
  }
  else if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -314,17 +314,17 @@
  };
 
  class State15 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(0);
  r->setExclude('E');
  if (c == 'E'){
- m->setState(State16);
+ // m->setState(State16);
  }
  else if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -332,16 +332,16 @@
  };
 
  class State16 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  //nach WHILE weiteres Zeichen(Letter oder Digit) -> Letter!
  r->setExclude('');
  r->setRegex(0);
  if (r->getResult(c)) {
- m->setState(State2);
+ // m->setState(State2);
  }
  //Sign
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -349,11 +349,11 @@
  };
 
  class State17 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -361,11 +361,11 @@
  };
 
  class State18 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -373,14 +373,14 @@
  };
 
  class State19 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (c == '=') {
- m->setState(State20);
+ // m->setState(State20);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -388,11 +388,11 @@
  };
 
  class State20 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -400,11 +400,11 @@
  };
 
  class State21 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -412,11 +412,11 @@
  };
 
  class State22 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -424,11 +424,11 @@
  };
 
  class State23 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -436,14 +436,14 @@
  };
 
  class State24 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (c == ':') {
- m->setState(State25);
+ // m->setState(State25);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -451,14 +451,14 @@
  };
 
  class State25 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (c == '=') {
- m->setState(State26);
+ // m->setState(State26);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = false;
@@ -466,11 +466,11 @@
  };
 
  class State26 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -478,11 +478,11 @@
  };
 
  class State27 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -490,14 +490,14 @@
  };
 
  class State28 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (c == '&') {
- m->setState(State29);
+ // m->setState(State29);
  }
  else {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = false;
@@ -505,11 +505,11 @@
  };
 
  class State29 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -517,11 +517,11 @@
  };
 
  class State30 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -529,11 +529,11 @@
  };
 
  class State31 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -541,11 +541,11 @@
  };
 
  class State32 : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = true;
@@ -553,18 +553,18 @@
  };
 
  class Error : public State {
- void Start::read(char c, AutomatOO *m) {
+ State Start::read(char c, AutomatOO *m) {
  r->setRegex(1);
  r->setExclude('');
  if (r->getResult(c)) {
- m->setState(Error);
+ // m->setState(Error);
  }
  }
  accepted = false;
  Type type = Type.None;
  };*/
 
-#include "../includes/Automat.h"
+//#include "../includes/Automat.h"
 #include "../includes/Regex.h"
 #include "../includes/State.h"
 
@@ -576,100 +576,125 @@
 /*class Start : public State {*/
 
 
-void Start::read(char c, Automat *m) {
+State* Start::read(char c ) {
 	if (r.checkDigit(c)) {
          	State1* state1 = new State1();
-         	m->setCurrentState(state1);
+         	return state1;
+         	// m->setCurrentState(state1);
 	}
 	else if (r.checkLetter(c)) {
 		switch (c) {
 			case 'i': 	State3* state3;// = new State3();
-	                	m->setCurrentState(state3);
+	                	// m->setCurrentState(state3);
+						return state3;
 	                 	break;
 	        case 'I': 	State5* state5;// = new State5();
-	           			m->setCurrentState(state5);
-               			break;
+	           			// m->setCurrentState(state5);
+               			return state5;
+	        				break;
 	        case 'w': 	State7* state7;// = new State7();
-	           			m->setCurrentState(state7);
-	                 			break;
+	           			// m->setCurrentState(state7);
+	        				return state7;
+	        				break;
 	        case 'W':   State12* state12;// = new State12();
-	           			m->setCurrentState(state12);
-               			break;
+	           			// m->setCurrentState(state12);
+	        return state12;
+	        				break;
 	             }
 	         }
 	else if (r.checkSign(c)) {
 		switch(c) {
 			case '+':   State17* state17;// = new State17();
-	           			m->setCurrentState(state17);
-               			break;
+	           			// m->setCurrentState(state17);
+			return state17;
+						break;
             case '-':   State18* state18;// = new State18();
-	           			m->setCurrentState(state18);
-               			break;
+	           			// m->setCurrentState(state18);
+            return state18;
+            				break;
             case ':':   State19* state19;// = new State19();
-              			m->setCurrentState(state19);
-               			break;
+              			// m->setCurrentState(state19);
+            return state19;
+            				break;
             case '*':   State21* state21;// = new State21();
-               			m->setCurrentState(state21);
-               			break;
+               			// m->setCurrentState(state21);
+            return state21;
+            				break;
             case '<':   State22* state22;// = new State22();
-               			m->setCurrentState(state22);
-               			break;
+               			// m->setCurrentState(state22);
+            return state22;
+            				break;
             case '>':   State23* state23;// = new State23();
-               			m->setCurrentState(state23);
-              			break;
+               			// m->setCurrentState(state23);
+            return state23;
+            				break;
             case '=':   State24* state24;// = new State24();
-              			m->setCurrentState(state24);
-              			break;
+              			// m->setCurrentState(state24);
+            return state24;
+            break;
             case '!':   State27* state27;// = new State27();
-              			m->setCurrentState(state27);
-               			break;
+              			// m->setCurrentState(state27);
+            return state27;
+            	break;
             case '&':   State28* state28;// = new State28();
-               			m->setCurrentState(state28);
-               			break;
+               			// m->setCurrentState(state28);
+            return state28;
+            break;
             case ';':   State30* state30;// = new State30();
-               			m->setCurrentState(state30);
-              			break;
+               			// m->setCurrentState(state30);
+            return state30;
+            break;
             case '(':   State31* state31;// = new State31();
-              			m->setCurrentState(state31);
-               			break;
+              			// m->setCurrentState(state31);
+            return state31;
+            break;
             case ')':   State32* state32;// = new State32();
-               			m->setCurrentState(state32);
-               			break;
+               			// m->setCurrentState(state32);
+            return state32;
+            break;
             case '{':   State33* state33;// = new State33();
-              			m->setCurrentState(state33);
-               			break;
+              			// m->setCurrentState(state33);
+            return state33;
+            break;
             case '}':   State34* state34;// = new state34();
-               			m->setCurrentState(state34);
-              			break;
+               			// m->setCurrentState(state34);
+            return state34;
+            break;
             case '[':   State35* state35;// = new State35();
-               			m->setCurrentState(state35);
-              			break;
+               			// m->setCurrentState(state35);
+            return state35;
+            break;
             case ']':   State36* state36;// = new State36();
-               			m->setCurrentState(state36);
-               			break;
+               			// m->setCurrentState(state36);
+            return state36;
+            break;
 		}
 	}
 
 }
 
-void State1::read(char c, Automat *m) {
+State* State1::read(char c ) {
 	if (r.checkDigit(c)) {
 		State1* state1;// = new State1();
-		m->setCurrentState(state1);
+		// m->setCurrentState(state1);
+		return state1;
 	}
 	else {
 		Error* error;// = new Error();
-		m->setCurrentState(error);
+		// m->setCurrentState(error);
+		return error;
 	}
 }
 
-void State2::read(char c, Automat *m) {
+State* State2::read(char c ) {
 	if(r.checkLD(c)) {
-         	State2* state2;// = new State2();
-         	m->setCurrentState(state2);
+         	//State2* state2;// = new State2();
+         	// m->setCurrentState(state2);
+         	return this;
 	}
 	else {
 		Error* error;// = new Error();
-		m->setCurrentState(error);
+		// m->setCurrentState(error);
+		return error;
 	}
 }

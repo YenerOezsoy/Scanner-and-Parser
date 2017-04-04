@@ -5,15 +5,15 @@ OBJDIR = objs
 
 AUTOMATDIR = Automat
 
-BUFFERDIR = Buffer
+#BUFFERDIR = Buffer
 
-SYMBOLTABELLEDIR = Symboltabelle
+#SYMBOLTABELLEDIR = Symboltabelle
 
-SCANNERDIR = Scanner
+#SCANNERDIR = Scanner
 
 
 
-all:	automatOBJs bufferOBJs symboltabelleOBJs scanner  
+all:	automatOBJs #bufferOBJs symboltabelleOBJs scanner  
 	@echo "target all"
 
 	
@@ -31,15 +31,15 @@ automatOBJs:
 	$(MAKE) -C $(AUTOMATDIR) AutomatOBJTarget
 	
 	
-bufferOBJs:
-	$(MAKE) -C $(BUFFERDIR) BufferOBJTarget
+#bufferOBJs:
+#	$(MAKE) -C $(BUFFERDIR) BufferOBJTarget
 
 	
-symboltabelleOBJs:
-	$(MAKE) -C $(SYMBOLTABELLEDIR) SymboltabelleOBJTarget
+#symboltabelleOBJs:
+#	$(MAKE) -C $(SYMBOLTABELLEDIR) SymboltabelleOBJTarget
 	
 
-scanner: 
-	$(MAKE) -C $(SCANNERDIR) makeTestScanner
+#scanner: 
+#	$(MAKE) -C $(SCANNERDIR) makeTestScanner
 
 	

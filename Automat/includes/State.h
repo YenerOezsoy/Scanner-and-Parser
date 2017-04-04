@@ -8,20 +8,21 @@
 
 
 #include "../includes/Regex.h"
-#include "../includes/Automat.h"
+//#include "../includes/Automat.h"
 
+//class Automat;
 
 class State {
 public:
 		//State(){};
-		virtual void read(char c, Automat* m=0);
-		virtual ~State() {  /*"destroying"*/};
+		virtual State* read(char c) = 0;
+		virtual ~State() {};
 		//bool accepted;
     	//enum Type {Sign, Letter, If, While, Digit, None };
     	Regex r;// = Regex();
 };
 class Start : public State {
-	void read(char c, Automat *m);/* {
+	State* read(char c );/* {
         if (r.checkDigit(c)) {
         	State1* state1 = new State1();
             m->setCurrentState(state1);
@@ -102,7 +103,7 @@ class Start : public State {
 };
 
 class State1 : public State {
-    void read(char c, Automat *m);// {
+    State* read(char c );// {
      /*   if (r.checkDigit(c)) {
         	State1* state1 = new State1();
             m->setCurrentState(state1);
@@ -117,7 +118,7 @@ class State1 : public State {
 */ };
 
 class State2 : public State {
-    void read(char c, Automat *m);/* {
+    State* read(char c );/* {
         if(r.checkLD(c)) {
         	State2* state2 = new State2();
             m->setCurrentState(state2);
@@ -134,7 +135,7 @@ class State2 : public State {
 };
 
 class State3 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(0);
         r.setExclude('f');
         //Wechsel State4
@@ -158,7 +159,7 @@ class State3 : public State {
 */ };
 
 class State4 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(0);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -175,7 +176,7 @@ class State4 : public State {
 */ };
 
 class State5 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(0);
 
         char carray[1] = {'F'};
@@ -200,7 +201,7 @@ class State5 : public State {
  };
 
 class State6 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(0);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -217,7 +218,7 @@ class State6 : public State {
 */ };
 
 class State7 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(0);
         r.setExclude('h');
         if (c == 'h'){
@@ -238,7 +239,7 @@ class State7 : public State {
 */ };
 
 class State8 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(0);
         r.setExclude('i');
         if (c == 'i'){
@@ -259,7 +260,7 @@ class State8 : public State {
 */ };
 
 class State9 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(0);
         r.setExclude('l');
         if (c == 'l'){
@@ -280,7 +281,7 @@ class State9 : public State {
 */ };
 
 class State10 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(3);
         r.setExclude('e');
         if (c == 'e'){
@@ -301,7 +302,7 @@ class State10 : public State {
 */ };
 
 class State11 : public State {
-    void read(char c, Automat *m);/* {
+    State* read(char c );/* {
         //nach while weiteres Zeichen(Letter oder Digit) -> Letter!
         r.setExclude('');
         r.setRegex(0);
@@ -320,7 +321,7 @@ class State11 : public State {
 */ };
 
 class State12 : public State {
-    void read(char c, Automat *m);/* {
+    State* read(char c );/* {
         r.setRegex(0);
         r.setExclude('H');
         if (c == 'H'){
@@ -341,7 +342,7 @@ class State12 : public State {
 */ };
 
 class State13 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(0);
         r.setExclude('I');
         if (c == 'I'){
@@ -362,7 +363,7 @@ class State13 : public State {
 */ };
 
 class State14 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(0);
         r.setExclude('L');
         if (c == 'L'){
@@ -383,7 +384,7 @@ class State14 : public State {
 */ };
 
 class State15 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(0);
         r.setExclude('E');
         if (c == 'E'){
@@ -404,7 +405,7 @@ class State15 : public State {
 */ };
 
 class State16 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         //nach WHILE weiteres Zeichen(Letter oder Digit) -> Letter!
         r.setExclude('');
         r.setRegex(0);
@@ -423,7 +424,7 @@ class State16 : public State {
 */ };
 
 class State17 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -436,7 +437,7 @@ class State17 : public State {
 */ };
 
 class State18 : public State {
-    void read(char c, Automat *m); /*{
+    State* read(char c ); /*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -449,7 +450,7 @@ class State18 : public State {
 */ };
 
 class State19 : public State {
-    void read(char c, Automat *m);/* {
+    State* read(char c );/* {
         r.setRegex(1);
         r.setExclude('');
         if (c == '=') {
@@ -466,7 +467,7 @@ class State19 : public State {
 */ };
 
 class State20 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -479,7 +480,7 @@ class State20 : public State {
 */ };
 
 class State21 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -492,7 +493,7 @@ class State21 : public State {
 */ };
 
 class State22 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -505,7 +506,7 @@ class State22 : public State {
 */ };
 
 class State23 : public State {
-   void read(char c, Automat *m) ; /*{
+   State* read(char c ) ; /*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -518,7 +519,7 @@ class State23 : public State {
 */ };
 
 class State24 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (c == ':') {
@@ -535,7 +536,7 @@ class State24 : public State {
 */ };
 
 class State25 : public State {
-    void read(char c, Automat *m);/* {
+    State* read(char c );/* {
         r.setRegex(1);
         r.setExclude('');
         if (c == '=') {
@@ -552,7 +553,7 @@ class State25 : public State {
 */ };
 
 class State26 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -565,7 +566,7 @@ class State26 : public State {
 */ };
 
 class State27 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -578,7 +579,7 @@ class State27 : public State {
 */ };
 
 class State28 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (c == '&') {
@@ -595,7 +596,7 @@ class State28 : public State {
 */ };
 
 class State29 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -608,7 +609,7 @@ class State29 : public State {
 */ };
 
 class State30 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -621,7 +622,7 @@ class State30 : public State {
 */ };
 
 class State31 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -634,7 +635,7 @@ class State31 : public State {
 */ };
 
 class State32 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -647,7 +648,7 @@ class State32 : public State {
 */ };
 
 class State33 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -660,7 +661,7 @@ class State33 : public State {
 */ };
 
 class State34 : public State {
-    void read(char c, Automat *m);/* {
+    State* read(char c );/* {
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -673,7 +674,7 @@ class State34 : public State {
 */ };
 
 class State35 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -686,7 +687,7 @@ class State35 : public State {
 */ };
 
 class State36 : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {
@@ -699,7 +700,7 @@ class State36 : public State {
 */ };
 
 class Error : public State {
-    void read(char c, Automat *m) ;/*{
+    State* read(char c ) ;/*{
         r.setRegex(1);
         r.setExclude('');
         if (r.getResult(c)) {

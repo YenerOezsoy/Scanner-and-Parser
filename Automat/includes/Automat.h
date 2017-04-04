@@ -10,12 +10,12 @@
 #ifndef Automat_H_
 #define Automat_H_
 
-//#include "../includes/State.h"
-class State;
+#include "../includes/State.h"
+//class State;
 
 class Automat {
 public:
-    State* currentState;
+    State* currentState = 0;
     //Start start;
     /*State1 state1;
     State2 state2;
@@ -50,6 +50,7 @@ public:
     State31 state31;
     State32 state32;
     Error error;*/
+    Start start = Start();
 	Automat();
 	virtual ~Automat();
     void handle();

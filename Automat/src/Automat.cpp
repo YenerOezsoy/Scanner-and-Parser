@@ -4,10 +4,11 @@
 
 #include "../../Automat/includes/Automat.h"
 #include "../includes/State.h"
+#include <iostream>
 
 
 Automat::Automat() {
-    Start start = Start();
+
     /*state1 =  State1();
     state2 =  State2();
     state3 =  State3();
@@ -52,9 +53,12 @@ Automat::~Automat() {
 void Automat::handle() {
     char test[] = {'i','f', '\0'};
     int i = 0;
+    std::cout << "test2" << std::endl;
     while (test[i] != '\0') {
-        //currentState.read(test[i]);
+        currentState = currentState->read(test[i]);
     }
+
+
 }
 
 void Automat::setCurrentState(State* s) {
