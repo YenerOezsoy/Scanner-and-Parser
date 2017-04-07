@@ -6,12 +6,13 @@
  */
 
 #include "../includes/Symboltabelle.h"
+#include <iostream>
 
 int main(int argc, char **argv) {
 
-	Symboltabelle* symboltabelle;
+	std::cout << "SymTab main test" << std::endl;
 
-	symboltabelle = new Symboltabelle();
+	Symboltabelle* symboltabelle = new Symboltabelle();
 
-
+	symboltabelle->
 }

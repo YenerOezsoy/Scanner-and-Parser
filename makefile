@@ -30,7 +30,7 @@ clean:
 automatOBJs:
 	$(MAKE) -C $(AUTOMATDIR) AutomatOBJTarget
 	
-	
+
 bufferOBJs:
 	$(MAKE) -C $(BUFFERDIR) BufferOBJTarget
 
