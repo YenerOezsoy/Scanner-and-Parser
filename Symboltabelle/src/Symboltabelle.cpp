@@ -6,12 +6,35 @@
  */
 
 #include "../includes/Symboltabelle.h"
+#include <string.h>
 
-Symboltabelle::Symboltabelle() {
-	// TODO Auto-generated constructor stub
-
+Symboltabelle::Symboltabelle(int size) {
+	this->size = size;
+	this->strTab = new StringTabelle;
+	this->entries = new SymTabEntry[size];
 }
 
 Symboltabelle::~Symboltabelle() {
-	// TODO Auto-generated destructor stub
+	delete strTab;
+	delete[] entries;
+}
+
+Key Symboltabelle::insert(char* lexem) {
+	int index = hash(lexem);
+	//entries[index].insert(lexem);
+}
+
+Information Symboltabelle::lookup(Key key) {
+
+}
+
+int Symboltabelle::hash(char* str) {
+    int hash = 0;
+
+    for (unsigned int i = 0; i < strlen(str); i++) {
+    	hash += str[i];
+    }
+    hash %= this->size;
+
+	return hash;
 }

@@ -8,17 +8,20 @@
 #ifndef SYMBOLTABELLE_H_
 #define SYMBOLTABELLE_H_
 
-#include "StringTabelle.h"
 #include "SymTabEntry.h"
+#include "StringTabelle.h"
 #include "Information.h"
 
 class Symboltabelle {
 private:
 	StringTabelle* strTab;
-	SymTabEntry* entries[];
+	SymTabEntry* entries;
+
+	int size;
+	int hash(char* str);
 
 public:
-	Symboltabelle();
+	Symboltabelle(int size);
 	virtual ~Symboltabelle();
 
 	Key insert(char* lexem);

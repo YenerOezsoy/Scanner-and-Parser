@@ -23,19 +23,15 @@ struct Key {
 	}
 };
 
-class Information {
+class Information{
 private:
 	char* name;
 
 public:
-	Information();
-	virtual ~Information();
-
-	bool compareLex(char* lexem);
-
-	char* getName() {
+	bool compareLex (char* lexem);
+	char* getName () {
 		return name;
-	};
+	}
 };
 
 #endif /* SYMBOLTABELLE_INCLUDES_INFORMATION_H_ */

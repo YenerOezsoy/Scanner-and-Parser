@@ -17,8 +17,10 @@ BINDIRTEST = debug
 ## darauf achten, dass letzte Zeile ohne "\" eingetragen wird
 
 OBJS = $(OBJDIR)/Symboltabelle.o \
-	#$(OBJDIR)/xx1.o \
-	#$(OBJDIR)/xxn.o
+	   $(OBJDIR)/StringTabelle.o \
+	   $(OBJDIR)/Information.o \
+	   $(OBJDIR)/SymTabEntry.o \
+	   $(OBJDIR)/StringTabNode.o
 
 
 #

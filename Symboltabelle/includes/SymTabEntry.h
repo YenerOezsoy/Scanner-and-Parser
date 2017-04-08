@@ -18,6 +18,7 @@ public:
 	SymTabEntry();
 	virtual ~SymTabEntry();
 
+	//void insert(char* lexem, StringTabelle* strTab);
 };
 
 #endif /* SYMBOLTABELLE_INCLUDES_SYMTABENTRY_H_ */

@@ -10,9 +10,7 @@
 
 int main(int argc, char **argv) {
 
-	std::cout << "SymTab main test" << std::endl;
+	std::cout << "SymTab main test so plsss" << std::endl;
+	Symboltabelle* symboltabelle = new Symboltabelle(10);
 
-	Symboltabelle* symboltabelle = new Symboltabelle();
-
-	symboltabelle->
 }
