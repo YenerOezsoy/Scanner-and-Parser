@@ -10,13 +10,17 @@
 
 int main (int argc, char* argv[]){
 
-	std::cout << "test" << std::endl;
+	std::cout << "Hello, World!" << std::endl;
 
-	Automat* automat;
+	char t[70] = "/*Dies ist ein*/ Test iF if WHILE 1a a1 11 /*habt ihr weitere test?";
+	char* test =  t;
 
+	Automat *automat;
+
+	std::cout << "TEST" << std::endl;
 	automat = new Automat();
 
-	automat->handle();
+	automat->handle(test);
 
 	return 0;
 

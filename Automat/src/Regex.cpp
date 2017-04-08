@@ -4,9 +4,6 @@
 
 #include "../includes/Regex.h"
 
-
-
-
 Regex::Regex(void) {
     regex = 0;
 }
@@ -24,11 +21,12 @@ void Regex::setExclude(char exclude) {
 
 bool Regex::getResult(char c) {
     if (checkExclude(c)) {
+
         switch (regex) {
             //Letter + Digit
-            case '0': return checkLD(c);
+            case 0:  return checkLD(c);
                 //All
-            case '1' : return checkAll(c);
+            case 1 : return checkAll(c);
         }
     }
     return false;
@@ -132,6 +130,7 @@ bool Regex::checkSign(char c) {
         case '}': return true;
         case '[': return true;
         case ']': return true;
+        case '/': return true;
         default: return false;
     }
 }

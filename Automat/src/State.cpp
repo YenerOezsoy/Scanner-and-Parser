@@ -117,6 +117,18 @@ State* State::getState(int i) {
         case 36: State36 *state36;
             state36 = new State36();
             return state36;
+        case 37: State37 *state37;
+            state37 = new State37();
+            return state37;
+        case 38: State38 *state38;
+            state38 = new State38();
+            return state38;
+        case 39: State39 *state39;
+            state39 = new State39();
+            return state39;
+        case 40: State40 *state40;
+            state40 = new State40();
+            return state40;
         case -1: Error *error;
             error = new Error();
             return error;
@@ -135,7 +147,7 @@ State* Start::read(char c ) {
             case 'w': return getState(7);
             case 'W': return getState(12);
 
-            default:break;
+            default: return getState(2);
         }
     }
     else if (r.checkSign(c)) {
@@ -156,6 +168,7 @@ State* Start::read(char c ) {
             case '}': return getState(34);
             case '[': return getState(35);
             case ']': return getState(36);
+            case '/': return getState(37);
             default:break;
         }
     }
@@ -556,6 +569,37 @@ State* State36::read(char c) {
         return getState(-1);
     }
     return 0;
+}
+
+State* State37::read(char c) {
+    if (c == '*') {
+        return getState(38);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State38::read(char c) {
+    if (c == '*') {
+        return getState(39);
+    }
+    else {
+        return this;
+    }
+}
+
+State* State39::read(char c) {
+    if (c == '/') {
+        return getState(40);
+    }
+    else {
+        return getState(38);
+    }
+}
+
+State* State40::read(char c) {
+    return getState(0)->read(c);
 }
 
 State* Error::read(char c) {

@@ -310,6 +310,38 @@ public: State36() {
     State* read(char c );
 };
 
+class State37 : public State {
+public: State37() {
+        accepted = false;
+        type = None;
+    };
+    State* read(char c );
+};
+
+class State38 : public State {
+public: State38() {
+        accepted = false;
+        type = Comment;
+    };
+    State* read(char c );
+};
+
+class State39 : public State {
+public: State39() {
+        accepted = false;
+        type = Comment;
+    };
+    State* read(char c );
+};
+
+class State40 : public State {
+public: State40() {
+        accepted = false;
+        type = Comment;
+    };
+    State* read(char c );
+};
+
 class Error : public State {
 public: Error() {
         accepted = false;

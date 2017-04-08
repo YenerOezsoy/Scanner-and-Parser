@@ -10,8 +10,9 @@ public:
     Start *start;
 	Automat();
 	virtual ~Automat();
-    void handle();
-   // void setCurrentState(State* s);
+    void handle(char* character);
+    //char Array und int für Tokenizer
+    int i;
 };
 
 #endif /* Automat_H_ */

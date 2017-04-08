@@ -16,14 +16,21 @@ Automat::~Automat() {
 }
 
 
-void Automat::handle() {
-    char test[] = {'W', 'H', 'I', 'L', 'e', '\0'};
-    int i = 0;
-    while (test[i] != '\0') {
-        currentState = currentState->read(test[i]);
-        std::cout << "State accepted: " << currentState->accepted << " Type: " << currentState->type <<std::endl;
+void Automat::handle(char* character) {
+    //this->character = character;
+    i = 0;
+    while (character[i] != '\0') {
+        if (character[i] == ' ' & currentState->type != 6) {
+            i++;
+            currentState = start;
+            std::cout << "____________" << std::endl;
+        }
+        else if (character[i] == ' '){
+            i++;
+            std::cout << "____________" << std::endl;
+        }
+        currentState = currentState->read(character[i]);
+        std::cout << "State accepted: " << currentState->accepted << " Type: " << currentState->type << " Buchstabe: " << character[i]<< std::endl;
         i++;
     }
-
-
 }
