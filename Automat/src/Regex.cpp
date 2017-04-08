@@ -8,7 +8,7 @@
 
 
 Regex::Regex(void) {
-	regex = 0;
+    regex = 0;
 }
 
 Regex::~Regex(void) {
@@ -27,11 +27,11 @@ bool Regex::getResult(char c) {
         switch (regex) {
             //Letter + Digit
             case '0': return checkLD(c);
-            //All
+                //All
             case '1' : return checkAll(c);
-         }
-     }
-     return false;
+        }
+    }
+    return false;
 }
 
 bool Regex::checkExclude(char c) {
@@ -137,16 +137,10 @@ bool Regex::checkSign(char c) {
 }
 
 bool Regex::checkLD(char c) {
-    if(checkLetter(c) || checkDigit(c)) {
-        return true;
-    }
-    return false;
+    return checkLetter(c) || checkDigit(c);
 }
 
 bool Regex::checkAll(char c) {
-    if (checkDigit(c) || checkLetter(c) || checkSign(c)) {
-        return true;
-    }
-    return false;
+    return checkDigit(c) || checkLetter(c) || checkSign(c);
 }
 

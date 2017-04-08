@@ -14,703 +14,308 @@
 
 class State {
 public:
-		//State(){};
-		virtual State* read(char c) = 0;
-		virtual ~State() {};
-		//bool accepted;
-    	//enum Type {Sign, Letter, If, While, Digit, None };
-    	Regex r;// = Regex();
+    //State(){};
+    virtual State* read(char c) = 0;
+    virtual ~State() {};
+    bool accepted;
+    enum Type {Sign, Letter, If, While, Digit, None, Comment};
+    Type type;
+    Regex r;// = Regex();
+    State* getState(int i);
 };
-class Start : public State {
-	State* read(char c );/* {
-        if (r.checkDigit(c)) {
-        	State1* state1 = new State1();
-            m->setCurrentState(state1);
-        }
-        else if (r.checkLetter(c)) {
-            switch (c) {
-                case 'i': 	State3* state3 = new State3();
-                			m->setCurrentState(state3);
-                			break;
-                case 'I': 	State5* state5 = new State5();
-                			m->setCurrentState(state5);
-                			break;
-                case 'w': 	State7* state7 = new State7();
-                			m->setCurrentState(state7);
-                			break;
-                case 'W':   State12* state12 = new State12();
-                			m->setCurrentState(state12);
-                			break;
-            }
-        }
-        else if (r.checkSign(c)){
-            switch(c) {
-                case '+':   State17* state17 = new State17();
-                			m->setCurrentState(state17);
-                			break;
-                case '-':   State18* state18 = new State18();
-                			m->setCurrentState(state18);
-                			break;
-                case ':':   State19* state19 = new State19();
-                			m->setCurrentState(state19);
-                			break;
-                case '*':   State21* state21 = new State21();
-                			m->setCurrentState(state21);
-                			break;
-                case '<':   State22* state22 = new State22();
-                			m->setCurrentState(state22);
-                			break;
-                case '>':   State23* state23 = new State23();
-                			m->setCurrentState(state23);
-                			break;
-                case '=':   State24* state24 = new State24();
-                			m->setCurrentState(state24);
-                			break;
-                case '!':   State27* state27 = new State27();
-                			m->setCurrentState(state27);
-                			break;
-                case '&':   State28* state28 = new State28();
-                			m->setCurrentState(state28);
-                			break;
-                case ';':   State30* state30 = new State30();
-                			m->setCurrentState(state30);
-                			break;
-                case '(':   State31* state31 = new State31();
-                			m->setCurrentState(state31);
-                			break;
-                case ')':   State32* state32 = new State32();
-                			m->setCurrentState(state32);
-                			break;
-                case '{':   State33* state33 = new State33();
-                			m->setCurrentState(state33);
-                			break;
-                case '}':   State34* state34 = new state34();
-                			m->setCurrentState(state34);
-                			break;
-                case '[':   State35* state35 = new State35();
-                			m->setCurrentState(state35);
-                			break;
-                case ']':   State36* state36 = new State36();
-                			m->setCurrentState(state36);
-                			break;
-            }
-        }
-    }
-    Type type = Type.None;
-    //accepted = false;
-*/
 
+class Start : public State {
+public: Start() {
+        accepted = false;
+        type = None;
+    };
+    State* read(char c );
 };
 
 class State1 : public State {
-    State* read(char c );// {
-     /*   if (r.checkDigit(c)) {
-        	State1* state1 = new State1();
-            m->setCurrentState(state1);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    Type type = Type.Digit;
-    accepted = 1;
-*/ };
+public: State1() {
+        accepted = true;
+        type = Digit;
+    };
+    State* read(char c );
+
+};
 
 class State2 : public State {
-    State* read(char c );/* {
-        if(r.checkLD(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    Type type = Type.Letter;
-    accepted = true;
-
-*/
+public: State2() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c );
 };
 
 class State3 : public State {
-    State* read(char c ); /*{
-        r.setRegex(0);
-        r.setExclude('f');
-        //Wechsel State4
-        if (c == 'f'){
-        	State4* state4 = new State4();
-            m->setCurrentState(state4);
-        }
-            //Wechsel zu State2
-        else if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-            //Wechsel Error
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    Type type = Type.Letter;
-    accepted = true;
-*/ };
+public: State3() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c );
+};
 
 class State4 : public State {
-    State* read(char c ); /*{
-        r.setRegex(0);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    Type type = Type.If;
-    accepted = true;
-*/ };
+    public: State4 () {
+        accepted = true;
+        type = If;
+    };
+    State* read(char c ); };
 
 class State5 : public State {
-    State* read(char c ); /*{
-        r.setRegex(0);
-
-        char carray[1] = {'F'};
-        char* cpointer;
-        r.setExclude(cpointer);
-        r.setExclude('F');
-        if (c == 'F'){
-        	State6* state6 = new State6();
-            m->setCurrentState(state6);
-        }
-        else if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    Type type = Type.Identifier;
-    accepted = true;*/
- };
+public: State5() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c );
+};
 
 class State6 : public State {
-    State* read(char c ); /*{
-        r.setRegex(0);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.If;
-*/ };
+public:     State6() {
+        accepted = true;
+        type = If;
+    };
+    State* read(char c ); };
 
 class State7 : public State {
-    State* read(char c ); /*{
-        r.setRegex(0);
-        r.setExclude('h');
-        if (c == 'h'){
-        	State8 state8 = new State8();
-            m->setCurrentState(state8);
-        }
-        else if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Identifier;
-*/ };
+public: State7() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c );
+};
 
 class State8 : public State {
-    State* read(char c ); /*{
-        r.setRegex(0);
-        r.setExclude('i');
-        if (c == 'i'){
-        	State9* state9 = new State9();
-            m->setCurrentState(state9);
-        }
-        else if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Identifier;
-*/ };
+    public: State8() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c ); };
 
 class State9 : public State {
-    State* read(char c ); /*{
-        r.setRegex(0);
-        r.setExclude('l');
-        if (c == 'l'){
-        	State10* state10 = new State10();
-            m->setCurrentState(state10);
-        }
-        else if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Identifier;
-*/ };
+    public: State9() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c );  };
 
 class State10 : public State {
-    State* read(char c ); /*{
-        r.setRegex(3);
-        r.setExclude('e');
-        if (c == 'e'){
-        	State11* state11 = new State11();
-            m->setCurrentState(state11);
-        }
-        else if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Identifier;
-*/ };
+    public: State10() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c );  };
 
 class State11 : public State {
-    State* read(char c );/* {
-        //nach while weiteres Zeichen(Letter oder Digit) -> Letter!
-        r.setExclude('');
-        r.setRegex(0);
-        if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-            //Sign
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.While;
-*/ };
+    public: State11() {
+        accepted = true;
+        type = While;
+    };
+    State* read(char c );};
 
 class State12 : public State {
-    State* read(char c );/* {
-        r.setRegex(0);
-        r.setExclude('H');
-        if (c == 'H'){
-        	State13* state13 = new State13();
-            m->setCurrentState(state13);
-        }
-        else if (r.getResult(c)) {
-        	State2 state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Identifier;
-*/ };
+public: State12() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c );
+};
 
 class State13 : public State {
-    State* read(char c ); /*{
-        r.setRegex(0);
-        r.setExclude('I');
-        if (c == 'I'){
-        	State14* state14 = new State14();
-            m->setCurrentState(state14);
-        }
-        else if (r.getResult(c)) {
-        	State2 state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Identifier;
-*/ };
+    public: State13() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c );  };
 
 class State14 : public State {
-    State* read(char c ); /*{
-        r.setRegex(0);
-        r.setExclude('L');
-        if (c == 'L'){
-        	State15* state15 = new State15();
-            m->setCurrentState(state15);
-        }
-        else if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Identifier;
-*/ };
+    public: State14() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c ); };
 
 class State15 : public State {
-    State* read(char c ); /*{
-        r.setRegex(0);
-        r.setExclude('E');
-        if (c == 'E'){
-        	State16* state16 = new State16();
-            m->setCurrentState(state16);
-        }
-        else if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Identifier;
-*/ };
+    public: State15() {
+        accepted = true;
+        type = Letter;
+    };
+    State* read(char c );  };
 
 class State16 : public State {
-    State* read(char c ); /*{
-        //nach WHILE weiteres Zeichen(Letter oder Digit) -> Letter!
-        r.setExclude('');
-        r.setRegex(0);
-        if (r.getResult(c)) {
-        	State2* state2 = new State2();
-            m->setCurrentState(state2);
-        }
-            //Sign
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.While;
-*/ };
+    public: State16() {
+        accepted = true;
+        type = While;
+    };
+    State* read(char c ); };
 
 class State17 : public State {
-    State* read(char c ); /*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State17() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State18 : public State {
-    State* read(char c ); /*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State18() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State19 : public State {
-    State* read(char c );/* {
-        r.setRegex(1);
-        r.setExclude('');
-        if (c == '=') {
-        	State20* state20 = new State20();
-            m->setCurrentState(state20);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State19() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State20 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+    public: State20() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c ) ; };
 
 class State21 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State21() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State22 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State22() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State23 : public State {
-   State* read(char c ) ; /*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State23() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State24 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (c == ':') {
-        	State25* state25 = new State25();
-            m->setCurrentState(state25);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State24() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State25 : public State {
-    State* read(char c );/* {
-        r.setRegex(1);
-        r.setExclude('');
-        if (c == '=') {
-        	State26* state26 = new State26();
-            m->setCurrentState(state26);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = false;
-    Type type = Type.Sign;
-*/ };
+    public: State25() {
+        accepted = false;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State26 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+    public: State26() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c ) ;
+};
 
 class State27 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State27() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State28 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (c == '&') {
-        	State29* state29 = new State29();
-            m->setCurrentState(state29);
-        }
-        else {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = false;
-    Type type = Type.Sign;
-*/ };
+public: State28() {
+        accepted = false;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State29 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+    public: State29() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c ) ;
+};
 
 class State30 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State30() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State31 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State31() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State32 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State32() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State33 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State33() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State34 : public State {
-    State* read(char c );/* {
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State34() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State35 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State35() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class State36 : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = true;
-    Type type = Type.Sign;
-*/ };
+public: State36() {
+        accepted = true;
+        type = Sign;
+    };
+    State* read(char c );
+};
 
 class Error : public State {
-    State* read(char c ) ;/*{
-        r.setRegex(1);
-        r.setExclude('');
-        if (r.getResult(c)) {
-        	Error* error = new Error();
-            m->setCurrentState(error);
-        }
-    }
-    accepted = false;
-    Type type = Type.None;
-*/ };
-
+public: Error() {
+        accepted = false;
+        type = None;
+    };
+    State* read(char c );
+};
 
 #endif //COMPILER_STATE_H

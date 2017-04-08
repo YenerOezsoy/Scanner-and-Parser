@@ -1,700 +1,563 @@
-//
-/*// Created by Yener on 27.03.2017.
- //
 
- #include "../includes/State.h"
- #include "../includes/Regex.h"
-
- class State {
- public: virtual State read(char c, AutomatOO* m=0);
- bool accepted;
- enum Type {Sign, Letter, If, While, Digit, None};
- Regex* r = new Regex();
- };
-
- class Start : public State {
- State Start::read(char c, AutomatOO *m) {
- if (r->checkDigit(c)) {
- // m->setState(State1);
- }
- else if (r->checkLetter(c)) {
- switch (c) {
- case 'i':   // m->setState(State3);
- break;
- case 'I':   // m->setSate(State5);
- break;
- case 'w':   // m->setSate(State7);
- break;
- case 'W':   // m->setState(State12);
- break;
- }
- }
- else if (r->checkSign(c)){
- switch(c) {
- case '+':   // m->setState(State17);
- break;
- case '-':   // m->setSate(State18);
- break;
- case ':':   // m->setSate(State19);
- break;
- case '*':   // m->setState(State21);
- break;
- case '<':   // m->setState(State22);
- break;
- case '>':   // m->setSate(State23);
- break;
- case '=':   // m->setSate(State24);
- break;
- case '!':   // m->setState(State27);
- break;
- case '&':   // m->setState(State28);
- break;
- case ';':   // m->setSate(State30);
- break;
- case '(':   // m->setSate(State31);
- break;
- case ')':   // m->setState(State32);
- break;
- case '{':   // m->setState(State33);
- break;
- case '}':   // m->setSate(State34);
- break;
- case '[':   // m->setSate(State35);
- break;
- case ']':   // m->setState(State36);
- break;
- }
- }
- }
- Type type = Type.None;
- accepted = false;
- };
-
- class State1 : public State {
- State Start::read(char c, AutomatOO *m) {
- if (r->checkDigit(c)) {
- // m->setState(State1);
- }
- else {
- // m->setState(Error);
- }
- }
- Type type = Type.Digit;
- accepted = true;
- };
-
- class State2 : public State {
- State Start::read(char c, AutomatOO *m) {
- if(r->checkLD(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- Type type = Type.Letter;
- accepted = true;
- };
-
- class State3 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
-
- r->setExclude('f');
- //Wechsel State4
- if (c == 'f'){
- // m->setState(State4);
- }
- //Wechsel zu State2
- else if (r->getResult(c)) {
- // m->setState(State2);
- }
- //Wechsel Error
- else {
- // m->setState(Error);
- }
- }
- Type type = Type.Letter;
- accepted = true;
- };
-
- class State4 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- Type type = Type.If;
- accepted = true;
- };
-
- class State5 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
-
- char carray[1] = {'F'};
- char* cpointer;
- r->setExclude(cpointer);
- r->setExclude('F');
- if (c == 'F'){
- // m->setState(State6);
- }
- else if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- Type type = Type.Identifier;
- accepted = true;
- };
-
- class State6 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.If;
- };
-
- class State7 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
- r->setExclude('h');
- if (c == 'h'){
- // m->setState(State8);
- }
- else if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Identifier;
- };
-
- class State8 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
- r->setExclude('i');
- if (c == 'i'){
- // m->setState(State9);
- }
- else if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Identifier;
- };
-
- class State9 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
- r->setExclude('l');
- if (c == 'l'){
- // m->setState(State10);
- }
- else if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Identifier;
- };
-
- class State10 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(3);
- r->setExclude('e');
- if (c == 'e'){
- // m->setState(State11);
- }
- else if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Identifier;
- };
-
- class State11 : public State {
- State Start::read(char c, AutomatOO *m) {
- //nach while weiteres Zeichen(Letter oder Digit) -> Letter!
- r->setExclude('');
- r->setRegex(0);
- if (r->getResult(c)) {
- // m->setState(State2);
- }
- //Sign
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.While;
- };
-
- class State12 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
- r->setExclude('H');
- if (c == 'H'){
- // m->setState(State13);
- }
- else if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Identifier;
- };
-
- class State13 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
- r->setExclude('I');
- if (c == 'I'){
- // m->setState(State14);
- }
- else if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Identifier;
- };
-
- class State14 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
- r->setExclude('L');
- if (c == 'L'){
- // m->setState(State15);
- }
- else if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Identifier;
- };
-
- class State15 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(0);
- r->setExclude('E');
- if (c == 'E'){
- // m->setState(State16);
- }
- else if (r->getResult(c)) {
- // m->setState(State2);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Identifier;
- };
-
- class State16 : public State {
- State Start::read(char c, AutomatOO *m) {
- //nach WHILE weiteres Zeichen(Letter oder Digit) -> Letter!
- r->setExclude('');
- r->setRegex(0);
- if (r->getResult(c)) {
- // m->setState(State2);
- }
- //Sign
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.While;
- };
-
- class State17 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State18 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State19 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (c == '=') {
- // m->setState(State20);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State20 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State21 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State22 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State23 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State24 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (c == ':') {
- // m->setState(State25);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State25 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (c == '=') {
- // m->setState(State26);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = false;
- Type type = Type.Sign;
- };
-
- class State26 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State27 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State28 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (c == '&') {
- // m->setState(State29);
- }
- else {
- // m->setState(Error);
- }
- }
- accepted = false;
- Type type = Type.Sign;
- };
-
- class State29 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State30 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State31 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class State32 : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = true;
- Type type = Type.Sign;
- };
-
- class Error : public State {
- State Start::read(char c, AutomatOO *m) {
- r->setRegex(1);
- r->setExclude('');
- if (r->getResult(c)) {
- // m->setState(Error);
- }
- }
- accepted = false;
- Type type = Type.None;
- };*/
-
-//#include "../includes/Automat.h"
 #include "../includes/Regex.h"
 #include "../includes/State.h"
 
-/*class State {
-	~State();
-	Regex r = Regex();
-};
-*/
-/*class Start : public State {*/
 
+State* State::getState(int i) {
+    switch (i) {
+        default: break;
+        case 0: Start *start;
+                start = new Start();
+                return start;
+        case 1: State1 *state1;
+            state1 = new State1();
+            return state1;
+        case 2: State2 *state2;
+            state2 = new State2();
+            return state2;
+        case 3: State3 *state3;
+            state3 = new State3();
+            return state3;
+        case 4: State4 *state4;
+            state4 = new State4();
+            return state4;
+        case 5: State5 *state5;
+            state5 = new State5();
+            return state5;
+        case 6: State6 *state6;
+            state6 = new State6();
+            return state6;
+        case 7: State7 *state7;
+            state7 = new State7();
+            return state7;
+        case 8: State8 *state8;
+            state8 = new State8();
+            return state8;
+        case 9: State9 *state9;
+            state9 = new State9();
+            return state9;
+        case 10: State10 *state10;
+            state10 = new State10();
+            return state10;
+        case 11: State11 *state11;
+            state11 = new State11();
+            return state11;
+        case 12: State12 *state12;
+            state12 = new State12();
+            return state12;
+        case 13: State13 *state13;
+            state13 = new State13();
+            return state13;
+        case 14: State14 *state14;
+            state14 = new State14();
+            return state14;
+        case 15: State15 *state15;
+            state15 = new State15();
+            return state15;
+        case 16: State16 *state16;
+            state16 = new State16();
+            return state16;
+        case 17: State17 *state17;
+            state17 = new State17();
+            return state17;
+        case 18: State18 *state18;
+            state18 = new State18();
+            return state18;
+        case 19: State19 *state19;
+            state19 = new State19();
+            return state19;
+        case 20: State20 *state20;
+            state20 = new State20();
+            return state20;
+        case 21: State21 *state21;
+            state21 = new State21();
+            return state21;
+        case 22: State22 *state22;
+            state22 = new State22();
+            return state22;
+        case 23: State23 *state23;
+            state23 = new State23();
+            return state23;
+        case 24: State24 *state24;
+            state24 = new State24();
+            return state24;
+        case 25: State25 *state25;
+            state25 = new State25();
+            return state25;
+        case 26: State26 *state26;
+            state26 = new State26();
+            return state26;
+        case 27: State27 *state27;
+            state27 = new State27();
+            return state27;
+        case 28: State28 *state28;
+            state28 = new State28();
+            return state28;
+        case 29: State29 *state29;
+            state29 = new State29();
+            return state29;
+        case 30: State30 *state30;
+            state30 = new State30();
+            return state30;
+        case 31: State31 *state31;
+            state31 = new State31();
+            return state31;
+        case 32: State32 *state32;
+            state32 = new State32();
+            return state32;
+        case 33: State33 *state33;
+            state33 = new State33();
+            return state33;
+        case 34: State34 *state34;
+            state34 = new State34();
+            return state34;
+        case 35: State35 *state35;
+            state35 = new State35();
+            return state35;
+        case 36: State36 *state36;
+            state36 = new State36();
+            return state36;
+        case -1: Error *error;
+            error = new Error();
+            return error;
+    }
+    return 0;
+}
 
 State* Start::read(char c ) {
-	if (r.checkDigit(c)) {
-         	State1* state1 = new State1();
-         	return state1;
-         	// m->setCurrentState(state1);
-	}
-	else if (r.checkLetter(c)) {
-		switch (c) {
-			case 'i': 	State3* state3;// = new State3();
-	                	// m->setCurrentState(state3);
-						return state3;
-	                 	break;
-	        case 'I': 	State5* state5;// = new State5();
-	           			// m->setCurrentState(state5);
-               			return state5;
-	        				break;
-	        case 'w': 	State7* state7;// = new State7();
-	           			// m->setCurrentState(state7);
-	        				return state7;
-	        				break;
-	        case 'W':   State12* state12;// = new State12();
-	           			// m->setCurrentState(state12);
-	        return state12;
-	        				break;
-	             }
-	         }
-	else if (r.checkSign(c)) {
-		switch(c) {
-			case '+':   State17* state17;// = new State17();
-	           			// m->setCurrentState(state17);
-			return state17;
-						break;
-            case '-':   State18* state18;// = new State18();
-	           			// m->setCurrentState(state18);
-            return state18;
-            				break;
-            case ':':   State19* state19;// = new State19();
-              			// m->setCurrentState(state19);
-            return state19;
-            				break;
-            case '*':   State21* state21;// = new State21();
-               			// m->setCurrentState(state21);
-            return state21;
-            				break;
-            case '<':   State22* state22;// = new State22();
-               			// m->setCurrentState(state22);
-            return state22;
-            				break;
-            case '>':   State23* state23;// = new State23();
-               			// m->setCurrentState(state23);
-            return state23;
-            				break;
-            case '=':   State24* state24;// = new State24();
-              			// m->setCurrentState(state24);
-            return state24;
-            break;
-            case '!':   State27* state27;// = new State27();
-              			// m->setCurrentState(state27);
-            return state27;
-            	break;
-            case '&':   State28* state28;// = new State28();
-               			// m->setCurrentState(state28);
-            return state28;
-            break;
-            case ';':   State30* state30;// = new State30();
-               			// m->setCurrentState(state30);
-            return state30;
-            break;
-            case '(':   State31* state31;// = new State31();
-              			// m->setCurrentState(state31);
-            return state31;
-            break;
-            case ')':   State32* state32;// = new State32();
-               			// m->setCurrentState(state32);
-            return state32;
-            break;
-            case '{':   State33* state33;// = new State33();
-              			// m->setCurrentState(state33);
-            return state33;
-            break;
-            case '}':   State34* state34;// = new state34();
-               			// m->setCurrentState(state34);
-            return state34;
-            break;
-            case '[':   State35* state35;// = new State35();
-               			// m->setCurrentState(state35);
-            return state35;
-            break;
-            case ']':   State36* state36;// = new State36();
-               			// m->setCurrentState(state36);
-            return state36;
-            break;
-		}
-	}
+    if (r.checkDigit(c)) {
+        return getState(1);
+    }
+    else if (r.checkLetter(c)) {
+        switch (c) {
+            case 'i': return getState(3);
+            case 'I': return getState(5);
+            case 'w': return getState(7);
+            case 'W': return getState(12);
 
+            default:break;
+        }
+    }
+    else if (r.checkSign(c)) {
+        switch(c) {
+            case '+': return getState(17);
+            case '-': return getState(18);
+            case ':': return getState(19);
+            case '*': return getState(21);
+            case '<': return getState(22);
+            case '>': return getState(23);
+            case '=': return getState(24);
+            case '!': return getState(27);
+            case '&': return getState(28);
+            case ';': return getState(30);
+            case '(': return getState(31);
+            case ')': return getState(32);
+            case '{': return getState(33);
+            case '}': return getState(34);
+            case '[': return getState(35);
+            case ']': return getState(36);
+            default:break;
+        }
+    }
+    return 0;
 }
 
 State* State1::read(char c ) {
-	if (r.checkDigit(c)) {
-		State1* state1;// = new State1();
-		// m->setCurrentState(state1);
-		return state1;
-	}
-	else {
-		Error* error;// = new Error();
-		// m->setCurrentState(error);
-		return error;
-	}
+    if (r.checkDigit(c)) {
+        return getState(1);
+    }
+    else {
+        return getState(-1);
+    }
 }
 
 State* State2::read(char c ) {
-	if(r.checkLD(c)) {
-         	//State2* state2;// = new State2();
-         	// m->setCurrentState(state2);
-         	return this;
-	}
-	else {
-		Error* error;// = new Error();
-		// m->setCurrentState(error);
-		return error;
-	}
+    if(r.checkLD(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State3::read(char c) {
+    r.setRegex(0);
+    r.setExclude('f');
+    //Wechsel State4
+    if (c == 'f') {
+        return getState(4);
+    }
+        //Wechsel zu State2
+    else if (r.getResult(c)) {
+        return getState(2);
+    }
+        //Wechsel Error
+    else {
+        return getState(-1);
+    }
+}
+
+State* State4::read(char c) {
+    r.setRegex(0);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State5::read(char c) {
+    r.setRegex(0);
+    r.setExclude('F');
+    if (c == 'F') {
+        return getState(6);
+    }
+    else if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State6::read(char c) {
+    r.setRegex(0);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State7::read(char c) {
+    r.setRegex(0);
+    r.setExclude('h');
+    if (c == 'h'){
+        return getState(8);
+    }
+    else if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State8::read(char c) {
+    r.setRegex(0);
+    r.setExclude('i');
+    if (c == 'i') {
+        return getState(9);
+    }
+    else if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State9::read(char c) {
+    r.setRegex(0);
+    r.setExclude('l');
+    if (c == 'l') {
+        return getState(10);
+    }
+    else if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State10::read(char c) {
+    r.setRegex(3);
+    r.setExclude('e');
+    if (c == 'e'){
+        return getState(11);
+    }
+    else if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State11::read(char c) {
+    r.setExclude('\0');
+    r.setRegex(0);
+    if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State12::read(char c) {
+    r.setRegex(0);
+    r.setExclude('H');
+    if (c == 'H') {
+        return getState(13);
+    }
+    else if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State13::read(char c) {
+    r.setRegex(0);
+    r.setExclude('I');
+    if (c == 'I') {
+        State14 *state14;
+        state14 = new State14();
+        return state14;
+    }
+    else if (r.getResult(c)) {
+        State2 *state2;
+        state2 = new State2();
+        return state2;
+    }
+    else {
+        Error *error;
+        error = new Error();
+        return error;
+    }
+}
+
+State* State14::read(char c) {
+    r.setRegex(0);
+    r.setExclude('L');
+    if (c == 'L') {
+        return getState(15);
+    }
+    else if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State15::read(char c) {
+    r.setRegex(0);
+    r.setExclude('E');
+    if (c == 'E') {
+        return getState(16);
+    }
+    else if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State16::read(char c) {
+    r.setExclude('\0');
+    r.setRegex(0);
+    if (r.getResult(c)) {
+        return getState(2);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State17::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State18::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State19::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (c == '=') {
+        return getState(20);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State20::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State21::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State22::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State23::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State24::read(char c) {
+    if (c == ':') {
+        return getState(25);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State25::read(char c) {
+    if (c == '=') {
+        return getState(26);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State26::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State27::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+
+    return 0;
+}
+
+State* State28::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (c == '&') {
+        return getState(29);
+    }
+    else {
+        return getState(-1);
+    }
+}
+
+State* State29::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State30::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State31::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State32::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State33::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State34::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State35::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* State36::read(char c) {
+    r.setRegex(1);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return getState(-1);
+    }
+    return 0;
+}
+
+State* Error::read(char c) {
+    return getState(-1);
 }
