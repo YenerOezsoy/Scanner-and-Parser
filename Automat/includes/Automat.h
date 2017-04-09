@@ -6,12 +6,12 @@
 
 class Automat {
 public:
-    State* currentState;
-    Start *start;
+    State* currentState = 0;
+    Start *start = 0;
 	Automat();
 	virtual ~Automat();
     void handle(char* character);
-    //char Array und int für Tokenizer
+    //int für Tokenizer, Buchstaben zählen
     int i;
 };
 

@@ -12,16 +12,16 @@ int main (int argc, char* argv[]){
 
 	std::cout << "Hello, World!" << std::endl;
 
-	char t[70] = "/*Dies ist ein*/ Test iF if WHILE 1a a1 11 /*habt ihr weitere test?";
+	char t[80] = "/*Dies ist ein*/ Test iF if WHILE 1a a1 11 //what hi \0 /*habt ihr weitere test?";
 	char* test =  t;
 
 	Automat *automat;
 
 	std::cout << "TEST" << std::endl;
+
 	automat = new Automat();
 
 	automat->handle(test);
 
 	return 0;
-
 }

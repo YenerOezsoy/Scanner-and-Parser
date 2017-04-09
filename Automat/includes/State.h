@@ -14,7 +14,6 @@
 
 class State {
 public:
-    //State(){};
     virtual State* read(char c) = 0;
     virtual ~State() {};
     bool accepted;
@@ -340,6 +339,14 @@ public: State40() {
         type = Comment;
     };
     State* read(char c );
+};
+
+class State41 : public State {
+public: State41() {
+        accepted = false;
+        type = Comment;
+    };
+    State* read(char c);
 };
 
 class Error : public State {

@@ -17,7 +17,6 @@ Automat::~Automat() {
 
 
 void Automat::handle(char* character) {
-    //this->character = character;
     i = 0;
     while (character[i] != '\0') {
         if (character[i] == ' ' & currentState->type != 6) {
