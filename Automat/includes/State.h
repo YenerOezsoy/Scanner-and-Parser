@@ -312,7 +312,7 @@ public: State36() {
 class State37 : public State {
 public: State37() {
         accepted = false;
-        type = None;
+        type = Comment;
     };
     State* read(char c );
 };
@@ -325,29 +325,7 @@ public: State38() {
     State* read(char c );
 };
 
-class State39 : public State {
-public: State39() {
-        accepted = false;
-        type = Comment;
-    };
-    State* read(char c );
-};
 
-class State40 : public State {
-public: State40() {
-        accepted = false;
-        type = Comment;
-    };
-    State* read(char c );
-};
-
-class State41 : public State {
-public: State41() {
-        accepted = false;
-        type = Comment;
-    };
-    State* read(char c);
-};
 
 class Error : public State {
 public: Error() {

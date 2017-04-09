@@ -123,15 +123,6 @@ State* State::getState(int i) {
         case 38: State38 *state38;
                  state38 = new State38();
                  return state38;
-        case 39: State39 *state39;
-                 state39 = new State39();
-                 return state39;
-        case 40: State40 *state40;
-                 state40 = new State40();
-                 return state40;
-        case 41: State41 *state41;
-                 state41 = new State41();
-                 return state41;
         case -1: Error *error;
                  error = new Error();
                  return error;
@@ -409,6 +400,9 @@ State* State19::read(char c) {
     if (c == '=') {
         return getState(20);
     }
+    else if (c == '*') {
+        return getState(37);
+    }
     else {
         return getState(-1);
     }
@@ -574,42 +568,17 @@ State* State37::read(char c) {
     if (c == '*') {
         return getState(38);
     }
-    else if (c == '/') {
-        return getState(41);
-    }
     else {
-        return getState(-1);
+        return this;
     }
 }
 
 State* State38::read(char c) {
-    if (c == '*') {
-        return getState(39);
-    }
-    else {
-        return this;
-    }
-}
-
-State* State39::read(char c) {
-    if (c == '/') {
-        return getState(40);
-    }
-    else {
-        return getState(38);
-    }
-}
-
-State* State40::read(char c) {
-    return getState(0)->read(c);
-}
-
-State* State41::read(char c) {
-    if (c == '\0') {
+    if (c == ':') {
         return getState(0);
     }
     else {
-        return this;
+        return getState(37);
     }
 }
 

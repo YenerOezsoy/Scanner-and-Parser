@@ -5,7 +5,6 @@
 #define COMPILER_REGEX_H
 
 
-
 class Regex{
 
 public:
