@@ -7,127 +7,127 @@ State* State::getState(int i) {
     switch (i) {
         default: break;
         case 0:  Start *start;
-                 start = new Start();
-                 return start;
+            start = new Start();
+            return start;
         case 1:  State1 *state1;
-                 state1 = new State1();
-                 return state1;
+            state1 = new State1();
+            return state1;
         case 2:  State2 *state2;
-                 state2 = new State2();
-                 return state2;
+            state2 = new State2();
+            return state2;
         case 3:  State3 *state3;
-                 state3 = new State3();
-                 return state3;
+            state3 = new State3();
+            return state3;
         case 4:  State4 *state4;
-                 state4 = new State4();
-                 return state4;
+            state4 = new State4();
+            return state4;
         case 5:  State5 *state5;
-                 state5 = new State5();
-                 return state5;
+            state5 = new State5();
+            return state5;
         case 6:  State6 *state6;
-                 state6 = new State6();
-                 return state6;
+            state6 = new State6();
+            return state6;
         case 7:  State7 *state7;
-                 state7 = new State7();
-                 return state7;
+            state7 = new State7();
+            return state7;
         case 8:  State8 *state8;
-                 state8 = new State8();
-                 return state8;
+            state8 = new State8();
+            return state8;
         case 9:  State9 *state9;
-                 state9 = new State9();
-                 return state9;
+            state9 = new State9();
+            return state9;
         case 10: State10 *state10;
-                 state10 = new State10();
-                 return state10;
+            state10 = new State10();
+            return state10;
         case 11: State11 *state11;
-                 state11 = new State11();
-                 return state11;
+            state11 = new State11();
+            return state11;
         case 12: State12 *state12;
-                 state12 = new State12();
-                 return state12;
+            state12 = new State12();
+            return state12;
         case 13: State13 *state13;
-                 state13 = new State13();
-                 return state13;
+            state13 = new State13();
+            return state13;
         case 14: State14 *state14;
-                 state14 = new State14();
-                 return state14;
+            state14 = new State14();
+            return state14;
         case 15: State15 *state15;
-                 state15 = new State15();
-                 return state15;
+            state15 = new State15();
+            return state15;
         case 16: State16 *state16;
-                 state16 = new State16();
-                 return state16;
+            state16 = new State16();
+            return state16;
         case 17: State17 *state17;
-                 state17 = new State17();
-                 return state17;
+            state17 = new State17();
+            return state17;
         case 18: State18 *state18;
-                 state18 = new State18();
-                 return state18;
+            state18 = new State18();
+            return state18;
         case 19: State19 *state19;
-                 state19 = new State19();
-                 return state19;
+            state19 = new State19();
+            return state19;
         case 20: State20 *state20;
-                 state20 = new State20();
-                 return state20;
+            state20 = new State20();
+            return state20;
         case 21: State21 *state21;
-                 state21 = new State21();
-                 return state21;
+            state21 = new State21();
+            return state21;
         case 22: State22 *state22;
-                 state22 = new State22();
-                 return state22;
+            state22 = new State22();
+            return state22;
         case 23: State23 *state23;
-                 state23 = new State23();
-                 return state23;
+            state23 = new State23();
+            return state23;
         case 24: State24 *state24;
-                 state24 = new State24();
-                 return state24;
+            state24 = new State24();
+            return state24;
         case 25: State25 *state25;
-                 state25 = new State25();
-                 return state25;
+            state25 = new State25();
+            return state25;
         case 26: State26 *state26;
-                 state26 = new State26();
-                 return state26;
+            state26 = new State26();
+            return state26;
         case 27: State27 *state27;
-                 state27 = new State27();
-                 return state27;
+            state27 = new State27();
+            return state27;
         case 28: State28 *state28;
-                 state28 = new State28();
-                 return state28;
+            state28 = new State28();
+            return state28;
         case 29: State29 *state29;
-                 state29 = new State29();
-                 return state29;
+            state29 = new State29();
+            return state29;
         case 30: State30 *state30;
-                 state30 = new State30();
-                 return state30;
+            state30 = new State30();
+            return state30;
         case 31: State31 *state31;
-                 state31 = new State31();
-                 return state31;
+            state31 = new State31();
+            return state31;
         case 32: State32 *state32;
-                 state32 = new State32();
-                 return state32;
+            state32 = new State32();
+            return state32;
         case 33: State33 *state33;
-                 state33 = new State33();
-                 return state33;
+            state33 = new State33();
+            return state33;
         case 34: State34 *state34;
-                 state34 = new State34();
-                 return state34;
+            state34 = new State34();
+            return state34;
         case 35: State35 *state35;
-                 state35 = new State35();
-                 return state35;
+            state35 = new State35();
+            return state35;
         case 36: State36 *state36;
-                 state36 = new State36();
-                 return state36;
+            state36 = new State36();
+            return state36;
         case 37: State37 *state37;
-                 state37 = new State37();
-                 return state37;
+            state37 = new State37();
+            return state37;
         case 38: State38 *state38;
-                 state38 = new State38();
-                 return state38;
+            state38 = new State38();
+            return state38;
         case -1: Error *error;
-                 error = new Error();
-                 return error;
+            error = new Error();
+            return error;
     }
-    return 0;
+    return this;
 }
 
 State* Start::read(char c ) {
@@ -165,7 +165,7 @@ State* Start::read(char c ) {
             default:break;
         }
     }
-    return 0;
+    return getState(-1);
 }
 
 State* State1::read(char c ) {
@@ -382,7 +382,7 @@ State* State17::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State18::read(char c) {
@@ -391,7 +391,7 @@ State* State18::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State19::read(char c) {
@@ -414,7 +414,7 @@ State* State20::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State21::read(char c) {
@@ -423,7 +423,7 @@ State* State21::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State22::read(char c) {
@@ -432,7 +432,7 @@ State* State22::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State23::read(char c) {
@@ -441,7 +441,7 @@ State* State23::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State24::read(char c) {
@@ -468,7 +468,7 @@ State* State26::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State27::read(char c) {
@@ -478,7 +478,7 @@ State* State27::read(char c) {
         return getState(-1);
     }
 
-    return 0;
+    return this;
 }
 
 State* State28::read(char c) {
@@ -498,7 +498,7 @@ State* State29::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State30::read(char c) {
@@ -507,7 +507,7 @@ State* State30::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State31::read(char c) {
@@ -516,7 +516,7 @@ State* State31::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State32::read(char c) {
@@ -525,7 +525,7 @@ State* State32::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State33::read(char c) {
@@ -534,7 +534,7 @@ State* State33::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State34::read(char c) {
@@ -543,7 +543,7 @@ State* State34::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State35::read(char c) {
@@ -552,7 +552,7 @@ State* State35::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State36::read(char c) {
@@ -561,7 +561,7 @@ State* State36::read(char c) {
     if (r.getResult(c)) {
         return getState(-1);
     }
-    return 0;
+    return this;
 }
 
 State* State37::read(char c) {

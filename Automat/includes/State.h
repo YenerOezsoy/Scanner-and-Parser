@@ -17,7 +17,7 @@ public:
     virtual State* read(char c) = 0;
     virtual ~State() {};
     bool accepted;
-    enum Type {Sign, Letter, If, While, Digit, None, Comment};
+    enum Type {Sign, Letter, If, While, Digit, None, Comment, StartType};
     Type type;
     Regex r;// = Regex();
     State* getState(int i);
@@ -26,7 +26,7 @@ public:
 class Start : public State {
 public: Start() {
         accepted = false;
-        type = None;
+        type = StartType;
     };
     State* read(char c );
 };
@@ -324,8 +324,6 @@ public: State38() {
     };
     State* read(char c );
 };
-
-
 
 class Error : public State {
 public: Error() {
