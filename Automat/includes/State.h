@@ -7,7 +7,7 @@
 #define COMPILER_STATE_H
 
 
-#include "../includes/Regex.h"
+#include "Regex.h"
 //#include "../includes/Automat.h"
 
 //class Automat;
@@ -17,7 +17,7 @@ public:
     virtual State* read(char c) = 0;
     virtual ~State() {};
     bool accepted;
-    enum Type {Sign, Letter, If, While, Digit, None, Comment, StartType};
+    enum Type {Sign, Letter, If, While, Digit, End, Comment, StartType, ErrorType};
     Type type;
     Regex r;// = Regex();
     State* getState(int i);
@@ -57,7 +57,7 @@ public: State3() {
 };
 
 class State4 : public State {
-    public: State4 () {
+public: State4 () {
         accepted = true;
         type = If;
     };
@@ -87,28 +87,28 @@ public: State7() {
 };
 
 class State8 : public State {
-    public: State8() {
+public: State8() {
         accepted = true;
         type = Letter;
     };
     State* read(char c ); };
 
 class State9 : public State {
-    public: State9() {
+public: State9() {
         accepted = true;
         type = Letter;
     };
     State* read(char c );  };
 
 class State10 : public State {
-    public: State10() {
+public: State10() {
         accepted = true;
         type = Letter;
     };
     State* read(char c );  };
 
 class State11 : public State {
-    public: State11() {
+public: State11() {
         accepted = true;
         type = While;
     };
@@ -123,28 +123,28 @@ public: State12() {
 };
 
 class State13 : public State {
-    public: State13() {
+public: State13() {
         accepted = true;
         type = Letter;
     };
     State* read(char c );  };
 
 class State14 : public State {
-    public: State14() {
+public: State14() {
         accepted = true;
         type = Letter;
     };
     State* read(char c ); };
 
 class State15 : public State {
-    public: State15() {
+public: State15() {
         accepted = true;
         type = Letter;
     };
     State* read(char c );  };
 
 class State16 : public State {
-    public: State16() {
+public: State16() {
         accepted = true;
         type = While;
     };
@@ -175,7 +175,7 @@ public: State19() {
 };
 
 class State20 : public State {
-    public: State20() {
+public: State20() {
         accepted = true;
         type = Sign;
     };
@@ -214,7 +214,7 @@ public: State24() {
 };
 
 class State25 : public State {
-    public: State25() {
+public: State25() {
         accepted = false;
         type = Sign;
     };
@@ -222,7 +222,7 @@ class State25 : public State {
 };
 
 class State26 : public State {
-    public: State26() {
+public: State26() {
         accepted = true;
         type = Sign;
     };
@@ -246,7 +246,7 @@ public: State28() {
 };
 
 class State29 : public State {
-    public: State29() {
+public: State29() {
         accepted = true;
         type = Sign;
     };
@@ -325,12 +325,28 @@ public: State38() {
     State* read(char c );
 };
 
+class State39 : public State {
+public: State39() {
+        accepted = false;
+        type = Comment;
+    };
+    State* read(char c );
+};
+
 class Error : public State {
 public: Error() {
         accepted = false;
-        type = None;
+        type = ErrorType;
     };
     State* read(char c );
+};
+
+class EndState : public State {
+public: EndState() {
+        accepted = false;
+        type = End;
+    };
+    State* read(char c);
 };
 
 #endif //COMPILER_STATE_H
