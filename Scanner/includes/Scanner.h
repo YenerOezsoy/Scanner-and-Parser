@@ -11,7 +11,7 @@
 
 #include "Buffer.h"
 #include "Automat.h"
-//#include "Symboltabelle.h"
+#include "Symboltabelle.h"
 #include "Token.h"
 
 class Scanner {
@@ -22,7 +22,7 @@ class Scanner {
 
         Automat *automat;
         Buffer *buffer;
-        //Symboltabelle *symboltabelle;
+        Symboltabelle *symboltabelle;
         Token *token;
 
         int type = 7;

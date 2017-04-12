@@ -23,6 +23,7 @@ int main(int argc, char **argv) {
         i++;
         std::cout << "=====================" << std::endl;
     }*/
+
     while ((token = scanner->nextToken()) != nullptr) {
         std::cout << "Wort: " << token->getKey() << '\n';
         std::cout << " Row: " << token->getRow();

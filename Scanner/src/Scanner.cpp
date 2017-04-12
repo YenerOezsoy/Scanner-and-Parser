@@ -41,7 +41,6 @@ Token* Scanner::nextToken() {
         }
 
         else {
-
             //EndType Ende erreicht
             if (type == 5) {
                 buffer->ungetChar();
