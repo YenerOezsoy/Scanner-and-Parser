@@ -380,22 +380,10 @@ State* State16::read(char c) {
 }
 
 State* State17::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return getState(-2);*/
     return getState(-1);
 }
 
 State* State18::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
@@ -414,42 +402,18 @@ State* State19::read(char c) {
 }
 
 State* State20::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
 State* State21::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
 State* State22::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
 State* State23::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
@@ -472,23 +436,10 @@ State* State25::read(char c) {
 }
 
 State* State26::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
 State* State27::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-
-    return this;*/
     return getState(-1);
 }
 
@@ -504,83 +455,34 @@ State* State28::read(char c) {
 }
 
 State* State29::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
 State* State30::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
 State* State31::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
 State* State32::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
 State* State33::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;
-     */
     return getState(-1);
 }
 
 State* State34::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
 State* State35::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 
 State* State36::read(char c) {
-    /*r.setRegex(1);
-    r.setExclude('\0');
-    if (r.getResult(c)) {
-        return getState(-1);
-    }
-    return this;*/
     return getState(-1);
 }
 

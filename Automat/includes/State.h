@@ -8,9 +8,6 @@
 
 
 #include "Regex.h"
-//#include "../includes/Automat.h"
-
-//class Automat;
 
 class State {
 public:
@@ -19,7 +16,7 @@ public:
     bool accepted;
     enum Type {Sign, Letter, If, While, Digit, End, Comment, StartType, ErrorType};
     Type type;
-    Regex r;// = Regex();
+    Regex r;
     State* getState(int i);
 };
 
