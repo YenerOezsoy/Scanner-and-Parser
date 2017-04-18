@@ -23,6 +23,8 @@ public:
 
 	Key insert(int hash, char* lexem, StringTabelle* strTab);
 	Information* lookup(Key key);
+
+	void ausgeben();
 };
 
 #endif /* SYMBOLTABELLE_INCLUDES_SYMTABENTRY_H_ */

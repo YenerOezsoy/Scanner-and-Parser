@@ -25,8 +25,10 @@ public:
 	virtual ~Symboltabelle();
 
 	Key insert(char* lexem);
-	Information lookup(Key key);
+	Information* lookup(Key key);
 
+	void initSymbols();
+	void ausgabe();
 };
 
 #endif /* SYMBOLTABELLE_H_ */

@@ -13,4 +13,6 @@ int main(int argc, char **argv) {
 	std::cout << "SymTab main test so plsss" << std::endl;
 	Symboltabelle* symboltabelle = new Symboltabelle(10);
 
+	symboltabelle->initSymbols();
+	symboltabelle->ausgabe();
 }

@@ -6,6 +6,7 @@
  */
 
 #include "../includes/SymTabEntry.h"
+#include <iostream>
 #include <string.h>
 
 SymTabEntry::SymTabEntry() {
@@ -48,7 +49,8 @@ Key SymTabEntry::insert(int hash, char* lexem, StringTabelle* strTab) {
 int SymTabEntry::exists(char* lexem) {
 	Information* current = first;
 	for (int i = 0; i < size; ++i) {
-		if (current->compareLex(lexem)) {
+		if (current->compareLex(lexem) == 0) {
+			std::cout << "EXISTS " << lexem  << " = " << current->getName() << " ," << std::endl;
 			return i;
 		}
 		current = current->getNext();
@@ -64,4 +66,10 @@ Information* SymTabEntry::lookup(Key key) {
 	return current;
 }
 
-
+void SymTabEntry::ausgeben() {
+	Information* current = first;
+	while (current != nullptr) {
+		std::cout << current->getName() << " ";
+		current = current->getNext();
+	}
+}

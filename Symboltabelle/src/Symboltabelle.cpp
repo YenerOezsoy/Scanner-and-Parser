@@ -6,6 +6,7 @@
  */
 
 #include "../includes/Symboltabelle.h"
+#include <iostream>
 #include <string.h>
 
 Symboltabelle::Symboltabelle(int size) {
@@ -21,11 +22,11 @@ Symboltabelle::~Symboltabelle() {
 
 Key Symboltabelle::insert(char* lexem) {
 	int index = hash(lexem);
-	//entries[index].insert(lexem);
+	entries[index].insert(index, lexem, strTab);
 }
 
-Information Symboltabelle::lookup(Key key) {
-
+Information* Symboltabelle::lookup(Key key) {
+	return entries[key.hash].lookup(key);
 }
 
 int Symboltabelle::hash(char* str) {
@@ -37,4 +38,24 @@ int Symboltabelle::hash(char* str) {
     hash %= this->size;
 
 	return hash;
+}
+
+void Symboltabelle::initSymbols() {
+	insert("while");
+	insert("WHILE");
+	insert("if");
+	insert("IF");
+	insert("test");
+	insert("i");
+	insert("come");
+	insert("lel");
+	insert("lel");
+}
+
+void Symboltabelle::ausgabe() {
+	for (int i = 0; i < this->size; i++) {
+		std::cout << i << ": ";
+		entries[i].ausgeben();
+		std::cout << std::endl;
+	}
 }
