@@ -10,13 +10,25 @@
 
 class StringTabNode {
 private:
-	char vector[];
+	char* vector;
+	int size;
 	StringTabNode* next;
 
 public:
-	StringTabNode();
+	StringTabNode(char* vector, int size);
 	virtual ~StringTabNode();
 
+	char* getVector() {
+		return vector;
+	}
+
+	StringTabNode* getNext() {
+		return next;
+	}
+
+	void setNext(StringTabNode* node) {
+		next = node;
+	}
 };
 
 #endif /* SYMBOLTABELLE_INCLUDES_STRINGTABNODE_H_ */
