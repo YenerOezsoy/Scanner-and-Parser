@@ -9,16 +9,20 @@
 #define SYMBOLTABELLE_INCLUDES_SYMTABENTRY_H_
 
 #include "Information.h"
+#include "StringTabelle.h"
 
 class SymTabEntry {
 private:
-	Information* info;
+	Information* first;
+	int size;
 
+	int exists(char* lexem);
 public:
 	SymTabEntry();
 	virtual ~SymTabEntry();
 
-	//void insert(char* lexem, StringTabelle* strTab);
+	Key insert(int hash, char* lexem, StringTabelle* strTab);
+	Information* lookup(Key key);
 };
 
 #endif /* SYMBOLTABELLE_INCLUDES_SYMTABENTRY_H_ */

@@ -61,7 +61,7 @@ SymboltabelleTarget: $(OBJS)
 # $^ --> rechte Seite vom Doppelpunkt
 
 $(OBJDIR)/%.o :  $(SRCDIR)/%.cpp $(HEADERDIR)/%.h
-	g++ -g  -c -Wall  $<  -o $@
+	g++ -g -std=gnu++11 -c -Wall  $<  -o $@
 
 
 

@@ -8,6 +8,10 @@
 #include "../includes/Information.h"
 #include <string.h>
 
+Information::Information(char* lexem) {
+	this->lexem = lexem;
+}
+
 bool Information::compareLex(char* lexem) {
-	return strcmp(this->name, lexem);
+	return strcmp(this->lexem, lexem);
 }

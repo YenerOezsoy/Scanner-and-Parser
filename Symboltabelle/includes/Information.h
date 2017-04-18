@@ -20,18 +20,24 @@ struct Key {
 
 class Information{
 private:
-	char* name;
+	char* lexem;
 	Information* next;
 
 public:
+	Information(char* lexem);
+
 	bool compareLex (char* lexem);
 
 	char* getName () {
-		return name;
+		return lexem;
 	}
 
 	Information* getNext() {
 		return next;
+	}
+
+	void setNext(Information* info) {
+		next = info;
 	}
 };
 
