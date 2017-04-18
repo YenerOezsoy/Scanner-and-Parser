@@ -16,21 +16,22 @@ struct Key {
 		this->hash = hash;
 		this->index = index;
 	}
-
-	Key () {
-		this->hash = 0;
-		this->index = -1;
-	}
 };
 
 class Information{
 private:
 	char* name;
+	Information* next;
 
 public:
 	bool compareLex (char* lexem);
+
 	char* getName () {
 		return name;
+	}
+
+	Information* getNext() {
+		return next;
 	}
 };
 
