@@ -7,25 +7,36 @@
 
 #ifndef BUFFER_H_
 #define BUFFER_H_
-
 #include <fstream>
-#include <iostream>
 
 using namespace std;
+class BufferOutOfBoundException {};
+class NotAbleToOpenFileException{};
 
 class Buffer {
-public:
-	const char* INPUT = "Buffer//input";
-	const char* OUTPUT = "Buffer//output";
-	const int SIZE = 20;
 
+private:
+	const char* INPUT = "Buffer//debug//input";
+
+	//new
+	const static int BUFFER_SIZE = 10;
+	char buffer1 [BUFFER_SIZE];
+	char buffer2 [BUFFER_SIZE];
+	int location1, location2;
+	int currentBuffer, wantedSize, inputSize1, inputSize2;
+
+
+	fstream file;
+
+public:
 	Buffer();
 	virtual ~Buffer();
+	void read();
 
-	fstream inputFile, outputFile;
+	//new
+	char getChar();
+	void ungetChar();
 
-	void readFromFile();
-	void writeToFile();
 };
 
 #endif /* BUFFER_H_ */

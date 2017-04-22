@@ -1,20 +1,33 @@
 /*
- * Automat.cpp
- *
- *  Created on: Mar 22, 2017
- *      Author: kaok1012
+ * Created by Yener on 27.03.2017.
  */
 
-#include "../../Automat/includes/Automat.h"
+#include "../includes/Automat.h"
+#include <iostream>
 
 
 Automat::Automat() {
-	// TODO Auto-generated constructor stub
-
+    start = new Start();
+    currentState = start;
 }
 
 Automat::~Automat() {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }
 
 
+int Automat::handle(char* character) {
+	    //Leerzeichen ignorieren wenn kein Kommentar
+	    if (*character == ' ' && currentState-> type != 6) {
+	        currentState = currentState->read(character);
+	        return currentState->type;
+	    }
+	    //Leerzeichen in Kommentaren überspringen
+	    else if (*character == ' ' && currentState-> type == 6) {
+	        return currentState->type;
+	    }
+	    else {
+	        currentState = currentState->read(character);
+	        return currentState->type;
+	    }
+}

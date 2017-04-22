@@ -1,17 +1,3 @@
-# Definition der Variablen
-
-# enthaelt die Header Files
-HEADERDIR = includes
-
-# enthaelt die Source Files
-SRCDIR = src
-
-# enthaelt die Obj Files fuer das Gesamtprojekt
-OBJDIR = objs
-
-# enthaelt die Objectfiles und das ausfuehrbare File zum Testen des Teilprojekts
-BINDIRTEST = debug
-
 #
 #		Targets zum Bauen des Tests
 #
@@ -22,7 +8,7 @@ BINDIRTEST = debug
 # -o --> name des output-files
 
 makeTestAutomat: AutomatTarget TestAutomatTarget  
-	g++ -g $(OBJDIR)/Automat.o $(BINDIRTEST)/TestAutomat.o -o $(BINDIRTEST)/AutomatTest
+	g++ -g objs/Automat.o debug/TestAutomat.o -o debug/AutomatTest
 	
 
 # compilieren des Files Automat.cpp zu Automat.o, 
@@ -32,25 +18,33 @@ makeTestAutomat: AutomatTarget TestAutomatTarget
 # -g --> debug Informationen erzeugen
 # -Wall --> alle meldungen erzeugen (Warning all)
 
-AutomatTarget :  $(SRCDIR)/Automat.cpp $(HEADERDIR)/Automat.h 
-	g++ -g  -c -Wall $(SRCDIR)/Automat.cpp -o $(OBJDIR)/Automat.o  
+AutomatTarget :  src/Automat.cpp includes/Automat.h 
+	g++ -g  -c -Wall src/Automat.cpp -o objs/Automat.o  
 
+StateTarget :  src/State.cpp includes/State.h includes/Regex.h
+	g++ -g  -c -Wall src/State.cpp -o objs/State.o
 
+RegexTarget :  src/Regex.cpp includes/Regex.h
+	g++ -g  -c -Wall src/Regex.cpp -o objs/Regex.o
+	
 # TestAutomat.o ist abhängig von src/TestAutomat.cpp und src/Automat.h
-TestAutomatTarget :  $(SRCDIR)/TestAutomat.cpp $(HEADERDIR)/Automat.h
-	g++ -g  -c -Wall $(SRCDIR)/TestAutomat.cpp  -o $(BINDIRTEST)/TestAutomat.o  
+TestAutomatTarget :  src/TestAutomat.cpp includes/Automat.h
+	g++ -g  -c -Wall src/TestAutomat.cpp  -o debug/TestAutomat.o  
 
 
 
 # loeschen aller files im verzeichnis obj und debug, dann neu erzeugen
 
 cleanAutomat:
-	rm -f $(OBJDIR)/*.o
-	rm -f $(BINDIRTEST)/*
+	rm -f objs/*.o
+	rm -f debug/*
 	$(MAKE) makeTestAutomat
 	
 	
 # dieses Target wird vom makefile des Gesamtprojekts verwendet
 # objs fuer Gesamtprojekt loeschen und dann neu erzeugen
 AutomatOBJTarget:
-	$(MAKE) makeTestAutomat
+	$(MAKE) AutomatTarget
+	$(MAKE) StateTarget
+	$(MAKE) RegexTarget
+

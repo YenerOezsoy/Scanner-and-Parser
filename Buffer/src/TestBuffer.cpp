@@ -6,13 +6,34 @@
  */
 
 #include "../includes/Buffer.h"
+#include <iostream>
+#include <fstream>
 
+using namespace std;
 
 int main(int argc, char **argv) {
+
 	cout << "Buffer" << endl;
+//	Buffer*  buffer;
+//
+//	buffer = new Buffer();
+//
+//	buffer->read();
 
-	Buffer*  buffer = new Buffer();
+	Buffer buffer;
+	int wantedSize = 400;
+	try {
+		for(int i = 0; i < wantedSize; i++){
+			cout << buffer.getChar();
+		}
+	} catch(BufferOutOfBoundException& exception) { /* hier passiert nichts */ }
 
-	buffer->readFromFile();
-	//buffer->readFromFile();
+	buffer.ungetChar();
+	buffer.ungetChar();
+	buffer.ungetChar();
+	buffer.ungetChar();
+	cout << "\n";
+	cout <<buffer.getChar();
+
 }
+

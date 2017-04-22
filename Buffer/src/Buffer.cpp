@@ -6,43 +6,78 @@
  */
 
 #include "../includes/Buffer.h"
+#include <iostream>
+#include <fstream> //wird schon im header file bestimmt, ist nun quasi doppelt
 
+using namespace std;
 
-Buffer::Buffer() {
-	// TODO Auto-generated constructor stub
-
+Buffer::Buffer(){
+	location1 = location2 = inputSize2 = 0;
+	file.open("C:\\Users\\Lea\\Documents\\Studium\\4. Semester\\Systemnahes Programmieren"
+			"\\Scanner-and-Parser-buffer\\Scanner-and-Parser-buffer\\Buffer_Test.txt",
+			ios::in); //durch das "in" wird Datei gelesen, durch out wird in Datei geschrieben
+	if (!file.is_open()) throw NotAbleToOpenFileException();
+	file.read(buffer1, BUFFER_SIZE);
+	inputSize1 = file.gcount();
+	currentBuffer = 1; //Zaehler in welchem Buffer wir uns befinden
 }
 
 Buffer::~Buffer() {
-	// TODO Auto-generated destructor stub
+    file.close();
+ }
+
+void Buffer::read() {
+
+    cout << buffer1 <<endl;
+
+    file << "Test Text geht in die Datei" << endl;
+    file << "Welcome to Bufferland" << endl;
+
+    file.close();
+    cout << "close" << endl;
 }
 
-void Buffer::readFromFile() {
-	char buffer1[SIZE], buffer2[SIZE];
-	//char* next, current;
 
-	inputFile.open(INPUT, ios::in);
-
-	inputFile.read(buffer1, SIZE);
-	inputFile.read(buffer2, SIZE);
-
-	for (int i = 0; i < SIZE; ++i) {
-		cout << i+1 << ": " << buffer1[i] << endl;
+char Buffer::getChar(){
+	//Scanner fraegt char von Buffer an. Liefert char-weise.
+	if(location2 >= inputSize2 && location1 >= inputSize1){
+		if(currentBuffer == 2){
+			file.read(buffer1, BUFFER_SIZE);
+			inputSize1 = file.gcount();
+			if (inputSize1 == 0) throw BufferOutOfBoundException(); //wenn nichts mehr eingelesen wird
+			location1 = location2 = 0;
+			currentBuffer = 1;
+		}
 	}
-	for (int i = 0; i < SIZE; ++i) {
-			cout << i+1 << ": " << buffer2[i] << endl;
+	if (location1 >= inputSize1){ 	//zweiter Buffer (wird befüllt sobald B1 voll ist)
+			if (location2 == 0){
+				file.read(buffer2, BUFFER_SIZE);
+				inputSize2 = file.gcount();
+				if (inputSize2 == 0) throw BufferOutOfBoundException();
+			}
+			currentBuffer = 2;
+			return buffer2[location2++];
+		}
+
+	return buffer1[location1++]; //holt Wert aus Array an erster Stelle raus und Zeiger zeigt danach eins rechts weiter
+}
+
+
+
+//geht char-weise wieder zurueck, location wird verringert
+void Buffer::ungetChar(){
+	if(currentBuffer == 1){
+		location1--;
+		if(location1 == 0){
+			currentBuffer = 2;
+		}
 	}
-//	cout << "Buffer1: " << buffer1 << endl;
-//	cout << "Buffer2: " << buffer2 << endl;
-	if (inputFile.eof() == 0) {
-		inputFile.close();
+	else if(currentBuffer == 2){
+		location2--;
+		if(location2 == 0){
+			currentBuffer = 1;
+		}
 	}
 }
 
-void Buffer::writeToFile(/* What to write */) {
-	outputFile.open(OUTPUT, ios::out);
 
-	outputFile << "Testing the output" << endl;
-
-	outputFile.close();
-}

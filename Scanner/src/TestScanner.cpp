@@ -6,16 +6,33 @@
  */
 
 #include "../includes/Scanner.h"
-#include "../../Buffer/includes/Buffer.h"
 #include <iostream>
 
 using namespace std;
 
 int main(int argc, char **argv) {
-	cout << "Scanner" << endl;
+	std::cout << "Hello, World!" << std::endl;
 
-	Scanner* scanner = new Scanner();
-	Buffer* buffer = new Buffer();
+    Scanner *scanner;
+    scanner = new Scanner();
+    Token *token;
+
+    /*int i = 0;
+    while (i < 500) {
+        scanner->nextToken();
+        i++;
+        std::cout << "=====================" << std::endl;
+    }*/
+
+    while ((token = scanner->nextToken()) != nullptr) {
+        std::cout << "Wort: " << token->getKey() << '\n';
+        std::cout << " Row: " << token->getRow();
+        std::cout << " Column: " << token->getColumn();
+        std::cout << " Type: " << token->getType() << std::endl;
+        std::cout << "====================="  << std::endl;
+    }
+
+    return 0;
 }
 
 
