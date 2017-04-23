@@ -6,15 +6,16 @@
  */
 
 #include "../includes/Scanner.h"
-
+#include <iostream>
 
 Scanner::Scanner() {
     buffer = new Buffer();
-    symboltabelle = new Symboltabelle(30);
+    automat = new Automat();
+    symboltabelle = new Symboltabelle(100);
 }
 
 Token* Scanner::nextToken() {
-    automat = new Automat();
+	automat->reset();
     stop = false;
     char array[2048];
     i = 0;
@@ -24,6 +25,7 @@ Token* Scanner::nextToken() {
         previousType = type;
 
         c = buffer->getChar();
+        std::cout << "Eingelesenes Wort: " << c << std::endl;
         type = automat->handle(&c);
         array[i] = c;
 
@@ -38,6 +40,7 @@ Token* Scanner::nextToken() {
             row++;
             column = 1;
             i--;
+            //stop = true;
         }
 
         else {
@@ -80,7 +83,7 @@ Token* Scanner::nextToken() {
     column++;
 
     //AKTIVIEREN!!
-    //symboltabelle->insert(*array);
+    symboltabelle->insert(array);
 
     token = new Token(previousType, row, column, array);
     return token;

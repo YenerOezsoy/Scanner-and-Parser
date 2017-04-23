@@ -31,3 +31,7 @@ int Automat::handle(char* character) {
 	        return currentState->type;
 	    }
 }
+
+void Automat::reset() {
+	currentState = start;
+}

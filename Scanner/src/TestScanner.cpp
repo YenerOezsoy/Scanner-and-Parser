@@ -11,10 +11,9 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-	std::cout << "Hello, World!" << std::endl;
+	//std::cout << "Hello, World!" << std::endl;
 
-    Scanner *scanner;
-    scanner = new Scanner();
+    Scanner *scanner = new Scanner();
     Token *token;
 
     /*int i = 0;
@@ -25,7 +24,7 @@ int main(int argc, char **argv) {
     }*/
 
     while ((token = scanner->nextToken()) != nullptr) {
-        std::cout << "Wort: " << token->getKey() << '\n';
+        std::cout << " Wort: " << token->getKey() << '\n';
         std::cout << " Row: " << token->getRow();
         std::cout << " Column: " << token->getColumn();
         std::cout << " Type: " << token->getType() << std::endl;

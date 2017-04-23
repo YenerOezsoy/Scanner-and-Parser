@@ -13,8 +13,7 @@ using namespace std;
 
 Buffer::Buffer(){
 	location1 = location2 = inputSize2 = 0;
-	file.open("C:\\Users\\Lea\\Documents\\Studium\\4. Semester\\Systemnahes Programmieren"
-			"\\Scanner-and-Parser-buffer\\Scanner-and-Parser-buffer\\Buffer_Test.txt",
+	file.open("Buffer//input",
 			ios::in); //durch das "in" wird Datei gelesen, durch out wird in Datei geschrieben
 	if (!file.is_open()) throw NotAbleToOpenFileException();
 	file.read(buffer1, BUFFER_SIZE);
@@ -24,22 +23,13 @@ Buffer::Buffer(){
 
 Buffer::~Buffer() {
     file.close();
- }
-
-void Buffer::read() {
-
-    cout << buffer1 <<endl;
-
-    file << "Test Text geht in die Datei" << endl;
-    file << "Welcome to Bufferland" << endl;
-
-    file.close();
-    cout << "close" << endl;
 }
 
 
 char Buffer::getChar(){
 	//Scanner fraegt char von Buffer an. Liefert char-weise.
+
+
 	if(location2 >= inputSize2 && location1 >= inputSize1){
 		if(currentBuffer == 2){
 			file.read(buffer1, BUFFER_SIZE);
@@ -57,7 +47,7 @@ char Buffer::getChar(){
 			}
 			currentBuffer = 2;
 			return buffer2[location2++];
-		}
+	}
 
 	return buffer1[location1++]; //holt Wert aus Array an erster Stelle raus und Zeiger zeigt danach eins rechts weiter
 }

@@ -22,7 +22,7 @@ Symboltabelle::~Symboltabelle() {
 
 Key Symboltabelle::insert(char* lexem) {
 	int index = hash(lexem);
-	entries[index].insert(index, lexem, strTab);
+	return entries[index].insert(index, lexem, strTab);
 }
 
 Information* Symboltabelle::lookup(Key key) {

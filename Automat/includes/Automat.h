@@ -11,6 +11,7 @@ public:
 	Automat();
 	virtual ~Automat();
 	int handle(char* character);
+	void reset();
 };
 
 #endif /* Automat_H_ */

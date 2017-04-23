@@ -16,10 +16,8 @@ class NotAbleToOpenFileException{};
 class Buffer {
 
 private:
-	const char* INPUT = "Buffer//debug//input";
-
 	//new
-	const static int BUFFER_SIZE = 10;
+	const static int BUFFER_SIZE = 80;
 	char buffer1 [BUFFER_SIZE];
 	char buffer2 [BUFFER_SIZE];
 	int location1, location2;
@@ -31,7 +29,6 @@ private:
 public:
 	Buffer();
 	virtual ~Buffer();
-	void read();
 
 	//new
 	char getChar();
