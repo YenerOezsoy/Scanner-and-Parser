@@ -15,7 +15,7 @@ Scanner::Scanner() {
 }
 
 Token* Scanner::nextToken() {
-    automat->reset();
+    type = automat->reset();
     stop = false;
     char array[2048];
     i = 0;
@@ -66,6 +66,7 @@ void Scanner::checkType(char c) {
         //ErrorType Fehlerhaftes Zeichen
     else if (type == 8) {
         stop = true;
+        previousType = type;
     }
 
         //StartType überspringen oder Kommentar übersrpingen

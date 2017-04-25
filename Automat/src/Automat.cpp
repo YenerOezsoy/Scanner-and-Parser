@@ -32,6 +32,7 @@ int Automat::handle(char* character) {
 	    }
 }
 
-void Automat::reset() {
+int Automat::reset() {
 	currentState = start;
+	return currentState;
 }
