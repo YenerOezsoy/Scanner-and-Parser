@@ -35,6 +35,7 @@ public: Token* nextToken();
         Scanner();
         void checkRowEnd(char c);
         void checkType(char c);
+        void initialize(char* array);
 };
 
 #endif /* SCANNER_H_ */
