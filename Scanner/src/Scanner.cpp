@@ -86,6 +86,7 @@ Token* Scanner::nextToken() {
 
     token = new Token(previousType, row, column, array);
     return token;
+
     //TEST zum Anzeigen der Zeichen
     //buffer->test();
 }
