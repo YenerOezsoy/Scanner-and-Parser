@@ -15,60 +15,54 @@ Scanner::Scanner() {
 }
 
 Token* Scanner::nextToken() {
-	automat->reset();
-	stop = false;
-	char array[2048];
-	i = 0;
+    automat->reset();
+    stop = false;
+    char array[2048];
+    i = 0;
 
-	while (!stop) {
+    while (!stop) {
 
-		previousType = type;
+        previousType = type;
 
-		c = buffer->getChar();
-		//std::cout << "eingelesen: " << c << std::endl;
-		type = automat->handle(&c);
-		array[i] = c;
+        c = buffer->getChar();
+        //std::cout << "eingelesen: " << c << std::endl;
+        type = automat->handle(&c);
+        array[i] = c;
 
-		//Ende des Files
-		if (c == '\0' && i == 0) {
-			stop = true;
-			return nullptr;
-		}
+        //Ende des Files
+        if (c == '\0' && i == 0) {
+            stop = true;
+            return nullptr;
+        }
 
-			//Neue Zeile
-		else if (c == '\n') {
-			row++;
-			column = 1;
-			i--;
-			if (type != 6 && type != 7) {
-				stop = true;
-			}
-		}
+            //Neue Zeile
+        else if (c == '\n') {
+            row++;
+            column = 1;
+        }
 
-		else {
-			//EndType Ende erreicht
-			if (type == 5) {
-				buffer->ungetChar();
-				//array[i] = '\0';
-				i--;
-				stop = true;
-			}
+        //EndType Ende erreicht
+        if (type == 5) {
+                buffer->ungetChar();
+                i--;
+                stop = true;
+        }
 
-				//ErrorType Fehlerhaftes Zeichen
-			else if (type == 8) {
-				stop = true;
-			}
+        //ErrorType Fehlerhaftes Zeichen
+        else if (type == 8) {
+            stop = true;
+        }
 
-				//StartType überspringen oder Kommentar übersrpingen
-			else if (type == 7 || type == 6) {
-				if (previousType == 0) {
-					i--;
-				}
-				i--;
-			}
-		}
-		i++;
-	}
+        //StartType überspringen oder Kommentar übersrpingen
+        else if (type == 7 || type == 6) {
+            if (previousType == 0) {
+                i--;
+            }
+            i--;
+        }
+
+    i++;
+    }
 
     array[i] = '\0';
 
