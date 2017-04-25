@@ -30,62 +30,54 @@ Token* Scanner::nextToken() {
         array[i] = c;
 
         //Ende des Files
-        if (c == '\0' && i == 0) {
-            stop = true;
-            return nullptr;
-        }
+		if (c == '\0' && i == 0) {
+			stop = true;
+			return nullptr;
+		}
 
-            //Neue Zeile
-        else if (c == '\n') {
-            row++;
-            column = 1;
-        }
+        checkRowEnd(c);
 
-        //EndType Ende erreicht
-        if (type == 5) {
-                buffer->ungetChar();
-                i--;
-                stop = true;
-        }
-
-        //ErrorType Fehlerhaftes Zeichen
-        else if (type == 8) {
-            stop = true;
-        }
-
-        //StartType überspringen oder Kommentar übersrpingen
-        else if (type == 7 || type == 6) {
-            if (previousType == 0) {
-                i--;
-            }
-            i--;
-        }
+        checkType(c);
 
     i++;
     }
 
     array[i] = '\0';
 
-    //Ausgabe TEST
-    /*
-    int j = 0;
-    while (array[j] != '\0') {
-        std::cout << "Buchstabe: "<< array[j] << std::endl;
-        j++;
-
-    }
-
-
-    std::cout << "Row: " << row << " Column: " << column << std::endl;
-    */
-
     column++;
 
-    //AKTIVIEREN!!
     symboltabelle->insert(array);
 
     token = new Token(previousType, row, column, array);
     return token;
-    //TEST zum Anzeigen der Zeichen
-    //buffer->test();
+}
+
+void Scanner::checkRowEnd(char c) {
+	//Neue Zeile
+	if (c == '\n') {
+		row++;
+		column = 1;
+	}
+}
+
+void Scanner::checkType(char c) {
+	//EndType Ende erreicht
+	if (type == 5) {
+			buffer->ungetChar();
+			i--;
+			stop = true;
+	}
+
+	//ErrorType Fehlerhaftes Zeichen
+	else if (type == 8) {
+		stop = true;
+	}
+
+	//StartType überspringen oder Kommentar übersrpingen
+	else if (type == 7 || type == 6) {
+		if (previousType == 0) {
+			i--;
+		}
+		i--;
+	}
 }

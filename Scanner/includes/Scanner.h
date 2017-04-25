@@ -15,6 +15,7 @@
 #include "Token.h"
 
 class Scanner {
+private:
         int i = 0;
         int row = 1;
         int column = 1;
@@ -32,6 +33,8 @@ class Scanner {
 
 public: Token* nextToken();
         Scanner();
+        void checkRowEnd(char c);
+        void checkType(char c);
 };
 
 #endif /* SCANNER_H_ */
