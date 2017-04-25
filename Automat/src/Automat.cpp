@@ -34,5 +34,5 @@ int Automat::handle(char* character) {
 
 int Automat::reset() {
 	currentState = start;
-	return currentState;
+	return currentState->type;
 }
