@@ -14,5 +14,6 @@ public:
 	int reset();
 };
 
+
 #endif /* Automat_H_ */
 

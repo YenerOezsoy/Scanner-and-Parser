@@ -22,7 +22,7 @@ public:
 
 class Start : public State {
 public:
-	Start() {
+    Start() {
         accepted = false;
         type = StartType;
     };
@@ -347,4 +347,6 @@ public: EndState() {
     State* read(char* c);
 };
 
-#endif //COMPILER_STATE_H
+
+
+#endif //SCANNER_STATE_H
