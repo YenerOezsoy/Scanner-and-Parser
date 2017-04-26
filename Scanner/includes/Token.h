@@ -39,4 +39,5 @@ public: Token(int type, int row, int column, char* key) {
         }
 };
 
+
 #endif /* TOKEN_H_ */

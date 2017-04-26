@@ -31,4 +31,6 @@ public:
 	}
 };
 
+
+
 #endif /* SYMBOLTABELLE_INCLUDES_STRINGTABNODE_H_ */

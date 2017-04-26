@@ -36,4 +36,5 @@ public:
 
 };
 
+
 #endif /* BUFFER_H_ */

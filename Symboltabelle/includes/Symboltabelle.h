@@ -31,4 +31,5 @@ public:
 	void ausgabe();
 };
 
+
 #endif /* SYMBOLTABELLE_H_ */

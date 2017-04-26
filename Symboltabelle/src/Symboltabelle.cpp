@@ -59,3 +59,4 @@ void Symboltabelle::ausgabe() {
 		std::cout << std::endl;
 	}
 }
+

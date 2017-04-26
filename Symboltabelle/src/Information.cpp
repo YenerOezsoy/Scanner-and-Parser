@@ -15,3 +15,4 @@ Information::Information(char* lexem) {
 bool Information::compareLex(char* lexem) {
 	return strcmp(this->lexem, lexem);
 }
+

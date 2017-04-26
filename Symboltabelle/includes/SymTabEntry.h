@@ -27,4 +27,5 @@ public:
 	void ausgeben();
 };
 
+
 #endif /* SYMBOLTABELLE_INCLUDES_SYMTABENTRY_H_ */

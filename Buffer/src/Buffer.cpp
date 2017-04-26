@@ -34,7 +34,7 @@ char Buffer::getChar(){
 		if(currentBuffer == 2){
 			file.read(buffer1, BUFFER_SIZE);
 			inputSize1 = file.gcount();
-			if (inputSize1 == 0) throw BufferOutOfBoundException(); //wenn nichts mehr eingelesen wird
+			if (inputSize1 == 0) return '\0'; //wenn nichts mehr eingelesen wird
 			location1 = location2 = 0;
 			currentBuffer = 1;
 		}
@@ -43,7 +43,7 @@ char Buffer::getChar(){
 			if (location2 == 0){
 				file.read(buffer2, BUFFER_SIZE);
 				inputSize2 = file.gcount();
-				if (inputSize2 == 0) throw BufferOutOfBoundException();
+				if (inputSize2 == 0) return '\0';
 			}
 			currentBuffer = 2;
 			return buffer2[location2++];

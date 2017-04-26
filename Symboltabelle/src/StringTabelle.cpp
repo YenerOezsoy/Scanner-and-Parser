@@ -34,5 +34,3 @@ char* StringTabelle::insert(char* lexem, int size) {
 
 	return node->getVector();
 }
-
-

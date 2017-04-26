@@ -73,3 +73,4 @@ void SymTabEntry::ausgeben() {
 		current = current->getNext();
 	}
 }
+

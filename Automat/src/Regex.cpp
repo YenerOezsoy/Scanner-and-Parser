@@ -142,4 +142,3 @@ bool Regex::checkLD(char* c) {
 bool Regex::checkAll(char* c) {
     return checkDigit(c) || checkLetter(c) || checkSign(c);
 }
-

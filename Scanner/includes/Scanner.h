@@ -38,4 +38,5 @@ public: Token* nextToken();
         void initialize(char* array);
 };
 
+
 #endif /* SCANNER_H_ */

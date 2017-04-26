@@ -36,3 +36,4 @@ int Automat::reset() {
 	currentState = start;
 	return currentState->type;
 }
+

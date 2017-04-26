@@ -17,5 +17,3 @@ StringTabNode::StringTabNode(char* vector, int size) {
 StringTabNode::~StringTabNode() {
 	delete this->vector;
 }
-
-

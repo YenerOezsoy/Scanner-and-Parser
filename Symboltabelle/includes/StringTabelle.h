@@ -23,4 +23,5 @@ public:
 	char* insert(char* lexem, int size);
 };
 
+
 #endif /* SYMBOLTABELLE_INCLUDES_STRINGTABELLE_H_ */
