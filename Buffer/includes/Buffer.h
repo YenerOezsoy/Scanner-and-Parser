@@ -17,16 +17,15 @@ class Buffer {
 
 private:
 	//new
-	const static int BUFFER_SIZE = 5;
+	const static int BUFFER_SIZE = 1024;
 	char buffer1 [BUFFER_SIZE];
 	char buffer2 [BUFFER_SIZE];
 	int location1, location2;
 	int currentBuffer, inputSize1, inputSize2;
-    int diff;
+	int diff;
 	bool read;
-    void fillBuffer();
-    void deleteBuffer();
-    bool checkEndOfFile(char* buffer, int location, int size);
+	void fillBuffer();
+	void deleteBuffer();
 
 	fstream file;
 
@@ -39,6 +38,5 @@ public:
 	void ungetChar();
 
 };
-
 
 #endif /* BUFFER_H_ */
