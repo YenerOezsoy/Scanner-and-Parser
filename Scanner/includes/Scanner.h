@@ -18,7 +18,7 @@ class Scanner {
 private:
         int i = 0;
         int row = 1;
-        int column = 1;
+        int column = 0;
         bool stop = false;
 
         Automat *automat;

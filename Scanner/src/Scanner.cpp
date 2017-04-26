@@ -49,9 +49,9 @@ Token* Scanner::nextToken() {
 
 void Scanner::checkRowEnd(char c) {
     //Neue Zeile
-    if (c == '\n') {
+    if (c == '\n' && i == 0) {
         row++;
-        column = 1;
+        column = 0;
     }
 }
 

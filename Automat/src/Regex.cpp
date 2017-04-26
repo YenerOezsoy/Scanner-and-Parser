@@ -130,7 +130,6 @@ bool Regex::checkSign(char* c) {
         case '}': return true;
         case '[': return true;
         case ']': return true;
-        case '/': return true;
         default: return false;
     }
 }
