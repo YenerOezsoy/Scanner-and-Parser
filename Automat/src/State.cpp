@@ -167,7 +167,6 @@ State* Start::read(char* c) {
             case '}': return getState(34);
             case '[': return getState(35);
             case ']': return getState(36);
-            case '/': return getState(37);
             default:break;
         }
     }
