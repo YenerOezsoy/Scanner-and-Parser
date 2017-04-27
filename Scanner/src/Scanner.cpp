@@ -41,7 +41,7 @@ Token* Scanner::nextToken() {
 
     column++;
 
-    symboltabelle->insert(array);
+    if (previousType != 8) symboltabelle->insert(array);
 
     token = new Token(previousType, row, column, array);
     return token;

@@ -20,6 +20,7 @@ Buffer::Buffer(){
 	inputSize1 = file.gcount();
 	currentBuffer = 1; //Zaehler in welchem Buffer wir uns befinden
     std::cout << "File size: " << file.tellg() << std::endl;
+
 }
 
 Buffer::~Buffer() {
@@ -36,13 +37,13 @@ char Buffer::getChar(){
     deleteBuffer();
 
 	if (currentBuffer == 1) {
-        if (file.eof() && ((inputSize1 + 1) - diff == 0)) return '\0';
+        if (file.eof() && (inputSize1 - diff == 0)) return '\0';
         return buffer1[location1++];
 
     }
 
 	else {
-        if (file.eof() && ((inputSize2 + 1) - diff == 0)) return '\0';
+        if (file.eof() && (inputSize2  - diff == 0)) return '\0';
         return buffer2[location2++];
     }
 }
@@ -77,13 +78,17 @@ void Buffer::fillBuffer() {
         inputSize2 = file.gcount();
         currentBuffer = 2;
         read = true;
+        diff = 0;
+
     }
     else if (location2 == BUFFER_SIZE && currentBuffer == 2) {
         file.read(buffer1, BUFFER_SIZE);
         inputSize1 = file.gcount();
         currentBuffer = 1;
         read = true;
+        diff = 0;
     }
+
 }
 
 void Buffer::deleteBuffer() {
@@ -95,3 +100,4 @@ void Buffer::deleteBuffer() {
         location1 = 0;
         read = false;
     }
+}
