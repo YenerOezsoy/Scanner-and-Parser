@@ -8,10 +8,11 @@
 #include "../includes/Scanner.h"
 #include <iostream>
 
-Scanner::Scanner() {
-    buffer = new Buffer();
+Scanner::Scanner(char* readFile, char* writeFile) {
+    buffer = new Buffer(readFile);
+    symboltabelle = new Symboltabelle(30);
     automat = new Automat();
-    symboltabelle = new Symboltabelle(100);
+    ausgabe = new Ausgabe(writeFile);
 }
 
 Token* Scanner::nextToken() {
@@ -44,14 +45,15 @@ Token* Scanner::nextToken() {
     if (previousType != 8) symboltabelle->insert(array);
 
     token = new Token(previousType, row, column, array);
+    ausgabe->write(previousType, row, column, array);
     return token;
 }
 
 void Scanner::checkRowEnd(char c) {
     //Neue Zeile
-    if (c == '\n' && i == 0) {
+    if (c == '\n') {
         row++;
-        column = 0;
+        column = 1;
     }
 }
 
@@ -83,8 +85,7 @@ void Scanner::initialize(char* array) {
     previousType = type;
 
     c = buffer->getChar();
-    //std::cout << "eingelesen: " << c << std::endl;
+    std::cout << "eingelesen: " << c << std::endl;
     type = automat->handle(&c);
     array[i] = c;
 }
-
