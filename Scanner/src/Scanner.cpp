@@ -89,3 +89,4 @@ void Scanner::initialize(char* array) {
     type = automat->handle(&c);
     array[i] = c;
 }
+

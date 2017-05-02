@@ -22,3 +22,4 @@ private:
 };
 
 #endif //SCANNER_AUSGABE_H
+
