@@ -50,7 +50,7 @@ int SymTabEntry::exists(char* lexem) {
 	Information* current = first;
 	for (int i = 0; i < size; ++i) {
 		if (current->compareLex(lexem) == 0) {
-			std::cout << "EXISTS " << lexem  << " = " << current->getName() << " ," << std::endl;
+			//std::cout << "EXISTS " << lexem  << " = " << current->getName() << " ," << std::endl;
 			return i;
 		}
 		current = current->getNext();

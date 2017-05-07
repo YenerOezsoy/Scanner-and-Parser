@@ -1,7 +1,7 @@
 //
 // Created by Yener Özsoy on 02.05.17.
 //
-#include "Ausgabe.h"
+#include "../includes/Ausgabe.h"
 
 void Ausgabe::write(int type, int row, int column, char* key) {
     if (stream.good()) {

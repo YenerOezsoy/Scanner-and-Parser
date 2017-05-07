@@ -11,16 +11,15 @@
 
 using namespace std;
 
-Buffer::Buffer(){
+Buffer::Buffer(char* readFile){
 	location1 = location2 = inputSize2 = diff = 0;
-	file.open("/Users/yenerozsoy/Coding/CLion/Buffer/input.txt",
+	file.open(readFile,
 			ios::in); //durch das "in" wird Datei gelesen, durch out wird in Datei geschrieben
 	if (!file.is_open()) throw NotAbleToOpenFileException();
 	file.read(buffer1, BUFFER_SIZE);
 	inputSize1 = file.gcount();
 	currentBuffer = 1; //Zaehler in welchem Buffer wir uns befinden
-    std::cout << "File size: " << file.tellg() << std::endl;
-
+    //std::cout << "File size: " << file.tellg() << std::endl;
 }
 
 Buffer::~Buffer() {
@@ -31,8 +30,8 @@ Buffer::~Buffer() {
 char Buffer::getChar(){
 	//Scanner fraegt char von Buffer an. Liefert char-weise.
 
-    diff++;
-    fillBuffer();
+
+	fillBuffer();
 
     deleteBuffer();
 
@@ -46,6 +45,7 @@ char Buffer::getChar(){
         if (file.eof() && (inputSize2  - diff == 0)) return '\0';
         return buffer2[location2++];
     }
+	diff++;
 }
 
 

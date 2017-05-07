@@ -6,6 +6,7 @@
  */
 
 #include "../includes/Buffer.h"
+#include "../includes/Ausgabe.h"
 #include <iostream>
 #include <fstream>
 
@@ -19,14 +20,14 @@ int main(int argc, char **argv) {
 //	buffer = new Buffer();
 //
 //	buffer->read();
-
+/*
 	Buffer buffer;
 	int wantedSize = 400;
 	try {
 		for(int i = 0; i < wantedSize; i++){
 			cout << buffer.getChar();
 		}
-	} catch(BufferOutOfBoundException& exception) { /* hier passiert nichts */ }
+	} catch(BufferOutOfBoundException& exception) {} // hier passiert nichts
 
 	buffer.ungetChar();
 	buffer.ungetChar();
@@ -34,6 +35,6 @@ int main(int argc, char **argv) {
 	buffer.ungetChar();
 	cout << "\n";
 	cout <<buffer.getChar();
-
+*/
 }
 

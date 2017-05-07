@@ -30,7 +30,7 @@ private:
 	fstream file;
 
 public:
-	Buffer();
+	Buffer(char* readFile);
 	virtual ~Buffer();
 
 	//new

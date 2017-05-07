@@ -40,18 +40,20 @@ Token* Scanner::nextToken() {
 
     array[i] = '\0';
 
-    column++;
+
 
     if (previousType != 8) symboltabelle->insert(array);
 
     token = new Token(previousType, row, column, array);
     ausgabe->write(previousType, row, column, array);
+
+    column++;
     return token;
 }
 
 void Scanner::checkRowEnd(char c) {
     //Neue Zeile
-    if (c == '\n') {
+    if (c == '\n' && i == 0) {
         row++;
         column = 1;
     }
@@ -85,7 +87,7 @@ void Scanner::initialize(char* array) {
     previousType = type;
 
     c = buffer->getChar();
-    std::cout << "eingelesen: " << c << std::endl;
+    //std::cout << "eingelesen: " << c << std::endl;
     type = automat->handle(&c);
     array[i] = c;
 }
