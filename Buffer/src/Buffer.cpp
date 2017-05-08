@@ -35,17 +35,21 @@ char Buffer::getChar(){
 
     deleteBuffer();
 
+
+	diff++;
+
 	if (currentBuffer == 1) {
+	    std::cout << "Buffersize1: " << inputSize1 << " Diff: " << diff << " RealDiff: "<< inputSize1 - diff << std::endl;
+
         if (file.eof() && (inputSize1 - diff == 0)) return '\0';
         return buffer1[location1++];
-
     }
 
 	else {
+		 std::cout << "Buffersize2: " << inputSize2 << " Diff: " << diff << " RealDiff: "<< inputSize2 - diff << std::endl;
         if (file.eof() && (inputSize2  - diff == 0)) return '\0';
         return buffer2[location2++];
     }
-	diff++;
 }
 
 

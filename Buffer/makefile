@@ -21,8 +21,8 @@ BINDIRTEST = debug
 # -g --> debug Informationen erzeugen
 # -o --> name des output-files
 
-makeTestBuffer: BufferTarget 	TestBufferTarget
-	g++ -g $(OBJDIR)/Buffer.o 	$(BINDIRTEST)/TestBuffer.o  -o $(BINDIRTEST)/BufferTest
+makeTestBuffer: BufferTarget AusgabeTarget TestBufferTarget
+	g++ -g $(OBJDIR)/Buffer.o $(OBJDIR)/Ausgabe.o $(BINDIRTEST)/TestBuffer.o  -o $(BINDIRTEST)/BufferTest
 	
 
 # compilieren der Source-files
@@ -31,6 +31,9 @@ makeTestBuffer: BufferTarget 	TestBufferTarget
 # -c --> nur compilieren
 # -g --> debug Informationen erzeugen
 # -Wall --> alle meldungen erzeugen (Warning all)
+
+AusgabeTarget: $(SRCDIR)/Ausgabe.cpp $(HEADERDIR)/Ausgabe.h
+	g++ -g -std=gnu++11 -c -Wall $(SRCDIR)/Ausgabe.cpp -o $(OBJDIR)/Ausgabe.o
 
 BufferTarget :  $(SRCDIR)/Buffer.cpp $(HEADERDIR)/Buffer.h 
 	g++ -g  -c -Wall $(SRCDIR)/Buffer.cpp -o $(OBJDIR)/Buffer.o
