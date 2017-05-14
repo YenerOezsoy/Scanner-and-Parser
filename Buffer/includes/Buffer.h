@@ -33,7 +33,6 @@ public:
 	Buffer(char* readFile);
 	virtual ~Buffer();
 
-	//new
 	char getChar();
 	void ungetChar();
 

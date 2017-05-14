@@ -514,4 +514,3 @@ State* EndState::read(char* c) {
 State* Error::read(char* c) {
     return getState(-2);
 }
-

@@ -17,13 +17,18 @@ Scanner::Scanner(char* readFile, char* writeFile) {
 
 Token* Scanner::nextToken() {
     type = automat->reset();
+
     stop = false;
     char array[2048];
     i = 0;
 
+    newWord = true;
+
     while (!stop) {
 
         initialize(array);
+
+        checkNewWord();
 
         //Ende des Files
         if (c == '\0' && i == 0) {
@@ -40,14 +45,11 @@ Token* Scanner::nextToken() {
 
     array[i] = '\0';
 
-
-
     if (previousType != 8) symboltabelle->insert(array);
 
-    token = new Token(previousType, row, column, array);
-    ausgabe->write(previousType, row, column, array);
+    token = new Token(previousType, row, startColumn, array);
+    ausgabe->write(previousType, row, startColumn, array);
 
-    column++;
     return token;
 }
 
@@ -55,14 +57,16 @@ void Scanner::checkRowEnd(char c) {
     //Neue Zeile
     if (c == '\n' && i == 0) {
         row++;
-        column = 1;
+        column = 0;
     }
 }
 
 void Scanner::checkType(char c) {
     //EndType Ende erreicht
     if (type == 5) {
+        if (!previousAcceptence && type != 7) previousType = error;
         buffer->ungetChar();
+        column--;
         i--;
         stop = true;
     }
@@ -80,15 +84,23 @@ void Scanner::checkType(char c) {
         }
         i--;
     }
+    else {
+        newWord = false;
+    }
 }
 
 void Scanner::initialize(char* array) {
 
     previousType = type;
+    previousAcceptence = automat->getAcceptance();
 
     c = buffer->getChar();
-    //std::cout << "eingelesen: " << c << std::endl;
+    column++;
     type = automat->handle(&c);
     array[i] = c;
+}
+
+void Scanner::checkNewWord() {
+    if (newWord) startColumn = column;
 }
 
