@@ -14,13 +14,25 @@ class Token {
     int row;
     int column;
     char* key;
+    int value;
+    bool isANumber;
 
 public: Token(int type, int row, int column, char* key) {
         this->type = type;
         this->row = row;
         this->column = column;
         this->key = key;
-    }
+        isANumber = false;
+}
+
+	Token(int type, int row, int column, int key) {
+        this->type = type;
+        this->row = row;
+        this->column = column;
+        this->value = key;
+        isANumber = true;
+	}
+
 
     int getType() {
         return type;
@@ -34,7 +46,11 @@ public: Token(int type, int row, int column, char* key) {
         return column;
     }
 
-    char* getKey() {
+    char* getKey(int** ptr) {
+    	if (!isANumber) {
+    		*ptr = &value;
+    		return nullptr;
+    	}
         return key;
     }
 };

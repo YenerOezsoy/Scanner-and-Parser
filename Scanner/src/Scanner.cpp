@@ -7,6 +7,8 @@
 
 #include "../includes/Scanner.h"
 #include <iostream>
+#include <stdlib.h>
+#include <errno.h>
 
 Scanner::Scanner(char* readFile, char* writeFile) {
     buffer = new Buffer(readFile);
@@ -46,10 +48,18 @@ Token* Scanner::nextToken() {
     array[i] = '\0';
 
 
+    if (previousType == 4) {
+    	int value = strtol(array, nullptr, 10);
+    	if (errno == ERANGE) previousType = 8;
+    	if (previousType != 8) symboltabelle->insert(array);
+    	token = new Token(previousType, row, startColumn, value);
+    }
+    else {
+    	if (previousType != 8) symboltabelle->insert(array);
+		token = new Token(previousType, row, startColumn, array);
+		errno = 0;
+    }
 
-    if (previousType != 8) symboltabelle->insert(array);
-
-    token = new Token(previousType, row, startColumn, array);
     ausgabe->write(previousType, row, startColumn, array);
 
     return token;
@@ -66,7 +76,15 @@ void Scanner::checkRowEnd(char c) {
 void Scanner::checkType(char c) {
     //EndType Ende erreicht
     if (type == 5) {
-        if (!previousAcceptence && type != 7) previousType = error;
+        if (!previousAcceptence && type != 7) {
+
+        	if (i > 1) {
+        		i--;
+        		buffer->ungetChar();
+        	}
+        	else previousType = error;
+        }
+
         buffer->ungetChar();
         column--;
         i--;
