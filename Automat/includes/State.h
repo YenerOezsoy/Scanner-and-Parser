@@ -14,7 +14,7 @@ public:
     virtual State* read(char* c) = 0;
     virtual ~State() {};
     bool accepted;
-    enum Type {Sign, Letter, If, While, Digit, End, Comment, StartType, ErrorType};
+    enum Type {Sign, Letter, If, While, Digit, End, Comment, StartType, ErrorType, SignPlus, SignMinus, SignDoppelpunkt , SignStern, SignKleiner, SignGroesser, SignGleich, SignDoppelpunktGleich, SignGleichDoppelpunktGleich, SignAusrufezeichen, SignUndUnd, SignSemikolon, SignRundeKlammerAuf, SignRundeKlammerZu, SignGeschweifteKlammerAuf, SignGeschweifteKlammerZu, SignEckigeKlammerAuf, SignEckigeKlammerZu};
     Type type;
     Regex r;
     State* getState(int i);
@@ -151,7 +151,7 @@ public: State16() {
 class State17 : public State {
 public: State17() {
         accepted = true;
-        type = Sign;
+        type = SignPlus;
     };
     State* read(char* c );
 };
@@ -159,7 +159,7 @@ public: State17() {
 class State18 : public State {
 public: State18() {
         accepted = true;
-        type = Sign;
+        type = SignMinus;
     };
     State* read(char* c );
 };
@@ -167,7 +167,7 @@ public: State18() {
 class State19 : public State {
 public: State19() {
         accepted = true;
-        type = Sign;
+        type = SignDoppelpunkt;
     };
     State* read(char* c );
 };
@@ -175,14 +175,14 @@ public: State19() {
 class State20 : public State {
 public: State20() {
         accepted = true;
-        type = Sign;
+        type = SignDoppelpunktGleich;
     };
     State* read(char* c ) ; };
 
 class State21 : public State {
 public: State21() {
         accepted = true;
-        type = Sign;
+        type = SignStern;
     };
     State* read(char* c );
 };
@@ -190,7 +190,7 @@ public: State21() {
 class State22 : public State {
 public: State22() {
         accepted = true;
-        type = Sign;
+        type = SignKleiner;
     };
     State* read(char* c );
 };
@@ -198,7 +198,7 @@ public: State22() {
 class State23 : public State {
 public: State23() {
         accepted = true;
-        type = Sign;
+        type = SignGroesser;
     };
     State* read(char* c );
 };
@@ -206,7 +206,7 @@ public: State23() {
 class State24 : public State {
 public: State24() {
         accepted = true;
-        type = Sign;
+        type = SignGleich;
     };
     State* read(char* c );
 };
@@ -222,7 +222,7 @@ public: State25() {
 class State26 : public State {
 public: State26() {
         accepted = true;
-        type = Sign;
+        type = SignGleichDoppelpunktGleich;
     };
     State* read(char* c ) ;
 };
@@ -230,7 +230,7 @@ public: State26() {
 class State27 : public State {
 public: State27() {
         accepted = true;
-        type = Sign;
+        type = SignAusrufezeichen;
     };
     State* read(char* c );
 };
@@ -246,7 +246,7 @@ public: State28() {
 class State29 : public State {
 public: State29() {
         accepted = true;
-        type = Sign;
+        type = SignUndUnd;
     };
     State* read(char* c ) ;
 };
@@ -254,7 +254,7 @@ public: State29() {
 class State30 : public State {
 public: State30() {
         accepted = true;
-        type = Sign;
+        type = SignSemikolon;
     };
     State* read(char* c );
 };
@@ -262,7 +262,7 @@ public: State30() {
 class State31 : public State {
 public: State31() {
         accepted = true;
-        type = Sign;
+        type = SignRundeKlammerAuf;
     };
     State* read(char* c );
 };
@@ -270,7 +270,7 @@ public: State31() {
 class State32 : public State {
 public: State32() {
         accepted = true;
-        type = Sign;
+        type = SignRundeKlammerZu;
     };
     State* read(char* c );
 };
@@ -278,7 +278,7 @@ public: State32() {
 class State33 : public State {
 public: State33() {
         accepted = true;
-        type = Sign;
+        type = SignGeschweifteKlammerAuf;
     };
     State* read(char* c );
 };
@@ -286,7 +286,7 @@ public: State33() {
 class State34 : public State {
 public: State34() {
         accepted = true;
-        type = Sign;
+        type = SignGeschweifteKlammerZu;
     };
     State* read(char* c );
 };
@@ -294,7 +294,7 @@ public: State34() {
 class State35 : public State {
 public: State35() {
         accepted = true;
-        type = Sign;
+        type = SignEckigeKlammerAuf;
     };
     State* read(char* c );
 };
@@ -302,7 +302,7 @@ public: State35() {
 class State36 : public State {
 public: State36() {
         accepted = true;
-        type = Sign;
+        type = SignEckigeKlammerZu;
     };
     State* read(char* c );
 };

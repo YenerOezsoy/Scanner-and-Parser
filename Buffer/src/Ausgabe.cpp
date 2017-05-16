@@ -28,6 +28,60 @@ char* Ausgabe::getType(int type) {
     else if (type == 8) {
         return "Unknown Identifier";
     }
+    else if (type == 9) {
+        return "Sign+			  ";
+    }
+    else if (type == 10) {
+        return "Sign-			  ";
+    }
+    else if (type == 11) {
+		return "Sign:			  ";
+    }
+    else if (type == 12) {
+		return "Sign*			  ";
+	}
+    else if (type == 13) {
+		return "Sign<			  ";
+	}
+    else if (type == 14) {
+		return "Sign>			  ";
+	}
+    else if (type == 15) {
+		return "Sign=			  ";
+	}
+    else if (type == 16) {
+		return "Sign:=			  ";
+	}
+    else if (type == 17) {
+		return "Sign=:=			  ";
+	}
+    else if (type == 18) {
+		return "Sign!			  ";
+	}
+    else if (type == 19) {
+		return "Sign&&			  ";
+	}
+    else if (type == 20) {
+		return "Sign;			  ";
+	}
+    else if (type == 21) {
+		return "Sign(			  ";
+	}
+    else if (type == 22) {
+		return "Sign)			  ";
+	}
+    else if (type == 23) {
+		return "Sign{			  ";
+	}
+    else if (type == 24) {
+		return "Sign}			  ";
+	}
+    else if (type == 25) {
+		return "Sign[			  ";
+	}
+    else if (type == 26) {
+		return "Sign]			  ";
+	}
     return nullptr;
 }
 
