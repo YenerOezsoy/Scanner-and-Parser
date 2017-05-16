@@ -47,3 +47,4 @@ private:   void checkRowEnd(char c);
 };
 
 #endif /* SCANNER_H_ */
+

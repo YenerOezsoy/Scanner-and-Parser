@@ -45,6 +45,8 @@ Token* Scanner::nextToken() {
 
     array[i] = '\0';
 
+
+
     if (previousType != 8) symboltabelle->insert(array);
 
     token = new Token(previousType, row, startColumn, array);
@@ -103,4 +105,3 @@ void Scanner::initialize(char* array) {
 void Scanner::checkNewWord() {
     if (newWord) startColumn = column;
 }
-

@@ -25,3 +25,4 @@ private:
 };
 
 #endif //COMPILER_REGEX_H
+

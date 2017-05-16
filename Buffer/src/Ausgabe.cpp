@@ -30,3 +30,4 @@ char* Ausgabe::getType(int type) {
     }
     return nullptr;
 }
+

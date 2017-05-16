@@ -22,7 +22,7 @@ int Automat::handle(char* character) {
         currentState = currentState->read(character);
         return currentState->type;
     }
-	//Leerzeichen in Kommentaren überspringen
+        //Leerzeichen in Kommentaren überspringen
     else if (*character == ' ' && currentState-> type == 6) {
         return currentState->type;
     }

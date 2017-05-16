@@ -15,4 +15,3 @@ public:
 };
 
 #endif /* Automat_H_ */
-

@@ -22,7 +22,7 @@ public:
 
 class Start : public State {
 public:
-	Start() {
+    Start() {
         accepted = false;
         type = StartType;
     };
@@ -214,7 +214,7 @@ public: State24() {
 class State25 : public State {
 public: State25() {
         accepted = false;
-        type = End;
+        type = Sign;
     };
     State* read(char* c );
 };
@@ -238,7 +238,7 @@ public: State27() {
 class State28 : public State {
 public: State28() {
         accepted = false;
-        type = End;
+        type = Sign;
     };
     State* read(char* c );
 };

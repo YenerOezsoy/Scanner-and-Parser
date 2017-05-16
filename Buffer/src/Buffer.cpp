@@ -12,13 +12,13 @@
 using namespace std;
 
 Buffer::Buffer(char* readFile){
-	location1 = location2 = inputSize2 = diff = 0;
-	file.open(readFile,
-			ios::in); //durch das "in" wird Datei gelesen, durch out wird in Datei geschrieben
-	if (!file.is_open()) throw NotAbleToOpenFileException();
-	file.read(buffer1, BUFFER_SIZE);
-	inputSize1 = file.gcount();
-	currentBuffer = 1; //Zaehler in welchem Buffer wir uns befinden
+    location1 = location2 = inputSize2 = diff = 0;
+    file.open(readFile,
+              ios::in); //durch das "in" wird Datei gelesen, durch out wird in Datei geschrieben
+    if (!file.is_open()) throw NotAbleToOpenFileException();
+    file.read(buffer1, BUFFER_SIZE);
+    inputSize1 = file.gcount();
+    currentBuffer = 1; //Zaehler in welchem Buffer wir uns befinden
     //std::cout << "File size: " << file.tellg() << std::endl;
 }
 
@@ -28,25 +28,25 @@ Buffer::~Buffer() {
 
 
 char Buffer::getChar(){
-	//Scanner fraegt char von Buffer an. Liefert char-weise.
+    //Scanner fraegt char von Buffer an. Liefert char-weise.
 
 
-	fillBuffer();
+    fillBuffer();
 
     deleteBuffer();
 
 
-	diff++;
+    diff++;
 
-	if (currentBuffer == 1) {
-	    std::cout << "Buffersize1: " << inputSize1 << " Diff: " << diff << " RealDiff: "<< inputSize1 - diff << std::endl;
+    if (currentBuffer == 1) {
+       // std::cout << "Buffersize1: " << inputSize1 << " Diff: " << diff << " RealDiff: "<< inputSize1 - diff << std::endl;
 
         if (file.eof() && (inputSize1 - diff == 0)) return '\0';
         return buffer1[location1++];
     }
 
-	else {
-		 std::cout << "Buffersize2: " << inputSize2 << " Diff: " << diff << " RealDiff: "<< inputSize2 - diff << std::endl;
+    else {
+        //std::cout << "Buffersize2: " << inputSize2 << " Diff: " << diff << " RealDiff: "<< inputSize2 - diff << std::endl;
         if (file.eof() && (inputSize2  - diff == 0)) return '\0';
         return buffer2[location2++];
     }
@@ -59,21 +59,21 @@ void Buffer::ungetChar(){
     diff--;
 
     if(currentBuffer == 1){
-		if(location1 == 0){
-			currentBuffer = 2;
-		}
-		else {
-			location1--;
-		}
-	}
-	else if(currentBuffer == 2){
-		if(location2 == 0){
-			currentBuffer = 1;
-		}
-		else {
-			location2--;
-		}
-	}
+        if(location1 == 0){
+            currentBuffer = 2;
+        }
+        else {
+            location1--;
+        }
+    }
+    else if(currentBuffer == 2){
+        if(location2 == 0){
+            currentBuffer = 1;
+        }
+        else {
+            location2--;
+        }
+    }
 }
 
 void Buffer::fillBuffer() {
