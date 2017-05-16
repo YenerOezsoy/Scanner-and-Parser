@@ -2,7 +2,6 @@
 #define Automat_H_
 
 #include "../includes/State.h"
-//class State;
 
 class Automat {
 public:
@@ -12,6 +11,7 @@ public:
 	virtual ~Automat();
 	int handle(char* character);
 	int reset();
+	bool getAcceptance();
 };
 
 #endif /* Automat_H_ */

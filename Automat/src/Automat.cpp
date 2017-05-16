@@ -17,23 +17,26 @@ Automat::~Automat() {
 
 
 int Automat::handle(char* character) {
-	    //Leerzeichen ignorieren wenn kein Kommentar
-	    if (*character == ' ' && currentState-> type != 6) {
-	        currentState = currentState->read(character);
-	        return currentState->type;
-	    }
-	    //Leerzeichen in Kommentaren überspringen
-	    else if (*character == ' ' && currentState-> type == 6) {
-	        return currentState->type;
-	    }
-	    else {
-	        currentState = currentState->read(character);
-	        return currentState->type;
-	    }
+    //Leerzeichen ignorieren wenn kein Kommentar
+    if (*character == ' ' && currentState-> type != 6) {
+        currentState = currentState->read(character);
+        return currentState->type;
+    }
+	//Leerzeichen in Kommentaren überspringen
+    else if (*character == ' ' && currentState-> type == 6) {
+        return currentState->type;
+    }
+    else {
+        currentState = currentState->read(character);
+        return currentState->type;
+    }
 }
 
 int Automat::reset() {
-	currentState = start;
-	return currentState->type;
+    currentState = start;
+    return currentState->type;
 }
 
+bool Automat::getAcceptance() {
+    return currentState->accepted;
+}

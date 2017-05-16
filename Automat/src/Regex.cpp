@@ -25,7 +25,7 @@ bool Regex::getResult(char* c) {
         switch (regex) {
             //Letter + Digit
             case 0:  return checkLD(c);
-                //All
+			//All
             case 1 : return checkAll(c);
         }
     }
