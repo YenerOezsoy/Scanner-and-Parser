@@ -14,36 +14,31 @@
 #include "Token.h"
 #include "../../Buffer/includes/Ausgabe.h"
 
-class Scanner {
+class ScannerNew {
 private:
-    int i = 0;
-    int row = 1;
-    int column = 0;
-    int startColumn;
-    bool newWord;
-    bool stop = false;
-    const int error = 8;
 
 
-    Automat *automat;
+    //Automat *automat;
     Buffer *buffer;
     Symboltabelle *symboltabelle;
     Token *token;
     Ausgabe *ausgabe;
 
-    int type = 7;
-    int previousType;
-    int previousAcceptence;
+    Start* start;
+    State* currentState;
 
+    int i = 0;
+    int begin = 1;
+    bool setBegin;
+    int row = 1;
+    int arrayCounter;
     char c;
 
 public: Token* nextToken();
-    Scanner();
-    Scanner(char* readFile, char* writeFile);
-private:   void checkRowEnd(char c);
-    void checkType(char c);
-    void initialize(char* array);
-    void checkNewWord();
+    ScannerNew();
+    ScannerNew(char* readFile, char* writeFile);
+private:
+    void undo(char* array);
 };
 
 #endif /* SCANNER_H_ */

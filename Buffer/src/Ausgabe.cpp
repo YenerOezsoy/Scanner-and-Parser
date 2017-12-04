@@ -11,77 +11,75 @@ void Ausgabe::write(int type, int row, int column, char* key) {
 
 char* Ausgabe::getType(int type) {
     if (type == 0) {
-        return "Sign              ";
+        return "Sign              :";
     }
     else if (type == 1) {
-        return "Identifier        ";
+        return "Identifier        :";
     }
     else if (type == 2) {
-        return "If                ";
+        return "If                :";
     }
     else if (type == 3) {
-        return "While             ";
+        return "While             :";
     }
     else if (type == 4) {
-        return "Digit             ";
+        return "Digit             :";
+    }
+    else if (type == 5) {
+        return "Sign+             :";
+    }
+    else if (type == 6) {
+        return "Sign -            :";
+    }
+    else if (type == 7) {
+        return "Sign :            :";
     }
     else if (type == 8) {
-        return "Unknown Identifier";
+        return "Sign *            :";
     }
     else if (type == 9) {
-        return "Sign+			  ";
+        return "Sign <            :";
     }
     else if (type == 10) {
-        return "Sign-			  ";
+        return "Sign >            :";
     }
     else if (type == 11) {
-		return "Sign:			  ";
+        return "Sign =            :";
     }
     else if (type == 12) {
-		return "Sign*			  ";
-	}
+        return "Sign :=           :";
+    }
     else if (type == 13) {
-		return "Sign<			  ";
-	}
+        return "Sign =:=          :";
+    }
     else if (type == 14) {
-		return "Sign>			  ";
-	}
+        return "Sign !            :";
+    }
     else if (type == 15) {
-		return "Sign=			  ";
-	}
+        return "Sign &&           :";
+    }
     else if (type == 16) {
-		return "Sign:=			  ";
-	}
+        return "Sign ;            :";
+    }
     else if (type == 17) {
-		return "Sign=:=			  ";
-	}
+        return "Sign (            :";
+    }
     else if (type == 18) {
-		return "Sign!			  ";
-	}
+        return "Sign )            :";
+    }
     else if (type == 19) {
-		return "Sign&&			  ";
-	}
+        return "Sign {            :";
+    }
     else if (type == 20) {
-		return "Sign;			  ";
-	}
+        return "Sign }            :";
+    }
     else if (type == 21) {
-		return "Sign(			  ";
-	}
+        return "Sign [            :";
+    }
     else if (type == 22) {
-		return "Sign)			  ";
-	}
-    else if (type == 23) {
-		return "Sign{			  ";
-	}
-    else if (type == 24) {
-		return "Sign}			  ";
-	}
-    else if (type == 25) {
-		return "Sign[			  ";
-	}
-    else if (type == 26) {
-		return "Sign]			  ";
-	}
-    return nullptr;
+        return "Sign ]            :";
+    }
+    else {
+        return "Unknown Identifier";
+    }
 }
-

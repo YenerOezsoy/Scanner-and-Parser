@@ -10,116 +10,74 @@
 #include <stdlib.h>
 #include <errno.h>
 
-Scanner::Scanner(char* readFile, char* writeFile) {
+ScannerNew::ScannerNew(char* readFile, char* writeFile) {
     buffer = new Buffer(readFile);
     symboltabelle = new Symboltabelle(30);
-    automat = new Automat();
+    //automat = new Automat();
+    start = new Start();
+    currentState = start;
     ausgabe = new Ausgabe(writeFile);
 }
 
-Token* Scanner::nextToken() {
-    type = automat->reset();
-
-    stop = false;
+Token* ScannerNew::nextToken() {
     char array[2048];
-    i = 0;
+    arrayCounter = 0;
+    setBegin = false;
 
-    newWord = true;
+    c = buffer->getChar();
+    currentState = start->read(&c);
 
-    while (!stop) {
+    i++;
 
-        initialize(array);
-
-        checkNewWord();
-
-        //Ende des Files
-        if (c == '\0' && i == 0) {
-            stop = true;
-            return nullptr;
+    while (currentState->type != 25 && currentState->type != 26 && c != '\0') {
+        std::cout << currentState->type << std::endl;
+        if (currentState->type < 23) {
+            if (!setBegin) {
+                begin = i;
+                setBegin = true;
+            }
+            array[arrayCounter] = c;
+            arrayCounter++;
         }
 
-        checkRowEnd(c);
+        if (c == '\n') {
+            row++;
+            i = 0;
+        }
 
-        checkType(c);
-
+        c = buffer->getChar();
+        currentState = currentState->read(&c);
         i++;
     }
 
-    array[i] = '\0';
+    if (c == '\0') return nullptr;
 
-
-    if (previousType == 4) {
-    	int value = strtol(array, nullptr, 10);
-    	if (errno == ERANGE) previousType = 8;
-    	if (previousType != 8) symboltabelle->insert(array);
-    	token = new Token(previousType, row, startColumn, value);
-    }
-    else {
-    	if (previousType != 8) symboltabelle->insert(array);
-		token = new Token(previousType, row, startColumn, array);
-		errno = 0;
-    }
-
-    ausgabe->write(previousType, row, startColumn, array);
+    undo(array);
+    array[arrayCounter] = '\0';
+    token = new Token(currentState->type, row, begin, array);
+    ausgabe->write(currentState->type, row, begin, array);
 
     return token;
 }
 
-void Scanner::checkRowEnd(char c) {
-    //Neue Zeile
-    if (c == '\n' && i == 0) {
-        row++;
-        column = 0;
-    }
-}
-
-void Scanner::checkType(char c) {
-    //EndType Ende erreicht
-    if (type == 5) {
-        if (!previousAcceptence && type != 7) {
-
-        	if (i > 1) {
-        		i--;
-        		buffer->ungetChar();
-        	}
-        	else previousType = error;
-        }
-
-        buffer->ungetChar();
-        column--;
-        i--;
-        stop = true;
-    }
-
-        //ErrorType Fehlerhaftes Zeichen
-    else if (type == 8) {
-        stop = true;
-        previousType = type;
-    }
-
-        //StartType überspringen oder Kommentar übersrpingen
-    else if (type == 7 || type == 6) {
-        if (previousType == 0) {
-            i--;
-        }
-        i--;
+void ScannerNew::undo(char* array) {
+    //Nur ein Zeichen gelesen -> kein undo!
+    if (currentState->type == 26) {
+        array[arrayCounter] = c;
+        arrayCounter++;
     }
     else {
-        newWord = false;
+        //Ein gültiges Zeichen
+        if (arrayCounter==1 && currentState->previousState->accepted){
+            buffer->ungetChar();
+            currentState = currentState->previousState;
+            i--;
+        }
+        //Mehrere Zeichen
+        while (!currentState->accepted && arrayCounter > 1) {
+            if (currentState->type != 25) arrayCounter--; i--;
+            buffer->ungetChar();
+            currentState = currentState->previousState;
+        }
     }
-}
-
-void Scanner::initialize(char* array) {
-
-    previousType = type;
-    previousAcceptence = automat->getAcceptance();
-
-    c = buffer->getChar();
-    column++;
-    type = automat->handle(&c);
-    array[i] = c;
-}
-
-void Scanner::checkNewWord() {
-    if (newWord) startColumn = column;
-}
+}‚
