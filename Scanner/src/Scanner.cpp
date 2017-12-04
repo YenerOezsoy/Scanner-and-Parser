@@ -10,16 +10,15 @@
 #include <stdlib.h>
 #include <errno.h>
 
-ScannerNew::ScannerNew(char* readFile, char* writeFile) {
+Scanner::Scanner(char* readFile, char* writeFile) {
     buffer = new Buffer(readFile);
     symboltabelle = new Symboltabelle(30);
-    //automat = new Automat();
     start = new Start();
     currentState = start;
     ausgabe = new Ausgabe(writeFile);
 }
 
-Token* ScannerNew::nextToken() {
+Token* Scanner::nextToken() {
     char array[2048];
     arrayCounter = 0;
     setBegin = false;
@@ -30,20 +29,12 @@ Token* ScannerNew::nextToken() {
     i++;
 
     while (currentState->type != 25 && currentState->type != 26 && c != '\0') {
-        std::cout << currentState->type << std::endl;
         if (currentState->type < 23) {
-            if (!setBegin) {
-                begin = i;
-                setBegin = true;
-            }
-            array[arrayCounter] = c;
-            arrayCounter++;
+            addToArray(array);
         }
 
-        if (c == '\n') {
-            row++;
-            i = 0;
-        }
+        checkComment();
+        checkRowEnd();
 
         c = buffer->getChar();
         currentState = currentState->read(&c);
@@ -52,15 +43,12 @@ Token* ScannerNew::nextToken() {
 
     if (c == '\0') return nullptr;
 
-    undo(array);
-    array[arrayCounter] = '\0';
-    token = new Token(currentState->type, row, begin, array);
-    ausgabe->write(currentState->type, row, begin, array);
+    createToken(array);
 
     return token;
 }
 
-void ScannerNew::undo(char* array) {
+void Scanner::undo(char* array) {
     //Nur ein Zeichen gelesen -> kein undo!
     if (currentState->type == 26) {
         array[arrayCounter] = c;
@@ -80,4 +68,34 @@ void ScannerNew::undo(char* array) {
             currentState = currentState->previousState;
         }
     }
-}‚
+}
+
+void Scanner::addToArray(char* array) {
+    if (!setBegin) {
+        begin = i;
+        setBegin = true;
+    }
+    array[arrayCounter] = c;
+    arrayCounter++;
+}
+
+void Scanner::createToken(char* array) {
+    undo(array);
+    array[arrayCounter] = '\0';
+    token = new Token(currentState->type, row, begin, array);
+    ausgabe->write(currentState->type, row, begin, array);
+}
+
+void Scanner::checkRowEnd()  {
+    if (c == '\n') {
+        row++;
+        i = 0;
+    }
+}
+
+void Scanner::checkComment() {
+    if (setBegin && currentState->type == 23) {
+        arrayCounter--;
+        setBegin = false;
+    }
+}

@@ -14,7 +14,7 @@
 #include "Token.h"
 #include "../../Buffer/includes/Ausgabe.h"
 
-class ScannerNew {
+class Scanner {
 private:
 
 
@@ -35,10 +35,14 @@ private:
     char c;
 
 public: Token* nextToken();
-    ScannerNew();
-    ScannerNew(char* readFile, char* writeFile);
+    Scanner();
+    Scanner(char* readFile, char* writeFile);
 private:
     void undo(char* array);
+	void addToArray(char* array);
+	void createToken(char* array);
+	void checkRowEnd();
+	void checkComment();
 };
 
 #endif /* SCANNER_H_ */

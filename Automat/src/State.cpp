@@ -357,7 +357,7 @@ State* State36::read(char* c) {
 
 State* State37::read(char* c) {
     if (*c == '*') {
-        return nextState = new State28(this);
+        return nextState = new State38(this);
     }
     else {
         return this;
@@ -366,15 +366,11 @@ State* State37::read(char* c) {
 
 State* State38::read(char* c) {
     if (*c == ':') {
-        return nextState = new State39(this);
+        return nextState = new Start();
     }
     else {
         return nextState = new State37(this);
     }
-}
-
-State* State39::read(char* c) {
-    return nextState = new EndState(this);
 }
 
 State* ErrorState::read(char *c) {
