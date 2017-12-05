@@ -89,10 +89,24 @@ void Scanner::addToArray(char* array) {
 }
 
 void Scanner::createToken(char* array) {
-    undo(array);
-    array[arrayCounter] = '\0';
-    token = new Token(currentState->type, row, begin, array);
-    ausgabe->write(currentState->type, row, begin, array);
+	undo(array);
+	array[arrayCounter] = '\0';
+
+	token = new Token(currentState->type, row, begin, array);
+	errno = 0;
+
+	if (currentState->type == 4) {
+		long value = strtol(array, nullptr, 10);
+		if (errno == ERANGE) currentState = currentState->read(&error);
+		else {
+			symboltabelle->insert(array);
+			token = new Token(currentState->type, row, begin, value);
+		}
+	}
+	else {
+		if (currentState->type != 26) symboltabelle->insert(array);
+	}
+	ausgabe->write(currentState->type, row, begin, array);
 }
 
 void Scanner::checkRowEnd()  {

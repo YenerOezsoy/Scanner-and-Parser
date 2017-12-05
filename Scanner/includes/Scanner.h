@@ -34,6 +34,7 @@ private:
     int row = 1;
     int arrayCounter;
     char c;
+    char error = '.';
 
 public: Token* nextToken();
     Scanner();

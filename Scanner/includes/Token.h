@@ -25,7 +25,7 @@ public: Token(int type, int row, int column, char* key) {
         isANumber = false;
 }
 
-	Token(int type, int row, int column, int key) {
+	Token(int type, int row, int column, long key) {
         this->type = type;
         this->row = row;
         this->column = column;
