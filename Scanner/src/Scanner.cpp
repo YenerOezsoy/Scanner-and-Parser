@@ -67,13 +67,13 @@ void Scanner::undo(char* array) {
         while (!currentState->accepted && arrayCounter > 1) {
             if (currentState->type != 25){
                 arrayCounter--;
-                i--;
             }
             if (rowCount && currentState->type == 26) {
                 !rowCount;
                 row--;
             }
             buffer->ungetChar();
+            i--;
             currentState = currentState->previousState;
         }
     }
