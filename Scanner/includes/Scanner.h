@@ -30,6 +30,7 @@ private:
     int i = 0;
     int begin = 1;
     bool setBegin;
+    bool rowCount;
     int row = 1;
     int arrayCounter;
     char c;

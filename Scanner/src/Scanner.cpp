@@ -13,6 +13,7 @@
 Scanner::Scanner(char* readFile, char* writeFile) {
     buffer = new Buffer(readFile);
     symboltabelle = new Symboltabelle(30);
+    //automat = new Automat();
     start = new Start();
     currentState = start;
     ausgabe = new Ausgabe(writeFile);
@@ -27,6 +28,7 @@ Token* Scanner::nextToken() {
     currentState = start->read(&c);
 
     i++;
+    rowCount = false;
 
     while (currentState->type != 25 && currentState->type != 26 && c != '\0') {
         if (currentState->type < 23) {
@@ -56,14 +58,21 @@ void Scanner::undo(char* array) {
     }
     else {
         //Ein gültiges Zeichen
-        if (arrayCounter==1 && currentState->previousState->accepted){
+        if (arrayCounter==1){
             buffer->ungetChar();
             currentState = currentState->previousState;
             i--;
         }
         //Mehrere Zeichen
         while (!currentState->accepted && arrayCounter > 1) {
-            if (currentState->type != 25) arrayCounter--; i--;
+            if (currentState->type != 25){
+                arrayCounter--;
+                i--;
+            }
+            if (rowCount && currentState->type == 26) {
+                !rowCount;
+                row--;
+            }
             buffer->ungetChar();
             currentState = currentState->previousState;
         }
@@ -90,6 +99,7 @@ void Scanner::checkRowEnd()  {
     if (c == '\n') {
         row++;
         i = 0;
+        rowCount = true;
     }
 }
 
