@@ -14,7 +14,7 @@ public:
     virtual State* read(char* c) = 0;
     virtual ~State() {};
     bool accepted;
-    enum Type {Sign, Letter, If, While, Digit, SignPlus, SignMinus, SignDoppelpunkt , SignStern, SignKleiner, SignGroesser, SignGleich, SignDoppelpunktGleich, SignGleichDoppelpunktGleich, SignAusrufezeichen, SignUndUnd, SignSemikolon, SignRundeKlammerAuf, SignRundeKlammerZu, SignGeschweifteKlammerAuf, SignGeschweifteKlammerZu, SignEckigeKlammerAuf, SignEckigeKlammerZu, Comment, StartType,  End, ErrorType};
+    enum Type {Sign, Letter, If, While, Digit, SignPlus, SignMinus, SignDoppelpunkt , SignStern, SignKleiner, SignGroesser, SignGleich, SignDoppelpunktGleich, SignGleichDoppelpunktGleich, SignAusrufezeichen, SignUndUnd, SignSemikolon, SignRundeKlammerAuf, SignRundeKlammerZu, SignGeschweifteKlammerAuf, SignGeschweifteKlammerZu, SignEckigeKlammerAuf, SignEckigeKlammerZu, Comment, StartType,  End, ErrorType, FinalType};
     Type type;
     Regex r;
     State* previousState;
@@ -382,6 +382,15 @@ public: EndState(State* State) {
         previousState = State;
         accepted = false;
         type = Type::End;
+    };
+    State* read(char* c);
+};
+
+class FinalState : public State {
+public: FinalState(State* State) {
+        previousState = State;
+        accepted = false;
+        type = Type::FinalType;
     };
     State* read(char* c);
 };

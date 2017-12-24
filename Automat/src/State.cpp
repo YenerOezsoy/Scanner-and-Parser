@@ -41,6 +41,9 @@ State* Start::read(char* c ) {
     else if (*c == ' ' || *c == '\n') {
         return this;
     }
+    else if (*c == '\0') {
+    	return nextState = new FinalState(this);
+    }
     return nextState = new ErrorState(this);
 }
 
@@ -380,6 +383,11 @@ State* ErrorState::read(char *c) {
 
 
 State* EndState::read(char* c) {
+    nextState = new Start();
+    return nextState;
+}
+
+State* FinalState::read(char* c) {
     nextState = new Start();
     return nextState;
 }

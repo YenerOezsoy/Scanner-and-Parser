@@ -30,7 +30,7 @@ Token* Scanner::nextToken() {
     i++;
     rowCount = false;
 
-    while (currentState->type != 25 && currentState->type != 26 && c != '\0') {
+    while (currentState->type != 25 && currentState->type != 26 && c != '\0' && currentState->type != 27) {
         if (currentState->type < 23) {
             addToArray(array);
         }
@@ -43,7 +43,7 @@ Token* Scanner::nextToken() {
         i++;
     }
 
-    if (c == '\0') return nullptr;
+    if (currentState->type == 27) return nullptr;
 
     createToken(array);
 
