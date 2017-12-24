@@ -10,13 +10,12 @@
 #include <stdlib.h>
 #include <errno.h>
 
-Scanner::Scanner(char* readFile, char* writeFile) {
+Scanner::Scanner(char* readFile, Symboltabelle* symtab) {
     buffer = new Buffer(readFile);
-    symboltabelle = new Symboltabelle(30);
+    symboltabelle = symtab;
     //automat = new Automat();
     start = new Start();
     currentState = start;
-    ausgabe = new Ausgabe(writeFile);
 }
 
 Token* Scanner::nextToken() {
@@ -106,7 +105,6 @@ void Scanner::createToken(char* array) {
 	else {
 		if (currentState->type != 26) symboltabelle->insert(array);
 	}
-	ausgabe->write(currentState->type, row, begin, array);
 }
 
 void Scanner::checkRowEnd()  {

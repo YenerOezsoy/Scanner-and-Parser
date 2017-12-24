@@ -22,7 +22,6 @@ private:
     Buffer *buffer;
     Symboltabelle *symboltabelle;
     Token *token;
-    Ausgabe *ausgabe;
 
     Start* start;
     State* currentState;
@@ -38,7 +37,7 @@ private:
 
 public: Token* nextToken();
     Scanner();
-    Scanner(char* readFile, char* writeFile);
+    Scanner(char* readFile, Symboltabelle* symtab);
 private:
     void undo(char* array);
 	void addToArray(char* array);
