@@ -38,7 +38,10 @@ enum Type {
 	End,
 	ErrorType,
 	FinalType,
-	T_INT
+	Int,
+	Write,
+	Read,
+	Else
 };
 
 class State {
