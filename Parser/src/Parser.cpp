@@ -10,8 +10,14 @@
 
 Parser::Parser(Symboltabelle* symtab, char* input, char* output) {
 	this->output.open(output);
-	scanner = new Scanner(input, symtab);
-	lookahead = this->scanner->nextToken();
+	this->scanner = new Scanner(input, symtab);
+	this->lookahead = nullptr;
+	this->symtab = symtab;
+
+	this->parseTree = new ParseTree();
+	this->root = new ParseTreeNode(PROG, nullptr);
+	this->ptr = root;
+	parseTree->setRoot(root);
 }
 
 Parser::~Parser() {
@@ -20,4 +26,12 @@ Parser::~Parser() {
 
 void Parser::parse() {
 	output << "Hello World!" << endl;
+}
+
+void Parser::next() {
+	lookahead = scanner->nextToken()
+}
+
+void Parser::parsePROG() {
+	next();
 }
