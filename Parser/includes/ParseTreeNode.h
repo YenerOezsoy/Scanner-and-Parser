@@ -45,6 +45,7 @@ private:
 
 public:
 	ParseTreeNode(NodeType type, ParseTreeNode* parent);
+	ParseTreeNode(NodeType type, ParseTreeNode* parent, Token* token);
 	virtual ~ParseTreeNode();
 
 	void addChild(ParseTreeNode* child);

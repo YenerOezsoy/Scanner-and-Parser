@@ -15,6 +15,15 @@ ParseTreeNode::ParseTreeNode(NodeType type, ParseTreeNode* parent) {
 	this->child = nullptr;
 }
 
+ParseTreeNode::ParseTreeNode(NodeType type, ParseTreeNode* parent, Token* token) {
+	this->type = type;
+	this->token = token;
+
+	this->next = nullptr;
+	this->parent = parent;
+	this->child = nullptr;
+}
+
 ParseTreeNode::~ParseTreeNode() {
 
 }

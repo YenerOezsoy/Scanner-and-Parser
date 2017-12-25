@@ -9,12 +9,44 @@
 
 #include "Regex.h"
 
+enum Type {
+	Sign,
+	Letter,
+	If,
+	While,
+	Digit,
+	SignPlus,
+	SignMinus,
+	SignDoppelpunkt,
+	SignStern,
+	SignKleiner,
+	SignGroesser,
+	SignGleich,
+	SignDoppelpunktGleich,
+	SignGleichDoppelpunktGleich,
+	SignAusrufezeichen,
+	SignUndUnd,
+	SignSemikolon,
+	SignRundeKlammerAuf,
+	SignRundeKlammerZu,
+	SignGeschweifteKlammerAuf,
+	SignGeschweifteKlammerZu,
+	SignEckigeKlammerAuf,
+	SignEckigeKlammerZu,
+	Comment,
+	StartType,
+	End,
+	ErrorType,
+	FinalType,
+	T_INT
+};
+
 class State {
 public:
     virtual State* read(char* c) = 0;
     virtual ~State() {};
     bool accepted;
-    enum Type {Sign, Letter, If, While, Digit, SignPlus, SignMinus, SignDoppelpunkt , SignStern, SignKleiner, SignGroesser, SignGleich, SignDoppelpunktGleich, SignGleichDoppelpunktGleich, SignAusrufezeichen, SignUndUnd, SignSemikolon, SignRundeKlammerAuf, SignRundeKlammerZu, SignGeschweifteKlammerAuf, SignGeschweifteKlammerZu, SignEckigeKlammerAuf, SignEckigeKlammerZu, Comment, StartType,  End, ErrorType, FinalType};
+
     Type type;
     Regex r;
     State* previousState;

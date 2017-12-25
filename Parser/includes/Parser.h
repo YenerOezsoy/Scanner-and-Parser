@@ -8,6 +8,7 @@
 #include "../../Scanner/includes/Token.h"
 #include "../../Symboltabelle/includes/Symboltabelle.h"
 #include "../includes/ParseTree.h"
+#include "../../Automat/includes/State.h"
 
 #ifndef PARSER_H_
 #define PARSER_H_
@@ -24,14 +25,21 @@ private:
 
 	ofstream output;
 
+	int errorCount;
+
 public:
     Parser(Symboltabelle* symtab, char* input, char* output);
     virtual ~Parser();
 
     void parse();
     void next();
+    void error();
+    bool match(Type type, ParseTreeNode* node);
+
 
     void parsePROG();
+    void parseDECLS(ParseTreeNode* parent);
+    void parseDECL(ParseTreeNode* parent);
 };
 
 #endif /* PARSER_H_ */
