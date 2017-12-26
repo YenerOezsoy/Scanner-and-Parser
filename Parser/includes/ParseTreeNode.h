@@ -4,6 +4,7 @@
  *  Created on: Dec 24, 2017
  *      Author: kaok1012
  */
+#include "CheckType.h"
 #include "../../Scanner/includes/Token.h"
 
 #ifndef PARSETREENODE_H_
@@ -36,6 +37,7 @@ enum NodeType {
 
 class ParseTreeNode {
 private:
+	CheckType checkType;
 	NodeType type;
 	Token* token;
 
@@ -52,6 +54,7 @@ public:
 	bool isLeaf();
 
 	// Getter
+	CheckType getCheckType();
 	NodeType getType();
 	Token* getToken();
 	ParseTreeNode* getNext();
@@ -62,7 +65,8 @@ public:
 	// Setter
 	void setChild(ParseTreeNode* child);
 	void setNext(ParseTreeNode* next);
-	void setType(ParseTreeNode* type);
+	void setType(NodeType type);
+	void setCheckType(CheckType checkType);
 };
 
 

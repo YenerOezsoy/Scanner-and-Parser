@@ -50,6 +50,10 @@ bool ParseTreeNode::isLeaf() {
 //
 // Getter
 //
+CheckType ParseTreeNode::getCheckType() {
+	return checkType;
+}
+
 NodeType ParseTreeNode::getType() {
 	return type;
 }
@@ -89,6 +93,10 @@ void ParseTreeNode::setNext(ParseTreeNode* next) {
 	this->next = next;
 }
 
-void ParseTreeNode::setType(ParseTreeNode* type) {
+void ParseTreeNode::setType(NodeType type) {
 	this->type = type;
+}
+
+void ParseTreeNode::setCheckType(CheckType checkType) {
+	this->checkType = checkType;
 }

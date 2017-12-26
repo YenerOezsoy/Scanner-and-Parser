@@ -26,8 +26,8 @@ SYMBOLTABELLEDIR = ../Symboltabelle
 ## darauf achten, dass letzte Zeile ohne "\" eingetragen wird
 
 OBJS = $(OBJDIR)/Parser.o \
-	#$(OBJDIR)/xx1.o \
-	#$(OBJDIR)/xxn.o
+	   $(OBJDIR)/ParseTree.o \
+	   $(OBJDIR)/ParseTreeNode.o
 
 
 ## Variante mit wenig Makefile-Kenntnissen

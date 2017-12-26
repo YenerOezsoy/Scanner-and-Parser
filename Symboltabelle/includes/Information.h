@@ -5,6 +5,8 @@
  *      Author: okan
  */
 
+#include "../../Parser/includes/CheckType.h"
+
 #ifndef SYMBOLTABELLE_INCLUDES_INFORMATION_H_
 #define SYMBOLTABELLE_INCLUDES_INFORMATION_H_
 
@@ -20,8 +22,9 @@ struct Key {
 
 class Information{
 private:
-	char* lexem;
 	Information* next;
+	char* lexem;
+	CheckType type;
 
 public:
 	Information(char* lexem);
@@ -38,6 +41,14 @@ public:
 
 	void setNext(Information* info) {
 		next = info;
+	}
+
+	void setCheckType(CheckType type) {
+		this->type = type;
+	}
+
+	CheckType getCheckType() {
+		return this->type;
 	}
 };
 

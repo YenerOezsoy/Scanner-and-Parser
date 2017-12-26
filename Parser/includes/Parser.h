@@ -7,8 +7,8 @@
 #include "../../Scanner/includes/Scanner.h"
 #include "../../Scanner/includes/Token.h"
 #include "../../Symboltabelle/includes/Symboltabelle.h"
-#include "../includes/ParseTree.h"
 #include "../../Automat/includes/State.h"
+#include "../includes/ParseTree.h"
 
 #ifndef PARSER_H_
 #define PARSER_H_
@@ -49,6 +49,7 @@ public:
     void parseOP_EXP(ParseTreeNode* parent);
     void parseOP(ParseTreeNode* parent);
 
+    void typeCheck(ParseTreeNode* node);
 };
 
 #endif /* PARSER_H_ */

@@ -26,7 +26,8 @@ Parser::~Parser() {
 }
 
 void Parser::parse() {
-	output << "Hello World!" << endl;
+	output << "parsing..." << endl;
+	parsePROG();
 }
 
 void Parser::next() {
