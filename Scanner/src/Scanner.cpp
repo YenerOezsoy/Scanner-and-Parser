@@ -84,6 +84,7 @@ void Scanner::addToArray(char* array) {
         begin = i;
         setBegin = true;
     }
+
     array[arrayCounter] = c;
     arrayCounter++;
 }

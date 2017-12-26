@@ -9,6 +9,7 @@ void Ausgabe::write(int type, int row, int column, char* key) {
     }
 }
 
+
 char* Ausgabe::getType(int type) {
     if (type == 0) {
         return "Sign              :";

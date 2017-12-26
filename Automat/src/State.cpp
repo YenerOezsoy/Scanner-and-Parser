@@ -567,10 +567,6 @@ State* State53::read(char *c) {
     }
 }
 
-/*State* State39::read(char* c) {
-    return nextState = new Start();
-}*/
-
 State* ErrorState::read(char *c) {
     return this;
 }

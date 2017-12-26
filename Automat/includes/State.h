@@ -347,6 +347,7 @@ public: State36(State* State) {
     State* read(char* c );
 };
 
+
 class State37 : public State {
 public: State37(State* State) {
         previousState = State;
