@@ -30,8 +30,8 @@ Token* Scanner::nextToken() {
     i++;
     rowCount = false;
 
-    while (currentState->type != 25 && currentState->type != 26 && c != '\0') {
-        if (currentState->type < 23) {
+    while (currentState->type != 29 && currentState->type != 30 && currentState->type != 31) {
+        if (currentState->type < 27) {
             addToArray(array);
         }
 
@@ -43,7 +43,7 @@ Token* Scanner::nextToken() {
         i++;
     }
 
-    if (c == '\0') return nullptr;
+    if (currentState->type == 31) return nullptr;
 
     createToken(array);
 
@@ -52,7 +52,7 @@ Token* Scanner::nextToken() {
 
 void Scanner::undo(char* array) {
     //Nur ein Zeichen gelesen -> kein undo!
-    if (currentState->type == 26) {
+    if (currentState->type == 30) {
         array[arrayCounter] = c;
         arrayCounter++;
     }
@@ -65,11 +65,11 @@ void Scanner::undo(char* array) {
         }
         //Mehrere Zeichen
         while (!currentState->accepted && arrayCounter > 1) {
-            if (currentState->type != 25){
+            if (currentState->type != 29){
                 arrayCounter--;
+                //i--;
             }
-            if (rowCount && currentState->type == 26) {
-                !rowCount;
+            if (rowCount && currentState->type == 30) {
                 row--;
             }
             buffer->ungetChar();
@@ -89,24 +89,24 @@ void Scanner::addToArray(char* array) {
 }
 
 void Scanner::createToken(char* array) {
-	undo(array);
-	array[arrayCounter] = '\0';
+    undo(array);
+    array[arrayCounter] = '\0';
 
-	token = new Token(currentState->type, row, begin, array);
-	errno = 0;
+    token = new Token(currentState->type, row, begin, array);
+    errno = 0;
 
-	if (currentState->type == 4) {
-		long value = strtol(array, nullptr, 10);
-		if (errno == ERANGE) currentState = currentState->read(&error);
-		else {
-			symboltabelle->insert(array);
-			token = new Token(currentState->type, row, begin, value);
-		}
-	}
-	else {
-		if (currentState->type != 26) symboltabelle->insert(array);
-	}
-	ausgabe->write(currentState->type, row, begin, array);
+    if (currentState->type == 4) {
+        long value = strtol(array, nullptr, 10);
+        if (errno == ERANGE) currentState = currentState->read(&error);
+        else {
+            symboltabelle->insert(array);
+            token = new Token(currentState->type, row, begin, value);
+        }
+    }
+    else {
+        if (currentState->type != 30) symboltabelle->insert(array);
+    }
+    ausgabe->write(currentState->type, row, begin, array);
 }
 
 void Scanner::checkRowEnd()  {
@@ -118,7 +118,7 @@ void Scanner::checkRowEnd()  {
 }
 
 void Scanner::checkComment() {
-    if (setBegin && currentState->type == 23) {
+    if (setBegin && currentState->type == 27) {
         arrayCounter--;
         setBegin = false;
     }

@@ -79,6 +79,18 @@ char* Ausgabe::getType(int type) {
     else if (type == 22) {
         return "Sign ]            :";
     }
+    else if (type == 23) {
+        return "int Type          :";
+    }
+    else if (type == 24) {
+        return "write Type        :";
+    }
+    else if (type == 25) {
+        return "read Type         :";
+    }
+    else if (type == 26) {
+        return "else Type         :";
+    }
     else {
         return "Unknown Identifier";
     }

@@ -14,6 +14,8 @@ State* Start::read(char* c ) {
             case 'I': return nextState = new State5(this);
             case 'w': return nextState = new State7(this);
             case 'W': return nextState = new State12(this);
+            case 'r': return nextState = new State46(this);
+            case 'e': return nextState = new State50(this);
             default: return nextState = new State2(this);
         }
     }
@@ -40,6 +42,9 @@ State* Start::read(char* c ) {
     }
     else if (*c == ' ' || *c == '\n') {
         return this;
+    }
+    else if (*c == '\0') {
+        return nextState = new FinalState(this);
     }
     return nextState = new ErrorState(this);
 }
@@ -69,6 +74,9 @@ State* State3::read(char* c) {
     r.setExclude('f');
     if (*c == 'f') {
         return nextState = new State4(this);
+    }
+    else if (*c == 'n') {
+        return nextState = new State40(this);
     }
     else if (r.getResult(c)) {
         return nextState = new State2(this);
@@ -119,6 +127,9 @@ State* State7::read(char* c) {
     r.setExclude('h');
     if (*c == 'h') {
         return nextState = new State8(this);
+    }
+    else if(*c == 'r') {
+        return nextState = new State42(this);
     }
     else if (r.getResult(c)) {
         return nextState = new State2(this);
@@ -373,13 +384,204 @@ State* State38::read(char* c) {
     }
 }
 
-State* ErrorState::read(char *c) {
+State* State40::read(char* c) {
+    r.setExclude('t');
+    if (*c == 't') {
+        return nextState = new State41(this);
+    }
+    else if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
 
+State* State41::read(char *c) {
+    r.setRegex(0);
+    r.setExclude('\0');
+    if (r.getResult(c)) {
+        return nextState = new State42(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State42::read(char *c) {
+    r.setRegex(0);
+    r.setExclude('i');
+    if (*c == 'i') {
+        return nextState = new State43(this);
+    }
+    else if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State43::read(char *c) {
+    r.setRegex(0);
+    r.setExclude('t');
+    if (*c == 't') {
+        return nextState = new State44(this);
+    }
+    else if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State44::read(char *c) {
+    r.setRegex(0);
+    r.setExclude('e');
+    if (*c == 'e') {
+        return nextState = new State45(this);
+    }
+    else if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State45::read(char *c) {
+    r.setExclude('\0');
+    r.setRegex(0);
+    if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State46::read(char *c) {
+    r.setRegex(0);
+    r.setExclude('e');
+    if (*c == 'e') {
+        return nextState = new State47(this);
+    }
+    else if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State47::read(char *c) {
+    r.setRegex(0);
+    r.setExclude('a');
+    if (*c == 'a') {
+        return nextState = new State48(this);
+    }
+    else if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State48::read(char *c) {
+    r.setRegex(0);
+    r.setExclude('d');
+    if (*c == 'd') {
+        return nextState = new State49(this);
+    }
+    else if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State49::read(char *c) {
+    r.setExclude('\0');
+    r.setRegex(0);
+    if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State50::read(char *c) {
+    r.setRegex(0);
+    r.setExclude('l');
+    if (*c == 'l') {
+        return nextState = new State51(this);
+    }
+    else if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State51::read(char *c) {
+    r.setRegex(0);
+    r.setExclude('s');
+    if (*c == 's') {
+        return nextState = new State52(this);
+    }
+    else if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State52::read(char *c) {
+    r.setRegex(0);
+    r.setExclude('e');
+    if (*c == 'e') {
+        return nextState = new State53(this);
+    }
+    else if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+State* State53::read(char *c) {
+    r.setExclude('\0');
+    r.setRegex(0);
+    if (r.getResult(c)) {
+        return nextState = new State2(this);
+    }
+    else {
+        return nextState = new EndState(this);
+    }
+}
+
+/*State* State39::read(char* c) {
+    return nextState = new Start();
+}*/
+
+State* ErrorState::read(char *c) {
     return this;
 }
 
 
 State* EndState::read(char* c) {
+    nextState = new Start();
+    return nextState;
+}
+
+State* FinalState::read(char* c) {
     nextState = new Start();
     return nextState;
 }
