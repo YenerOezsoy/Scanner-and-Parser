@@ -17,7 +17,7 @@
 class Scanner {
 private:
 
-
+	Ausgabe* ausgabe;
     //Automat *automat;
     Buffer *buffer;
     Symboltabelle *symboltabelle;
@@ -35,9 +35,10 @@ private:
     char c;
     char error = '.';
 
-public: Token* nextToken();
+public:
     Scanner();
     Scanner(char* readFile, Symboltabelle* symtab);
+    Token* nextToken();
 private:
     void undo(char* array);
 	void addToArray(char* array);

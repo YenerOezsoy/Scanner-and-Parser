@@ -4,7 +4,7 @@
  *  Created on: Mar 22, 2017
  *      Author: kaok1012
  */
-//#include "../includes/TestAutomat.h‚"
+
 #include "../../Automat/includes/Automat.h"
 #include <iostream>
 

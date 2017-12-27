@@ -10,6 +10,7 @@
 
 class Token {
 
+	Key realKey;
     int type;
     int row;
     int column;
@@ -17,22 +18,29 @@ class Token {
     int value;
     bool isANumber;
 
-public: Token(int type, int row, int column, char* key) {
+public:
+    Token(int type, int row, int column, char* key, Key realKey) {
         this->type = type;
         this->row = row;
         this->column = column;
         this->key = key;
         isANumber = false;
-}
+        this->realKey = realKey;
+        this->value = 0;
+    }
 
-	Token(int type, int row, int column, long key) {
+	Token(int type, int row, int column, long key, Key realKey) {
         this->type = type;
         this->row = row;
         this->column = column;
         this->value = key;
         isANumber = true;
+        this->realKey = realKey;
 	}
 
+	int getValue() {
+		return value;
+	}
 
     int getType() {
         return type;
@@ -52,6 +60,10 @@ public: Token(int type, int row, int column, char* key) {
     		return nullptr;
     	}
         return key;
+    }
+
+    Key getRealKey() {
+    	return realKey;
     }
 };
 

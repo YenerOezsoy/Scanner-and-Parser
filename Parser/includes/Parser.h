@@ -26,6 +26,7 @@ private:
 	ofstream output;
 
 	int errorCount;
+	int typeErrorCount;
 
 public:
     Parser(Symboltabelle* symtab, char* input, char* output);
@@ -50,6 +51,9 @@ public:
     void parseOP(ParseTreeNode* parent);
 
     void typeCheck(ParseTreeNode* node);
+    void typeError(char* msg);
+    void store (Key key, CheckType type);
+    CheckType getType(Key key);
 };
 
 #endif /* PARSER_H_ */

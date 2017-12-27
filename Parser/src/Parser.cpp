@@ -19,6 +19,7 @@ Parser::Parser(Symboltabelle* symtab, char* input, char* output) {
 	parseTree->setRoot(root);
 
 	this->errorCount = 0;
+	this->typeErrorCount = 0
 }
 
 Parser::~Parser() {
@@ -32,6 +33,10 @@ void Parser::parse() {
 
 void Parser::next() {
 	lookahead = scanner->nextToken();
+
+	if (lookahead == nullptr) {
+		lookahead = new Token(FinalType, 0, 0, "END_OF_FILE");
+	}
 }
 
 void Parser::error() {
@@ -39,7 +44,7 @@ void Parser::error() {
 }
 
 bool Parser::match(Type type, ParseTreeNode* node) {
-	if (node->getType() == type) {
+	if (lookahead->getType() == type) {
 		ParseTreeNode* matchNode = new ParseTreeNode(LEAF, node, lookahead);
 		node->addChild(matchNode);
 		next();
@@ -63,7 +68,7 @@ void Parser::parsePROG() {
 }
 
 void Parser::parseDECLS(ParseTreeNode* parent) {
-	if (lookahead->getType() == Int) {
+	if (lookahead->getType() == intType) {
 		parseDECL(parent);
 		if (match(SignSemikolon, parent)) {
 			parseDECLS(parent);
@@ -77,7 +82,7 @@ void Parser::parseDECLS(ParseTreeNode* parent) {
 void Parser::parseDECL(ParseTreeNode* parent) {
 	ParseTreeNode* declNode = new ParseTreeNode(DECL, ptr);
 	parent->addChild(declNode);
-	if (match(Int, declNode)) {
+	if (match(intType, declNode)) {
 		parseARRAY(declNode);
 		match(Letter, declNode); // LETTER == IDENTIFIER
 	}
@@ -94,8 +99,8 @@ void Parser::parseARRAY(ParseTreeNode* parent) {
 
 void Parser::parseSTATEMENTS(ParseTreeNode* parent) {
 	if (lookahead->getType() == Letter
-		|| lookahead->getType() == Write
-		|| lookahead->getType() == Read
+		|| lookahead->getType() == writeType
+		|| lookahead->getType() == readType
 		|| lookahead->getType() == SignGeschweifteKlammerAuf
 		|| lookahead->getType() == If
 		|| lookahead->getType() == While
@@ -127,7 +132,7 @@ void Parser::parseSTATEMENT(ParseTreeNode* parent) {
 	}
 
 	//write(EXP)
-	else if (match(Write, statementNode)) {
+	else if (match(writeType, statementNode)) {
 		if (match(SignRundeKlammerAuf, statementNode)) {
 			parseEXP(statementNode);
 			if (match(SignRundeKlammerZu, statementNode)) {
@@ -141,7 +146,7 @@ void Parser::parseSTATEMENT(ParseTreeNode* parent) {
 	}
 
 	//read(EXP)
-	else if (match(Read, statementNode)) {
+	else if (match(readType, statementNode)) {
 		if (match(SignRundeKlammerAuf, statementNode)) {
 			if (match(Letter, statementNode)) {
 				parseINDEX(statementNode);
@@ -167,7 +172,7 @@ void Parser::parseSTATEMENT(ParseTreeNode* parent) {
 			parseEXP(statementNode);
 			if (match(SignRundeKlammerZu, statementNode)) {
 				parseSTATEMENT(statementNode);
-				if (match(Else, statementNode)){
+				if (match(elseType, statementNode)){
 					parseSTATEMENT(statementNode);
 					this->ptr = statementNode;
 				}

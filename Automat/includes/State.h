@@ -1,13 +1,10 @@
 //
 // Created by Yener on 27.03.2017.
 //
-
+#include "Regex.h"
 
 #ifndef COMPILER_STATE_H
 #define COMPILER_STATE_H
-
-
-#include "Regex.h"
 
 enum Type {
 	Sign,
@@ -33,15 +30,15 @@ enum Type {
 	SignGeschweifteKlammerZu,
 	SignEckigeKlammerAuf,
 	SignEckigeKlammerZu,
+	intType,
+	writeType,
+	readType,
+	elseType,
 	Comment,
 	StartType,
 	End,
 	ErrorType,
-	FinalType,
-	Int,
-	Write,
-	Read,
-	Else
+	FinalType
 };
 
 class State {
@@ -49,7 +46,6 @@ public:
     virtual State* read(char* c) = 0;
     virtual ~State() {};
     bool accepted;
-
     Type type;
     Regex r;
     State* previousState;
@@ -67,7 +63,6 @@ public:
 
 };
 
-
 class State1 : public State {
 public:
     State1(State* State) {
@@ -78,7 +73,6 @@ public:
     State* read(char* c);
 
 };
-
 
 class State2 : public State {
 public: State2(State* State) {
@@ -384,6 +378,7 @@ public: State36(State* State) {
     State* read(char* c );
 };
 
+
 class State37 : public State {
 public: State37(State* State) {
         previousState = State;
@@ -402,6 +397,142 @@ public: State38(State* State) {
     State* read(char* c );
 };
 
+class State39 : public State {
+public: State39(State* State) {
+        previousState = State;
+        accepted = false;
+        type = Type::Comment;
+    };
+    State* read(char* c );
+};
+
+class State40 : public State {
+public: State40(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::Letter;
+    };
+    State* read(char* c );
+};
+
+class State41 : public State {
+public: State41(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::intType;
+    };
+    State* read(char* c );
+};
+
+class State42 : public State {
+public: State42(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::Letter;
+    };
+    State* read(char* c );
+};
+
+class State43 : public State {
+public: State43(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::Letter;
+    };
+    State* read(char* c );
+};
+
+class State44 : public State {
+public: State44(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::Letter;
+    };
+    State* read(char* c );
+};
+
+class State45 : public State {
+public: State45(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::writeType;
+    };
+    State* read(char* c );
+};
+
+class State46 : public State {
+public: State46(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::Letter;
+    };
+    State* read(char* c );
+};
+
+class State47 : public State {
+public: State47(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::Letter;
+    };
+    State* read(char* c );
+};
+
+class State48 : public State {
+public: State48(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::Letter;
+    };
+    State* read(char* c );
+};
+
+class State49 : public State {
+public: State49(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::readType;
+    };
+    State* read(char* c );
+};
+
+class State50 : public State {
+public: State50(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::Letter;
+    };
+    State* read(char* c );
+};
+
+class State51 : public State {
+public: State51(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::Letter;
+    };
+    State* read(char* c );
+};
+
+class State52 : public State {
+public: State52(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::Letter;
+    };
+    State* read(char* c );
+};
+
+class State53 : public State {
+public: State53(State* State) {
+        previousState = State;
+        accepted = true;
+        type = Type::elseType;
+    };
+    State* read(char* c );
+};
+
+
 class ErrorState : public State {
 public: ErrorState(State* State) {
         previousState = State;
@@ -410,7 +541,6 @@ public: ErrorState(State* State) {
     };
     State* read(char* c );
 };
-
 
 class EndState : public State {
 public: EndState(State* State) {
@@ -429,5 +559,4 @@ public: FinalState(State* State) {
     };
     State* read(char* c);
 };
-
 #endif //COMPILER_STATE_H
