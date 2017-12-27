@@ -527,5 +527,5 @@ public: FinalState(State* State) {
         type = Type::FinalType;
     };
     State* read(char* c);
-
+};
 #endif //COMPILER_STATE_H

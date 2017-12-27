@@ -13,7 +13,7 @@ SCANNERDIR = Scanner
 
 
 
-all:	automatOBJs bufferOBJs symboltabelleOBJs scanner  
+all:	automatOBJs bufferOBJs symboltabelleOBJs scannerOBJs 
 	@echo "target all"
 
 	
@@ -25,6 +25,9 @@ clean:
 	rm -f $(SYMBOLTABELLEDIR)/$(OBJDIR)/*.o
 	rm -f $(SCANNERDIR)/$(OBJDIR)/*.o
 	rm -f $(SCANNERDIR)/debug/*
+	rm -f $(AUTOMATDIR)/debug/*
+	rm -f $(BUFFERDIR)/debug/*
+	rm -f $(SYMBOLTABELLEDIR)/debug/*
 	
 
 automatOBJs:
@@ -39,7 +42,7 @@ symboltabelleOBJs:
 	$(MAKE) -C $(SYMBOLTABELLEDIR) SymboltabelleOBJTarget
 	
 
-scanner: 
-	$(MAKE) -C $(SCANNERDIR) makeTestScanner
+scannerOBJs: 
+	$(MAKE) -C $(SCANNERDIR) ScannerOBJTarget
 
 	

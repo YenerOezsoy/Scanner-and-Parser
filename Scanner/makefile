@@ -31,41 +31,44 @@ OBJS = $(OBJDIR)/Scanner.o \
 ## Variante mit wenig Makefile-Kenntnissen
 # 
 ## linken der Object-files 
-#makeTestScanner: $(OBJDIR)/Scanner.o $(OBJDIR)/TestScanner.o
-#	g++ -g $(OBJDIR)/Scanner.o $(OBJDIR)/TestScanner.o   $(PROJECTOBJDIR)/Automat/*.o $(PROJECTOBJDIR)/Buffer/*.o $(PROJECTOBJDIR)/Symboltable/*.o -o $(BINDIRTEST)/ScannerTest
+makeTestScanner: $(OBJDIR)/Scanner.o $(OBJDIR)/TestScanner.o
+	g++ -g $(OBJDIR)/Scanner.o $(OBJDIR)/TestScanner.o   $(AUTOMATDIR)/$(OBJDIR)/*.o $(BUFFERDIR)/$(OBJDIR)/*.o $(SYMBOLTABELLEDIR)/$(OBJDIR)/*.o -o $(BINDIRTEST)/ScannerTest
 ##	
 ##	
 ##	
 ### compilieren der source-files
-#$(OBJDIR)/Scanner.o :  $(SRCDIR)/Scanner.cpp $(HEADERDIR)/Scanner.h
-#	@echo "g++ $*.cpp"
-#	g++ -g  -c -Wall  -o $(OBJDIR)/Scanner.o  $(SRCDIR)/Scanner.cpp
-#	cp $(OBJDIR)/Scanner.o $(PROJECTOBJDIR)/Scanner
+$(OBJDIR)/Scanner.o :  $(SRCDIR)/Scanner.cpp $(HEADERDIR)/Scanner.h
+	@echo "g++ $*.cpp"
+	g++ -g  -c -Wall  -o $(OBJDIR)/Scanner.o  $(SRCDIR)/Scanner.cpp
+	cp $(OBJDIR)/Scanner.o $(PROJECTOBJDIR)/Scanner
 ##
-#$(OBJDIR)/TestScanner.o :  $(SRCDIR)/TestScanner.cpp 
-#	@echo "g++ $*.cpp"
-#	g++ -g  -c -Wall  -o $(OBJDIR)/TestScanner.o  $(SRCDIR)/TestScanner.cpp
+$(OBJDIR)/TestScanner.o :  $(SRCDIR)/TestScanner.cpp 
+	@echo "g++ $*.cpp"
+	g++ -g  -c -Wall  -o $(OBJDIR)/TestScanner.o  $(SRCDIR)/TestScanner.cpp
 #
 	
 	
 # Variante mit guten Makefile-Kenntnissen
-makeTestScanner: $(OBJS) ScannerTest
+#makeTestScanner: $(OBJS) ScannerTest
 
 
-$(OBJDIR)/%.o :  $(SRCDIR)/%.cpp $(HEADERDIR)/%.h
-	@echo "g++ $*.cpp"
-	g++ -g -std=gnu++11 -c -Wall  -o $@  $<
+#$(OBJDIR)/%.o :  $(SRCDIR)/%.cpp $(HEADERDIR)/%.h
+#	@echo "g++ $*.cpp"
+#	g++ -g -std=gnu++11 -c -Wall  -o $@  $<
 
 # 
 # $@ name des object files
 # $< erste abhaengigkeit
 
 
-ScannerTest: $(SRCDIR)/TestScanner.cpp $(HEADERDIR)/Scanner.h
-	g++ -g -std=gnu++11 -c -Wall src/TestScanner.cpp -o $(BINDIRTEST)/TestScanner.o  
-	g++ -g $(BINDIRTEST)/TestScanner.o $(OBJDIR)/*.o $(AUTOMATDIR)/$(OBJDIR)/*.o $(BUFFERDIR)/$(OBJDIR)/*.o $(SYMBOLTABELLEDIR)/$(OBJDIR)/*.o -o $(BINDIRTEST)/ScannerTest
+#ScannerTest: $(SRCDIR)/TestScanner.cpp $(HEADERDIR)/Scanner.h
+#	g++ -g -std=gnu++11 -c -Wall src/TestScanner.cpp -o $(BINDIRTEST)/TestScanner.o  
+#	g++ -g $(BINDIRTEST)/TestScanner.o  $(AUTOMATDIR)/$(OBJDIR)/*.o $(BUFFERDIR)/$(OBJDIR)/*.o $(SYMBOLTABELLEDIR)/$(OBJDIR)/*.o -o $(BINDIRTEST)/ScannerTest
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu erstellen
+
+ScannerOBJTarget:
+	$(MAKE) makeTestScanner
 
 cleanScanner:
 	rm -rf $(OBJDIR)/*.o
