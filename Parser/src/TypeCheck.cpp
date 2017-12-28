@@ -184,48 +184,95 @@ void Parser::typeCheck(ParseTreeNode* node) {
 			node->setCheckType(node->getChild(0)->getCheckType());
 		}
 	}
+	else if (node->getType() == EXP2) {
+		Type exp2Type = node->getChild()->getToken()->getType();
 
-//	else if (node->getType() == EXP2) {
-//			Type exp2Type = node->getChild()->getToken()->getType();
-//			if (exp2Type == T_SIGN_BRACKET_ROUND_L) {
-//				typeCheck(node->getChild(1));
-//				node->setCheckType(node->getChild(1)->getCheckType());
-//			}
-//			else if (exp2Type == T_IDENTIFIER) {
-//				typeCheck(node->getChild(1));
-//				CheckType identifierType = getType(
-//						node->getChild(0)->getToken()->getKey());
-//				if (identifierType == NOTYPE) {
-//					typeError("identifier not defined");
-//					node->setCheckType(ERRORTYPE);
-//				}
-//				else if (identifierType == INTTYPE && node->getChild(1)->getCheckType() == NOTYPE) {
-//					node->setCheckType(identifierType);
-//				}
-//				else if (identifierType == INTARRAYTYPE && node->getChild(1)->getCheckType() == ARRAYTYPE){
-//					node->setCheckType(INTTYPE);
-//				}
-//				else{
-//					typeError("no primitive type");
-//				}
-//
-//			}
-//			else if(exp2Type == T_INTEGER){
-//				node->setCheckType(INTTYPE);
-//			}
-//			else if(exp2Type == T_SIGN_MINUS){
-//				typeCheck(node->getChild(1));
-//				node->setCheckType(node->getChild(1)->getCheckType());
-//			}
-//			else if(exp2Type == T_SIGN_EXCLAMATION){
-//				typeCheck(node->getChild(1));
-//				if(node->getChild(1)->getCheckType() != INTTYPE){
-//					node->setCheckType(ERRORTYPE);
-//				}
-//				else{
-//					node->setCheckType(INTTYPE);
-//				}
-//			}
-//
-//		}
+		if (exp2Type == SignRundeKlammerAuf) {
+			typeCheck(node->getChild(1));
+			node->setCheckType(node->getChild(1)->getCheckType());
+		}
+		else if (exp2Type == Letter) {
+			typeCheck(node->getChild(1));
+
+			CheckType identifierType = getType(node->getChild(0)->getToken()->getRealKey());
+
+			if (identifierType == NOTYPE) {
+				typeError("identifier not defined");
+				node->setCheckType(ERRORTYPE);
+			}
+			else if (identifierType == INTTYPE && node->getChild(1)->getCheckType() == NOTYPE) {
+				node->setCheckType(identifierType);
+			}
+			else if (identifierType == INTARRAYTYPE && node->getChild(1)->getCheckType() == ARRAYTYPE) {
+				node->setCheckType(INTTYPE);
+			}
+			else {
+				typeError("no primitive type");
+				node->setCheckType(ERRORTYPE);
+			}
+		}
+		else if (exp2Type == intType) {
+			node->setCheckType(INTTYPE);
+		}
+		else if (exp2Type == SignMinus) {
+			typeCheck(node->getChild(1));
+			node->setCheckType(node->getChild(1)->getCheckType());
+		}
+		else if (exp2Type == SignAusrufezeichen) {
+			typeCheck(node->getChild(1));
+
+			if (node->getChild(1)->getCheckType() != INTTYPE) {
+				node->setCheckType(ERRORTYPE);
+			}
+			else {
+				node->setCheckType(INTTYPE);
+			}
+		}
+	}
+	else if (node->getType() == OP_EXP) {
+		if (!node->isLeaf()) {
+			typeCheck(node->getChild(0));
+			typeCheck(node->getChild(1));
+			node->setCheckType(node->getChild(1)->getCheckType());
+
+		}
+		else {
+			node->setCheckType(NOTYPE);
+		}
+	}
+	else if (node->getType() == OP) {
+		Type opType = node->getChild()->getToken()->getType();
+
+		switch(opType) {
+		case SignPlus:
+			node->setCheckType(OPPLUS);
+			break;
+		case SignMinus:
+			node->setCheckType(OPMINUS);
+			break;
+		case SignStern:
+			node->setCheckType(OPMULT);
+			break;
+		case SignDoppelpunkt:
+			node->setCheckType(OPDIV);
+			break;
+		case SignKleiner:
+			node->setCheckType(OPLESS);
+			break;
+		case SignGroesser:
+			node->setCheckType(OPGREATER);
+			break;
+		case SignGleich:
+			node->setCheckType(OPEQUAL);
+			break;
+		case SignGleichDoppelpunktGleich:
+			node->setCheckType(OPUNEQUAL);
+			break;
+		case SignUndUnd:
+			node->setCheckType(OPAND);
+			break;
+		default:
+			break;
+		}
+	}
 }
