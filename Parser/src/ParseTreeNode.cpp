@@ -9,6 +9,7 @@
 ParseTreeNode::ParseTreeNode(NodeType type, ParseTreeNode* parent) {
 	this->type = type;
 	this->token = nullptr;
+	this->checkType = nullptr;
 
 	this->next = nullptr;
 	this->parent = parent;
@@ -18,6 +19,7 @@ ParseTreeNode::ParseTreeNode(NodeType type, ParseTreeNode* parent) {
 ParseTreeNode::ParseTreeNode(NodeType type, ParseTreeNode* parent, Token* token) {
 	this->type = type;
 	this->token = token;
+	this->checkType = nullptr;
 
 	this->next = nullptr;
 	this->parent = parent;

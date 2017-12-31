@@ -54,6 +54,8 @@ public:
     void typeError(char* msg);
     void store (Key key, CheckType type);
     CheckType getType(Key key);
+
+    void makeCode(ParseTreeNode* node);
 };
 
 #endif /* PARSER_H_ */

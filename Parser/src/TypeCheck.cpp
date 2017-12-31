@@ -4,11 +4,12 @@
  *  Created on: Dec 26, 2017
  *      Author: kaok1012
  */
+#include <iostream>
 #include "../includes/Parser.h"
 
 void Parser::typeError(char* msg) {
 	++typeErrorCount;
-//	cout << msg << endl;
+	cout << msg << endl;
 }
 
 void Parser::store(Key key, CheckType type){

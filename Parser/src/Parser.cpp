@@ -35,7 +35,8 @@ void Parser::next() {
 	lookahead = scanner->nextToken();
 
 	if (lookahead == nullptr) {
-		lookahead = new Token(FinalType, 0, 0, "END_OF_FILE");
+		Key key = symtab->insert("END_OF_FILE");
+		lookahead = new Token(FinalType, 0, 0, "END_OF_FILE", key);
 	}
 }
 
