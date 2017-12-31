@@ -18,7 +18,7 @@ Parser::Parser(Symboltabelle* symtab, char* input, char* output) {
 	this->ptr = root;
 	parseTree->setRoot(root);
 
-	this->errorCount = 0;
+	this->parseErrorCount = 0;
 	this->typeErrorCount = 0;
 	this->labelCounter = 0;
 }
@@ -28,8 +28,25 @@ Parser::~Parser() {
 }
 
 void Parser::parse() {
-	cout << "parsing..." << endl;
+	cout << "parsing ..." << endl;
 	parsePROG();
+
+	if (parseErrorCount == 0) {
+		cout << "type checking ..." << endl;
+		typeCheck(root);
+
+		if (typeErrorCount == 0) {
+			cout << "generate code ..." << endl;
+			makeCode(root);
+		}
+		else {
+			cout << "type checking failed" << endl;
+		}
+
+	}
+	else {
+		cout << "parsing failed" << endl;
+	}
 }
 
 void Parser::next() {
@@ -42,7 +59,15 @@ void Parser::next() {
 }
 
 void Parser::error() {
-	errorCount++;
+	parseErrorCount++;
+	cout << "Error at: ";
+
+	if (lookahead->getColumn() == 0 && lookahead->getRow() == 0) {
+		cout << "end" << endl;
+	}
+	else {
+		cout << lookahead->getColumn() << "|" << lookahead->getRow() << endl;
+	}
 }
 
 bool Parser::match(Type type, ParseTreeNode* node) {

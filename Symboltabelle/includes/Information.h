@@ -14,6 +14,11 @@ struct Key {
 	int hash;
 	int index;
 
+public:
+	Key () {
+		this->hash = 0;
+		this->index = 0;
+	}
 	Key (int hash, int index) {
 		this->hash = hash;
 		this->index = index;

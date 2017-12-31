@@ -25,7 +25,7 @@ private:
 
 	ofstream code;
 
-	int errorCount;
+	int parseErrorCount;
 	int typeErrorCount;
 	int labelCounter;
 

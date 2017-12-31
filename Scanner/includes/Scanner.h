@@ -8,10 +8,10 @@
 #ifndef SCANNER_H_
 #define SCANNER_H_
 
+#include "Token.h"
 #include "../../Buffer/includes/Buffer.h"
 #include "../../Automat/includes/Automat.h"
 #include "../../Symboltabelle/includes/Symboltabelle.h"
-#include "Token.h"
 #include "../../Buffer/includes/Ausgabe.h"
 
 class Scanner {

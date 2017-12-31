@@ -4,6 +4,7 @@
  *  Created on: 12.04.2017
  *      Author: yenerozsoy
  */
+#include "../../Symboltabelle/includes/Information.h"
 
 #ifndef TOKEN_H_
 #define TOKEN_H_
