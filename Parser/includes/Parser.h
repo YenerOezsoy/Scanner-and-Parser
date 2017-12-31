@@ -23,10 +23,11 @@ private:
 	ParseTreeNode* root;
 	ParseTreeNode* ptr;
 
-	ofstream output;
+	ofstream code;
 
 	int errorCount;
 	int typeErrorCount;
+	int labelCounter;
 
 public:
     Parser(Symboltabelle* symtab, char* input, char* output);
@@ -56,6 +57,7 @@ public:
     CheckType getType(Key key);
 
     void makeCode(ParseTreeNode* node);
+    int getLabelCounter();
 };
 
 #endif /* PARSER_H_ */

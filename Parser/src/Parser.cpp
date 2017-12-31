@@ -4,11 +4,11 @@
  *  Created on: Dec 24, 2017
  *      Author: kaok1012
  */
-
+#include <iostream>
 #include "../includes/Parser.h"
 
 Parser::Parser(Symboltabelle* symtab, char* input, char* output) {
-	this->output.open(output);
+	this->code.open(output);
 	this->scanner = new Scanner(input, symtab);
 	this->lookahead = nullptr;
 	this->symtab = symtab;
@@ -19,15 +19,16 @@ Parser::Parser(Symboltabelle* symtab, char* input, char* output) {
 	parseTree->setRoot(root);
 
 	this->errorCount = 0;
-	this->typeErrorCount = 0
+	this->typeErrorCount = 0;
+	this->labelCounter = 0;
 }
 
 Parser::~Parser() {
-	output.close();
+	code.close();
 }
 
 void Parser::parse() {
-	output << "parsing..." << endl;
+	cout << "parsing..." << endl;
 	parsePROG();
 }
 
