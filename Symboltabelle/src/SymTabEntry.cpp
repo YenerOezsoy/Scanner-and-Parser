@@ -60,7 +60,7 @@ int SymTabEntry::exists(char* lexem) {
 
 Information* SymTabEntry::lookup(Key key) {
 	Information* current = first;
-	for (int i = 0; i < key.index; ++i) {
+	for (int i = 1; i < key.index; ++i) {
 		current = current->getNext();
 	}
 	return current;

@@ -51,13 +51,16 @@ OBJS = $(OBJDIR)/Parser.o \
 	
 	
 # Variante mit guten Makefile-Kenntnissen
-makeTestParser: $(OBJS) ParserTest
+makeTestParser: ParseTreeTarget ParseTreeNodeTarget ParserTarget ParserTest
 
+ParseTreeTarget :  src/ParseTree.cpp includes/ParseTree.h 
+	g++ -g  -c -Wall src/ParseTree.cpp -o objs/ParseTree.o  
 
-$(OBJDIR)/%.o :  $(SRCDIR)/%.cpp $(HEADERDIR)/%.h
-	@echo "g++ $*.cpp"
-	g++ -g -std=gnu++11 -c -Wall  -o $@  $<
+ParseTreeNodeTarget :  src/ParseTreeNode.cpp includes/ParseTreeNode.h 
+	g++ -g  -c -Wall src/ParseTreeNode.cpp -o objs/ParseTreeNode.o  
 
+ParserTarget :  src/Parser.cpp includes/Parser.h 
+	g++ -g  -c -Wall src/Parser.cpp -o objs/Parser.o  
 # 
 # $@ name des object files
 # $< erste abhaengigkeit
@@ -69,7 +72,7 @@ ParserTest: $(SRCDIR)/TestParser.cpp $(HEADERDIR)/Parser.h
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu erstellen
 
-cleanScanner:
+cleanParser:
 	rm -rf $(OBJDIR)/*.o
 	rm -rf $(BINDIRTEST)/*
 	$(MAKE) makeTestParser

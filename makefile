@@ -26,7 +26,7 @@ clean:
 	rm -f $(SYMBOLTABELLEDIR)/$(OBJDIR)/*.o
 	rm -f $(SCANNERDIR)/$(OBJDIR)/*.o
 	rm -f $(SCANNERDIR)/debug/*
-	rm -f $(PARSERDIR)/*.o
+	rm -f $(PARSERDIR)/$(OBJDIR)/*.o
 	rm -f $(PARSERDIR)/debug/*
 	
 
