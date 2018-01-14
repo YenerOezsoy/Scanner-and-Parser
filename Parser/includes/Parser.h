@@ -52,7 +52,9 @@ public:
     void parseOP(ParseTreeNode* parent);
 
     void typeCheck(ParseTreeNode* node);
+    char* typeToString(int type);
     void typeError(char* msg);
+    void typeError(char* msg, Token* token);
     void store (Key key, CheckType type);
     CheckType getType(Key key);
 

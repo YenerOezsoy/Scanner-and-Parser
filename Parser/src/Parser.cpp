@@ -58,15 +58,60 @@ void Parser::next() {
 	}
 }
 
+char* Parser::typeToString(int type) {
+	switch (type) {
+	case 5:
+		return "SignPlus";
+	case 6:
+		return "SignMinus";
+	case 7:
+		return "SignDoppelPunkt";
+	case 8:
+		return "SignStern";
+	case 9:
+		return "SignKleiner";
+	case 10:
+		return "SignGroesser";
+	case 11:
+		return "SignGleich";
+	case 12:
+		return "SignDoppelpunktGleich";
+	case 13:
+		return "SignGleichDoppelpunktGleich";
+	case 14:
+		return "SignAusrufezeichen";
+	case 15:
+		return "SignUndUnd";
+	case 16:
+		return "SignSemikolon";
+	case 17:
+		return "SignRundeKlammerAuf";
+	case 18:
+		return "SignRundeKlammerZu";
+	case 19:
+		return "SignGeschweifteKlammerAuf";
+	case 20:
+		return "SignGeschweifteKlammerZu";
+	case 21:
+		return "SignEckigeKlammerAuf";
+	case 22:
+		return "SignEckigeKlammerZu";
+	default:
+		return "Others";
+	}
+}
+
 void Parser::error() {
 	parseErrorCount++;
-	cout << "Error at: ";
+	cout << "error  ";
 
-	if (lookahead->getColumn() == 0 && lookahead->getRow() == 0) {
+	if (lookahead->getRow() == 0 && lookahead->getColumn() == 0) {
 		cout << "end" << endl;
 	}
 	else {
-		cout << lookahead->getColumn() << "|" << lookahead->getRow() << endl;
+		cout << "Line: " << lookahead->getRow();
+		cout << "Column: " << lookahead->getColumn();
+		cout << '  ' << typeToString(lookahead->getType()) << endl;
 	}
 }
 
@@ -359,6 +404,14 @@ void Parser::typeError(char* msg) {
 	cout << msg << endl;
 }
 
+void Parser::typeError(char* msg, Token* token) {
+	++typeErrorCount;
+
+	cout << "Line:   " << token->getRow();
+	cout << "\tColumn: " << token->getColumn();
+	cout << '\t' << msg << endl;
+}
+
 void Parser::store(Key key, CheckType type){
 	symtab->lookup(key)->setCheckType(type);
 }
@@ -392,7 +445,7 @@ void Parser::typeCheck(ParseTreeNode* node) {
 
 		if (node->getChild(2) != nullptr) {
 			if (getType(node->getChild(2)->getToken()->getRealKey()) != NOTYPE) {
-				typeError("identifier already defined");
+				typeError("identifier already defined", node->getChild(2)->getToken());
 				node->setCheckType(ERRORTYPE);
 			}
 			else if (node->getChild(1)->getCheckType() == ERRORTYPE) {
@@ -409,7 +462,7 @@ void Parser::typeCheck(ParseTreeNode* node) {
 			}
 		}
 		else {
-			typeError("no identifier name");
+			typeError("no identifier name", node->getNext()->getToken());
 		}
 	}
 	else if (node->getType() == ARRAY) {
@@ -417,7 +470,7 @@ void Parser::typeCheck(ParseTreeNode* node) {
 			if (node->getChild(1)->getToken()->getValue() > 0) {
 				node->setCheckType(ARRAYTYPE);
 			} else {
-				typeError("no valid number");
+				typeError("no valid number", node->getChild(1)->getToken());
 				node->setCheckType(ERRORTYPE);
 			}
 		}
@@ -434,7 +487,7 @@ void Parser::typeCheck(ParseTreeNode* node) {
 			typeCheck(node->getChild(1));
 
 			if (getType(node->getChild(0)->getToken()->getRealKey()) == NOTYPE) {
-				typeError("identifier not defined");
+				typeError("identifier not defined", node->getChild(0)->getToken());
 				node->setCheckType(ERRORTYPE);
 			}
 			else if (node->getChild(3)->getCheckType() == INTTYPE
@@ -446,7 +499,7 @@ void Parser::typeCheck(ParseTreeNode* node) {
 				node->setCheckType(NOTYPE);
 			}
 			else {
-				typeError("incompatible types");
+				typeError("incompatible types", node->getChild(0)->getToken());
 			}
 		}
 
@@ -461,7 +514,7 @@ void Parser::typeCheck(ParseTreeNode* node) {
 			typeCheck(node->getChild(3));
 
 			if (getType(node->getChild(2)->getToken()->getRealKey()) == NOTYPE) {
-				typeError("identifier not defined");
+				typeError("identifier not defined", node->getChild(2)->getToken());
 				node->setCheckType(ERRORTYPE);
 			}
 			else if ( ((getType(node->getChild(2)->getToken()->getRealKey()) == INTTYPE)
@@ -472,7 +525,7 @@ void Parser::typeCheck(ParseTreeNode* node) {
 				node->setCheckType(NOTYPE);
 			}
 			else {
-				typeError("incompatible types");
+				typeError("incompatible types", node->getChild(2)->getToken());
 			}
 		}
 
@@ -546,7 +599,7 @@ void Parser::typeCheck(ParseTreeNode* node) {
 			CheckType identifierType = getType(node->getChild(0)->getToken()->getRealKey());
 
 			if (identifierType == NOTYPE) {
-				typeError("identifier not defined");
+				typeError("identifier not defined", node->getChild(0)->getToken());
 				node->setCheckType(ERRORTYPE);
 			}
 			else if (identifierType == INTTYPE && node->getChild(1)->getCheckType() == NOTYPE) {
@@ -556,7 +609,7 @@ void Parser::typeCheck(ParseTreeNode* node) {
 				node->setCheckType(INTTYPE);
 			}
 			else {
-				typeError("no primitive type");
+				typeError("no primitive type", node->getChild(0)->getToken());
 				node->setCheckType(ERRORTYPE);
 			}
 		}
@@ -767,7 +820,11 @@ void Parser::makeCode(ParseTreeNode* node) {
 			code << "LV "<<endl;
 		}
 		else if (exp2Type == Digit) {
-			code << "LC " << node->getChild()->getToken()->getValue() <<endl;
+			if (node->getChild()->getToken()->isThisANumber()) {
+				code << "LC " << node->getChild()->getToken()->getValue() <<endl;
+			} else {
+				typeError("not a number", node->getChild()->getToken());
+			}
 		}
 		else if (exp2Type == SignMinus) {
 			code << "LC " << 0 <<endl;

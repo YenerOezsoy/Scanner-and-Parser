@@ -66,6 +66,10 @@ public:
     Key getRealKey() {
     	return realKey;
     }
+
+    bool isThisANumber() {
+    	return isANumber;
+    }
 };
 
 #endif /* TOKEN_H_ */
