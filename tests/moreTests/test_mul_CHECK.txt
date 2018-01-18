@@ -1,0 +1,12 @@
+int x;
+int y;
+x := 4;
+y := 8;
+write(1);
+write(1 * 1);
+write(8);
+write(x * 2);
+write(32);
+write(x * y);
+write(64);
+write(2 * y * x);

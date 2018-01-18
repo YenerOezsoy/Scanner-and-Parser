@@ -103,15 +103,15 @@ char* Parser::typeToString(int type) {
 
 void Parser::error() {
 	parseErrorCount++;
-	cout << "error  ";
+	cerr << "error  ";
 
 	if (lookahead->getRow() == 0 && lookahead->getColumn() == 0) {
-		cout << "end" << endl;
+		cerr << "end" << endl;
 	}
 	else {
-		cout << "Line: " << lookahead->getRow();
-		cout << "Column: " << lookahead->getColumn();
-		cout << '  ' << typeToString(lookahead->getType()) << endl;
+		cerr << "Line: " << lookahead->getRow();
+		cerr << "Column: " << lookahead->getColumn();
+		cerr << '  ' << typeToString(lookahead->getType()) << endl;
 	}
 }
 
@@ -401,15 +401,15 @@ void Parser::parseOP(ParseTreeNode* parent){
 // TypeCheck
 void Parser::typeError(char* msg) {
 	++typeErrorCount;
-	cout << msg << endl;
+	cerr << msg << endl;
 }
 
 void Parser::typeError(char* msg, Token* token) {
 	++typeErrorCount;
 
-	cout << "Line:   " << token->getRow();
-	cout << "\tColumn: " << token->getColumn();
-	cout << '\t' << msg << endl;
+	cerr << "Line:   " << token->getRow();
+	cerr << "\tColumn: " << token->getColumn();
+	cerr << '\t' << msg << endl;
 }
 
 void Parser::store(Key key, CheckType type){

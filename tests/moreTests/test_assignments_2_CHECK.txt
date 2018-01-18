@@ -1,0 +1,2 @@
+int[5] x;
+x := 5; :*this should fail*:

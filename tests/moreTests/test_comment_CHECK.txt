@@ -1,0 +1,7 @@
+:*this*: int :*is*: x :*a*: ; :*test*:
+x
+:*a very useful comment*:
+:=
+:*here comes the value*:
+42;
+write(:*print this ->*:x);

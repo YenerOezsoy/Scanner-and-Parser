@@ -1,0 +1,16 @@
+int [100] numbers;
+int counter;
+
+counter := 0;
+
+while (counter < 100) {
+   numbers[counter] := counter + 1;
+   counter := counter + 1;
+};
+
+while (counter > 0) {
+   counter := counter - 1;
+   write(numbers[counter]); :* sollten zahlen 100 bis 1 sein *:
+};
+
+write(000); :* sollte 0 rauskommen :*

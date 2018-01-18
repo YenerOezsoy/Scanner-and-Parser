@@ -1,0 +1,10 @@
+:*factorial*:
+int x;
+int fac;
+fac := 1;
+read(x);
+while (x > 0) {
+  fac := fac * x;
+  x := x - 1;
+};
+write(fac);

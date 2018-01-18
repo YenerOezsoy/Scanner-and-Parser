@@ -1,0 +1,19 @@
+int x;
+int y;
+x := 5;
+y := x + 3;
+if (x =:= y) {
+  write(0);
+} else {
+  write(1);
+};
+if ((x < y) && (x < 10)) {
+  write(0);
+} else {
+  write(1);
+};
+if (x = y) {
+  write(0);
+} else {
+  write(1);
+};

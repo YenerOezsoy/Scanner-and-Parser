@@ -1,0 +1,27 @@
+int hello;
+int bye;
+int welcome;
+int count;
+hello := 20;
+bye := 30;
+welcome := 10;
+count := 0;
+
+
+
+
+
+
+
+while(count <  5) {
+	while(welcome < 10) {
+	  write(welcome);
+	  welcome := 15;
+	};
+	if(bye < count){
+	  write(bye);
+	} else {
+      write(welcome);
+	};
+	count := count + 1;
+};

@@ -1,0 +1,16 @@
+:* this *:
+:* comment *:
+:* 
+   is on 
+   multiple 
+   lines
+*:
+int x;
+int y;
+int a;
+read(x);
+read(y);
+if (x < y) {x := -x; print(x);} else {};
+while (y > 0) {
+	y := y - 1;
+};
